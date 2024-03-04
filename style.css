@@ -1,0 +1,49 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    color-scheme: dark;
+    font-family: system-ui;
+    font-size: 11.25px;
+    color: rgb(228, 228, 228);
+}
+
+body {
+    height: 100dvh;
+    width: 100dvw;
+    display: grid;
+    place-content: center;
+    background: url('https://source.unsplash.com/random/?city,night');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    text-align: center;
+    user-select: none;
+}
+
+body::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 22, 22, 0.6);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
+#clock {
+    font-size: 14rem;
+    text-shadow: 3px 3px 25px rgba(0, 0, 0, 0.514);
+}
+
+#greeting-msg {
+    font-size: 2.7rem;
+    letter-spacing: .5rem;
+    font-family: 'Roboto';
+    color: color-mix(in lab, currentColor, black 20%);
+    text-transform: uppercase;
+
+}

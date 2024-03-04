@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "neutrabize",
+    "version": "1.0",
+    "description": "Your own tab",
+    "permissions": ["activeTab"],
+
+    "icons": {
+        "32": "imgs/neutrabize-32.png",
+        "64": "imgs/neutrabize-64.png",
+        "128": "imgs/neutrabize-128.png"
+    },
+
+    "chrome_url_overrides": {
+        "newtab": "neutrabize.html"
+    }
+}
