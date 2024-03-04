@@ -1,7 +1,7 @@
 const clock = document.getElementById("clock");
 update_time();
 
-setInterval(update_time, 1 * 1000);
+setInterval(update_time, 60 * 1000);
 
 function update_time() {
     const time = new Date();
