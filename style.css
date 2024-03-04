@@ -5,7 +5,7 @@
 
 html {
     color-scheme: dark;
-    font-family: system-ui;
+    font-family: 'Inter', sans-serif;
     font-size: 11.25px;
     color: rgb(228, 228, 228);
 }
@@ -15,7 +15,7 @@ body {
     width: 100dvw;
     display: grid;
     place-content: center;
-    background: url('https://source.unsplash.com/random/?city,night');
+    background: url('imgs/bg.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -42,7 +42,6 @@ body::after {
 #greeting-msg {
     font-size: 2.7rem;
     letter-spacing: .5rem;
-    font-family: 'Roboto';
     color: color-mix(in lab, currentColor, black 20%);
     text-transform: uppercase;
 
