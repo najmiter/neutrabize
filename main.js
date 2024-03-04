@@ -1,8 +1,13 @@
 const clock = document.getElementById("clock");
 const greeting_msg = document.getElementById("greeting-msg");
+const hours = document.getElementById("hours");
+const minutes = document.getElementById("minutes");
+const meridiem = document.getElementById("meridiem");
+const mkhi = document.getElementById("mkhi");
+
 update_time();
 
-setInterval(update_time, 60 * 1000);
+setInterval(update_time, 1 * 1000);
 
 const hour = new Date().getHours();
 
@@ -19,11 +24,32 @@ if (hour <= 6) {
 }
 
 function update_time() {
-    const time = new Date().toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-    });
+    const time = new Date();
 
-    clock.textContent = time;
+    const [pm, h] = get_hours(time.getHours());
+    const m = suuii(time.getMinutes());
+
+    hours.textContent = h;
+    mkhi.classList.toggle("vis-none");
+    minutes.textContent = m;
+    meridiem.textContent = pm ? "PM" : "AM";
+}
+
+function get_hours(hrs) {
+    let dopehr = false;
+    if (hrs !== 12) {
+        hrs %= 12;
+    }
+
+    dopehr = hrs >= 12;
+
+    return [dopehr, suuii(hrs)];
+}
+
+function suuii(thing) {
+    if (thing < 10) {
+        thing = `0${thing}`;
+    }
+
+    return thing;
 }
