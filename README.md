@@ -13,7 +13,8 @@ More features like, *changing the background* or even selecting an entire direct
 ------
 ### Preview
 <figure>
-  <img width="1680" alt="neutrabize preview on March 05, 2024" src="https://github.com/najmiter/neutrabize/assets/85332859/6537ceea-6564-4714-91dc-c7f70d266303">
+  <img width="1680" alt="neutrabize preview on March 05, 2024" src="https://github.com/najmiter/neutrabize/assets/85332859/2dfb4638-86bc-4538-a632-a08a9733b81c">
   <figcaption>neutrabize preview on March 05, 2024</figcaption>
 </figure>
+
 
