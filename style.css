@@ -89,6 +89,8 @@ main {
 
 #name {
     color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
+    outline: none;
+    border: none;
 }
 
 #date {
