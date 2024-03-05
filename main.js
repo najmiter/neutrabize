@@ -8,6 +8,7 @@ date.textContent = new Date().toLocaleDateString("en-US", {
 update_time();
 update_greeting_msg();
 get_name_from_localStorage();
+read_bg_from_localStorage();
 
 name.addEventListener("input", function () {
     if (name.textContent.length >= 25) {
@@ -17,6 +18,4 @@ name.addEventListener("input", function () {
 });
 
 setInterval(update_time, 1 * 1000);
-setInterval(() => {
-    document.getElementById("meteor").classList.toggle("fall");
-}, 3 * 1000);
+setInterval(play_animations, 3 * 1000);

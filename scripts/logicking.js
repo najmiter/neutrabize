@@ -36,7 +36,7 @@ function update_greeting_msg() {
         greeting_msg.textContent = "Good morning to me.";
     } else if (hour < 14) {
         greeting_msg.textContent = "Good afternoon to me.";
-    } else if (hour < 20) {
+    } else if (hour < 19) {
         greeting_msg.textContent = "Good evening to me.";
     } else {
         greeting_msg.textContent = "Good night to me.";

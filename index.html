@@ -13,11 +13,27 @@
         <link rel="stylesheet" href="style.css" />
         <script src="scripts/globals.js" defer></script>
         <script src="scripts/logicking.js" defer></script>
+        <script src="scripts/context_menu.js" defer></script>
+        <script src="scripts/change_bg_btn.js" defer></script>
+        <script src="scripts/toggle_animations.js" defer></script>
         <script src="main.js" defer></script>
     </head>
-    <body>
-        <div id="meteor"></div>
-        <nav>
+    <body id="jism">
+        <div id="meteor" aria-should-play="false"></div>
+        <div id="menu">
+            <span class="menu-item" id="change-bg-btn"
+                >Change Background
+                <input
+                    type="file"
+                    id="upload-bg"
+                    accept="image/*"
+                    style="display: none"
+                /> </span
+            ><span class="menu-item" id="toggle-animations-btn"
+                >Toggle Animations</span
+            >
+        </div>
+        <nav class="bar">
             <div id="name" contenteditable spellcheck="false">./root</div>
             <div id="date"></div>
         </nav>

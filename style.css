@@ -19,13 +19,14 @@ html {
     color: rgb(213, 87, 87);
 }
 
+img {
+    width: 100%;
+}
+
 body {
     height: 100dvh;
     width: 100dvw;
-    background: url('imgs/bg.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: center / cover no-repeat url('imgs/bg.jpg');
     position: relative;
     text-align: center;
     user-select: none;
@@ -44,23 +45,49 @@ body::after {
     z-index: -1;
 }
 
-nav {
+.bar {
     height: 8dvh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: 3rem;
-    font-size: 2rem;
     color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
     background-color: rgba(27, 27, 27, 0.7);
     backdrop-filter: blur(10px);
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    padding-inline: 3rem;
+    font-size: 2rem;
+    justify-content: space-between;
 }
 
 main {
     display: grid;
     place-content: center;
     height: 85dvh;
+}
+
+#menu {
+    position: absolute;
+    top: 20%;
+    z-index: 90;
+    font-size: 1.5rem;
+    display: none;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    width: max-content;
+    background-color: rgba(19, 25, 30, 0.825);
+}
+
+.menu-item {
+    padding-block: 1.5rem;
+    padding-inline: 3rem;
+    border-bottom: 1px solid rgb(146, 146, 146);
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-item:hover {
+    background-color: rgb(29, 37, 44);
 }
 
 .fall {
