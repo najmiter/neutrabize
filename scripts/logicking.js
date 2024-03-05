@@ -11,12 +11,11 @@ function update_time() {
 }
 
 function get_hours(hrs) {
-    let dopehr = false;
+    let dopehr = hrs >= 12;
+
     if (hrs !== 12) {
         hrs %= 12;
     }
-
-    dopehr = hrs >= 12;
 
     return [dopehr, suuii(hrs)];
 }
