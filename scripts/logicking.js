@@ -42,8 +42,3 @@ function update_greeting_msg() {
         greeting_msg.textContent = "Good night to me.";
     }
 }
-
-function get_name_from_localStorage() {
-    name.textContent =
-        localStorage.getItem("neutrabize_NAME") ?? name.textContent;
-}

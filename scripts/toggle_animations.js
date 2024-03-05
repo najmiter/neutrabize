@@ -5,10 +5,9 @@ toggle_animations_btn.addEventListener("click", function () {
 });
 
 function toggle_animations() {
-    meteor.setAttribute(
-        "aria-should-play",
-        `${meteor.getAttribute("aria-should-play") !== "true"}`
-    );
+    const what = meteor.getAttribute("aria-should-play") !== "true";
+    meteor.setAttribute("aria-should-play", `${what}`);
+    localStorage.setItem("neutrabize_ANIMATE", what);
 }
 
 function play_animations() {

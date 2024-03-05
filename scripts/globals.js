@@ -23,3 +23,19 @@ function read_bg_from_localStorage() {
     const img = localStorage.getItem("neutrabize_BGIMG");
     if (img) update_bg(img);
 }
+
+function get_name_from_localStorage() {
+    name.textContent =
+        localStorage.getItem("neutrabize_NAME") ?? name.textContent;
+}
+
+function get_animations_toggle_from_localStorage() {
+    const animate = localStorage.getItem("neutrabize_ANIMATE");
+    meteor.setAttribute("aria-should-play", `${animate === "true"}`);
+}
+
+function read_localStorage() {
+    get_name_from_localStorage();
+    read_bg_from_localStorage();
+    get_animations_toggle_from_localStorage();
+}
