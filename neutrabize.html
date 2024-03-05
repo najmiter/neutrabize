@@ -11,15 +11,23 @@
         <title>New Tab</title>
 
         <link rel="stylesheet" href="style.css" />
+        <script src="scripts/globals.js" defer></script>
+        <script src="scripts/logicking.js" defer></script>
         <script src="main.js" defer></script>
     </head>
     <body>
-        <h1 id="clock">
-            <span id="hours"></span>
-            <span id="mkhi">:</span>
-            <span id="minutes"></span>
-            <span id="meridiem"></span>
-        </h1>
-        <h3 id="greeting-msg"></h3>
+        <nav>
+            <div id="name" contenteditable="true">./</div>
+            <div id="date"></div>
+        </nav>
+        <main>
+            <h1 id="clock">
+                <div id="hours"></div>
+                <div id="mkhi">:</div>
+                <div id="minutes"></div>
+                <div id="meridiem"></div>
+            </h1>
+            <h3 id="greeting-msg"></h3>
+        </main>
     </body>
 </html>
