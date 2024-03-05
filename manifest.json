@@ -12,6 +12,6 @@
     },
 
     "chrome_url_overrides": {
-        "newtab": "neutrabize.html"
+        "newtab": "index.html"
     }
 }
