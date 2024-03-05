@@ -63,6 +63,31 @@ main {
     height: 85dvh;
 }
 
+.fall {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 90px;
+    height: 5px;
+    border-radius: 10px;
+    rotate: -30deg;
+    background: linear-gradient(to right, currentColor, transparent 60%);
+
+    animation: fall 1s linear forwards;
+}
+
+@keyframes fall {
+    from {
+        top: -20%;
+        right: -10%;
+    }
+
+    to {
+        top: 120%;
+        right: 110%;
+    }
+}
+
 #clock {
     font-size: 20rem;
     text-shadow: 3px 3px 25px rgba(0, 0, 0, 0.514);

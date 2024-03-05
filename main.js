@@ -17,3 +17,6 @@ name.addEventListener("input", function () {
 });
 
 setInterval(update_time, 1 * 1000);
+setInterval(() => {
+    document.getElementById("meteor").classList.toggle("fall");
+}, 3 * 1000);
