@@ -37,7 +37,7 @@ body::after {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba(22, 22, 22, 0.6);
+    background-color: rgba(22, 22, 22, 0.65);
     position: absolute;
     top: 0;
     left: 0;
@@ -88,6 +88,12 @@ main {
 }
 
 #name {
+    color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
+    outline: none;
+    border: none;
+}
+
+#mantra {
     color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
     outline: none;
     border: none;

@@ -10,6 +10,9 @@ update_greeting_msg();
 get_name_from_localStorage();
 
 name.addEventListener("input", function () {
+    if (name.textContent.length >= 25) {
+        get_name_from_localStorage();
+    }
     localStorage.setItem("neutrabize_NAME", name.textContent);
 });
 
