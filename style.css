@@ -51,7 +51,7 @@ nav {
     justify-content: space-between;
     padding-inline: 3rem;
     font-size: 2rem;
-
+    color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
     background-color: rgba(27, 27, 27, 0.7);
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
@@ -85,14 +85,8 @@ main {
     font-size: 0.3em;
 }
 
-#name {
-    color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
-    outline: none;
-    border: none;
-}
-
+#name,
 #mantra {
-    color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
     outline: none;
     border: none;
 }
