@@ -12,7 +12,8 @@ For starters, whatever you want!
 
 ------
 
-More features like, *changing the background* or even selecting an entire directory/folder and change the background after a specified time, and *changing the greeting message* like we can change the name (i know this one doesn't even need any extra work but it is what it is) will be added soon.
+Thanks **open-meteo** for their free weather api:
+<a href="https://open-meteo.com/">open-meteo</a>
 
 ------
 ### Preview
