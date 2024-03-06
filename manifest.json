@@ -3,7 +3,7 @@
     "name": "neutrabize",
     "version": "1.0",
     "description": "Your own tab",
-    "permissions": ["activeTab"],
+    "permissions": ["activeTab", "geolocation"],
 
     "icons": {
         "32": "imgs/neutrabize-32.png",

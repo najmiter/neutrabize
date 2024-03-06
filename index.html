@@ -17,6 +17,7 @@
         <script src="scripts/change_bg_btn.js" defer></script>
         <script src="scripts/toggle_animations.js" defer></script>
         <script src="scripts/change_color_btn.js" defer></script>
+        <script src="scripts/weather.js" defer></script>
         <script src="main.js" defer></script>
     </head>
     <body id="jism">
@@ -45,6 +46,10 @@
         </div>
         <nav class="bar">
             <div id="name" contenteditable spellcheck="false">./root</div>
+            <div>
+                <span id="weather">Loading weather data...</span>
+                <span id="unit"></span>
+            </div>
             <div id="date"></div>
         </nav>
         <main>

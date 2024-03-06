@@ -56,6 +56,10 @@ body::after {
     align-items: center;
 }
 
+.bar>div {
+    width: 33dvw;
+}
+
 nav {
     padding-inline: 3rem;
     font-size: 2rem;
@@ -147,4 +151,12 @@ main {
 
 .vis-hid {
     visibility: hidden;
+}
+
+#name {
+    text-align: left;
+}
+
+#date {
+    text-align: right;
 }
