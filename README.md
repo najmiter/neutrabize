@@ -5,7 +5,7 @@ A chrome extension to customise your new tab
 For starters, whatever you want!
 
 - But, you can change your name in the `nav` where it says `./root` by default. If you click on it, you will be able to enter your own name. That name will be stored locally (see the scripts for more) and then it'll be shown instead of the default `./root`.
-- `contextmenu` features:
+- `contextmenu` features (they will be stored permanently* in the `localStorage`):
   - You can **change the background** to any local picture you want.
   - You can toggle the `meteor` animation.
   - You can **change the text color** to any color you like.
