@@ -16,6 +16,7 @@
         <script src="scripts/context_menu.js" defer></script>
         <script src="scripts/change_bg_btn.js" defer></script>
         <script src="scripts/toggle_animations.js" defer></script>
+        <script src="scripts/change_color_btn.js" defer></script>
         <script src="main.js" defer></script>
     </head>
     <body id="jism">
@@ -28,10 +29,19 @@
                     id="upload-bg"
                     accept="image/*"
                     style="display: none"
-                /> </span
-            ><span class="menu-item" id="toggle-animations-btn"
+                />
+            </span>
+            <span class="menu-item" id="toggle-animations-btn"
                 >Toggle Animations</span
             >
+            <span class="menu-item" id="change-color-btn"
+                >Change Color
+                <input
+                    type="color"
+                    id="change-color-input"
+                    style="visibility: hidden"
+                />
+            </span>
         </div>
         <nav class="bar">
             <div id="name" contenteditable spellcheck="false">./root</div>

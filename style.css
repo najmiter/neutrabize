@@ -14,9 +14,10 @@
 }
 
 html {
+    --main-color: rgb(213, 87, 87);
     color-scheme: dark;
     font-size: 11.25px;
-    color: rgb(213, 87, 87);
+    color: var(--main-color);
 }
 
 img {
@@ -32,6 +33,7 @@ body {
     user-select: none;
     font-family: 'shonomono', monospace;
     overflow: hidden;
+    color: var(--main-color);
 }
 
 body::after {
@@ -128,7 +130,7 @@ main {
     font-family: 'chulbul', system-ui;
     font-size: 2.7rem;
     letter-spacing: .5rem;
-    color: color-mix(in lab, currentColor, black 10%);
+    color: color-mix(in lab, var(--main-color), black 10%);
     text-transform: uppercase;
     -webkit-text-stroke: 1px currentColor;
 }
@@ -141,10 +143,6 @@ main {
 #mantra {
     outline: none;
     border: none;
-}
-
-#date {
-    color: color-mix(in lab, currentColor, black 30%);
 }
 
 .vis-hid {

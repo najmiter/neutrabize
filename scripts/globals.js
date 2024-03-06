@@ -19,6 +19,12 @@ function update_bg(img) {
     localStorage.setItem("neutrabize_BGIMG", img);
 }
 
+function set_main_color(color) {
+    document
+        .getElementsByTagName("html")[0]
+        .style.setProperty("--main-color", `${color}`);
+}
+
 function read_bg_from_localStorage() {
     const img = localStorage.getItem("neutrabize_BGIMG");
     if (img) update_bg(img);
@@ -34,8 +40,14 @@ function get_animations_toggle_from_localStorage() {
     meteor.setAttribute("aria-should-play", `${animate === "true"}`);
 }
 
+function get_main_color_from_localStorage() {
+    const main_color = localStorage.getItem("neutrabize_TEXTCOLOR");
+    if (main_color) set_main_color(main_color);
+}
+
 function read_localStorage() {
     get_name_from_localStorage();
     read_bg_from_localStorage();
     get_animations_toggle_from_localStorage();
+    get_main_color_from_localStorage();
 }
