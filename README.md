@@ -22,4 +22,7 @@ Thanks **open-meteo** for their free weather api:
   <figcaption>neutrabize preview on March 05, 2024</figcaption>
 </figure>
 
-
+<figure>
+  <img width="1680" alt="neutrabize preview on March 05, 2024" src="https://github.com/najmiter/neutrabize/assets/85332859/fa3a0784-3b54-4d2e-b7ae-1d7b6c3a57e4">
+  <figcaption>neutrabize preview on March 07, 2024</figcaption>
+</figure>
