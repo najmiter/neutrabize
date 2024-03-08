@@ -8,6 +8,7 @@ date.textContent = new Date().toLocaleDateString("en-US", {
 update_time();
 update_greeting_msg();
 read_localStorage();
+update_weather();
 
 name.addEventListener("input", function () {
     if (name.textContent.length >= 25) {
