@@ -1,6 +1,6 @@
 const change_bg_btn = document.getElementById("change-bg-btn");
 
-const bg_input = document.getElementById("upload-bg");
+const bg_input = document.getElementById("upload-bg-input");
 
 change_bg_btn.addEventListener("click", function () {
     bg_input.click();
