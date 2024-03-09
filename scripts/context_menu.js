@@ -1,5 +1,3 @@
-const menu = document.getElementById("menu");
-
 document.addEventListener("contextmenu", function (click) {
     click.preventDefault();
 

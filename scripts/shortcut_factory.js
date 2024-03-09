@@ -1,10 +1,15 @@
 const links = ["google", "youtube", "facebook", "github", "x", "instagram"];
-const shortcuts = document.getElementById("shortcuts");
 
 function render_shortcuts() {
-    links.forEach((item) =>
-        shortcuts.appendChild(create_shortcut_item(item, item))
-    );
+    if (show_shortcuts) {
+        shortcuts.style.display = "flex";
+        links.forEach((item) =>
+            shortcuts.appendChild(create_shortcut_item(item, item))
+        );
+    } else {
+        shortcuts.style.display = "none";
+        shortcuts.innerHTML = "";
+    }
 }
 
 function create_shortcut_item(link, name) {

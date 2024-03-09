@@ -7,6 +7,9 @@ const mkhi = document.getElementById("mkhi");
 const date = document.getElementById("date");
 const name = document.getElementById("name");
 const meteor = document.getElementById("meteor");
+const menu = document.getElementById("menu");
+const shortcuts = document.getElementById("shortcuts");
+let show_shortcuts = true;
 
 function update_bg(img) {
     document
