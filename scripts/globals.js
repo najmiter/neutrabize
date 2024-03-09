@@ -48,9 +48,15 @@ function get_main_color_from_localStorage() {
     if (main_color) set_main_color(main_color);
 }
 
+function get_show_shortcuts_from_localStorage() {
+    const should = localStorage.getItem("neutrabize_SHOWSHORTCUTS");
+    if (should) show_shortcuts = should === "true";
+}
+
 function read_localStorage() {
     get_name_from_localStorage();
     read_bg_from_localStorage();
     get_animations_toggle_from_localStorage();
     get_main_color_from_localStorage();
+    get_show_shortcuts_from_localStorage();
 }

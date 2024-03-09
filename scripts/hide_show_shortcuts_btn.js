@@ -4,4 +4,6 @@ hide_show_shortcuts.addEventListener("click", function () {
     menu.style.display = "none";
     show_shortcuts = !show_shortcuts;
     render_shortcuts();
+
+    localStorage.setItem("neutrabize_SHOWSHORTCUTS", show_shortcuts);
 });
