@@ -9,6 +9,7 @@ update_time();
 update_greeting_msg();
 read_localStorage();
 update_weather();
+render_shortcuts();
 
 name.addEventListener("input", function () {
     if (name.textContent.length >= 25) {
