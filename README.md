@@ -1,5 +1,6 @@
-# neutrabize
-A chrome extension to customise your new tab
+# Setting up
+## 1. For Windows
+Download the project by running the [**batch**](https://github.com/knoctal/Accessories/blob/main/neutrabize/update%20(windows).bat) file and then run it. This will install the files in your `C:\` drive. You can use the same batch file to update to the latest versions later.
 
 ## What you can do
 For starters, whatever you want!
