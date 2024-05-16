@@ -22,8 +22,7 @@ function create_shortcut_item(link, name) {
             class="shortcut-icon"
             src="imgs/icons/${name}.png"
             alt="${name} icon"
-        />${name}</a
-        >
+        /></a>
     `;
 
     return shortcut_item;

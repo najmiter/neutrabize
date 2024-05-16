@@ -1,13 +1,13 @@
 {
     "manifest_version": 3,
     "name": "neutrabize",
-    "version": "1.0",
-    "description": "Your own tab",
-    "permissions": ["activeTab", "geolocation"],
+    "version": "2.0",
+    "description": "Your own customisable Chrome new tab and home page",
+    "permissions": ["geolocation"],
 
     "icons": {
-        "32": "imgs/neutrabize-32.png",
-        "64": "imgs/neutrabize-64.png",
+        "32": "imgs/neutrabize-128.png",
+        "64": "imgs/neutrabize-128.png",
         "128": "imgs/neutrabize-128.png"
     },
 
