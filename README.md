@@ -25,12 +25,6 @@ Thanks **open-meteo** for their free weather api:
 
 ### Preview
 
-<figure>
-  <img width="1680" alt="neutrabize preview on March 05, 2024" src="https://github.com/najmiter/neutrabize/assets/85332859/2dfb4638-86bc-4538-a632-a08a9733b81c">
-  <figcaption>neutrabize preview on March 05, 2024</figcaption>
-</figure>
+As of May 17, 2024
 
-<figure>
-  <img width="1680" alt="neutrabize preview on March 05, 2024" src="https://github.com/najmiter/neutrabize/assets/85332859/fa3a0784-3b54-4d2e-b7ae-1d7b6c3a57e4">
-  <figcaption>neutrabize preview on March 07, 2024</figcaption>
-</figure>
+![neutrabize on May 17, 2024](https://lh3.googleusercontent.com/xwFA33PjI9R3qr-7Epn8lBS177u9oOnHe7FF3KllpxV8kiqN3DQZcJK7242dxKA7-sQY6JM3wsa8BTl4CjwDipruAA=w1280-h800-rw)
