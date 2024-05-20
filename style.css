@@ -186,9 +186,10 @@ a {
 
 #greeting-msg {
     font-family: 'chulbul', system-ui;
-    font-size: clamp(1rem, 3dvw, 2.7rem);
+    font-size: clamp(2.7rem, 3dvw, 4.7rem);
     letter-spacing: .2rem;
-    color: color-mix(in lab, var(--main-color), black 10%);
+    color: var(--main-color);
+    text-shadow: 5px 5px 25px black;
 }
 
 #meridiem {
