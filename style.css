@@ -40,7 +40,6 @@ body {
     width: 100dvw;
     background: center / cover no-repeat url('imgs/bg.jpg');
     position: relative;
-    text-align: center;
     user-select: none;
     font-family: 'shonomono', monospace;
     overflow: hidden;
@@ -119,8 +118,12 @@ button {
     display: inline-block;
 }
 
+#shortcut-wrapper {
+    position: relative;
+}
+
 #shortcuts {
-    max-width: 50rem;
+    max-width: 70rem;
     overflow-x: auto;
     gap: 2rem;
     color: var(--mix-color);
@@ -237,6 +240,12 @@ button {
     outline: none;
     font-size: 3rem;
     padding-inline: 2rem;
+    position: absolute;
+    right: -7rem;
+}
+
+.shortcut-icon-default {
+    font-size: 3rem;
 }
 
 #username {
@@ -355,8 +364,12 @@ button {
     background-color: var(--bg-color);
 }
 
-#settings-save {
+#settings-save,
+.btn-primary {
     background-color: rgb(1, 105, 208);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .settings-wrapper[aria-visible='false'] {
@@ -436,4 +449,31 @@ button {
 
 .toggle[data-isOn="true"]::after {
     content: '✅';
+}
+
+#add-shortcut-dialog {
+    padding: 5rem;
+    background-color: #222;
+    border: none;
+    outline: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 1.7rem;
+    width: 30%;
+    height: fit-content;
+    border-radius: 1rem;
+}
+
+#add-shortcut-dialog div {
+    display: grid;
+    gap: 2rem;
+}
+
+#add-shortcut-dialog input {
+    padding: 1rem 2rem;
+    font-size: inherit;
+    border: 1px solid #333;
+    border-radius: 1rem;
 }

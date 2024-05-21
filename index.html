@@ -46,14 +46,45 @@
                     <h3 id="greeting-msg"></h3>
                     <span>,&nbsp;</span>
                     <div id="username">
-                        <input type="text" placeholder="your name" />
+                        <input
+                            maxlength="30"
+                            type="text"
+                            placeholder="your name"
+                        />
                         <p class="tooltip">
                             To change username, go to settings
                         </p>
                     </div>
                 </div>
             </div>
-            <div id="shortcuts"></div>
+            <div id="shortcut-wrapper">
+                <div id="shortcuts"></div>
+            </div>
+            <dialog id="add-shortcut-dialog">
+                <div>
+                    <div>
+                        <label for="shortcut-link-input">Link</label>
+                        <input
+                            id="shortcut-link-input"
+                            type="text"
+                            placeholder="Link to your shortcut"
+                        />
+                    </div>
+                    <div>
+                        <label for="shortcut-icon-input">Icon</label>
+                        <input
+                            id="shortcut-icon-input"
+                            type="text"
+                            placeholder="Online link to your shortcut icon"
+                        />
+                    </div>
+                    <div>
+                        <button class="btn-primary" id="add-shortcut-btn">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </dialog>
         </main>
 
         <article id="settings">
@@ -100,6 +131,7 @@
                                     id="change-username-input"
                                     type="text"
                                     placeholder="New name"
+                                    maxlength="30"
                                 />
                             </li>
                             <li class="settings-content-item">

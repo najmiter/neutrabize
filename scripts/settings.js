@@ -44,7 +44,10 @@ function hideSettings() {
 
 change_username_input.addEventListener("input", (e) => {
     const new_name = e.target.value;
-    localStorage.setItem("neutrabize_USERNAME", new_name);
 
-    document.querySelector("#username h3").textContent = new_name;
+    if (new_name.length < 30) {
+        localStorage.setItem("neutrabize_USERNAME", new_name);
+
+        document.querySelector("#username h3").textContent = new_name;
+    }
 });
