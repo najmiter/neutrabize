@@ -247,10 +247,11 @@ button {
     display: none;
     position: absolute;
     bottom: -110%;
-    left: -50%;
+    left: 50%;
+    translate: -50% 0%;
     border-radius: 0.5rem;
     font-size: 1.4rem;
-    min-width: 200%;
+    width: 30rem;
     padding: 2rem 2rem;
     background-color: #2222228f;
     backdrop-filter: blur(3rem);
