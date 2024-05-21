@@ -7,7 +7,6 @@ change_bg_btn.addEventListener("click", function () {
 });
 
 bg_input.addEventListener("change", function (file) {
-    menu.style.display = "none";
     const reader = new FileReader();
 
     reader.onload = function () {

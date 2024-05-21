@@ -1,6 +1,5 @@
 const toggle_animations_btn = document.getElementById("toggle-animations-btn");
 toggle_animations_btn.addEventListener("click", function () {
-    menu.style.display = "none";
     toggle_animations();
 });
 

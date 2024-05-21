@@ -28,13 +28,12 @@
         <div id="menu"></div>
         <nav class="bar">
             <div id="name" contenteditable spellcheck="false">./root</div>
-
-            <div id="date"></div>
+            <div id="weather-wrapper">
+                <span id="weather">Loading weather data...</span>
+                <span id="unit"></span>
+            </div>
+            <button id="settings-btn">⚙️</button>
         </nav>
-        <div id="weather-wrapper">
-            <span id="weather">Loading weather data...</span>
-            <span id="unit"></span>
-        </div>
         <main>
             <div id="clock-msg">
                 <h1 id="clock">
@@ -56,8 +55,6 @@
             </div>
             <div id="shortcuts"></div>
         </main>
-
-        <button id="settings-btn">⚙️</button>
 
         <article id="settings">
             <div id="settings-sidebar">
@@ -83,8 +80,7 @@
                     </ul>
                 </nav>
                 <div class="cta-wrapper">
-                    <button id="settings-close">Close</button>
-                    <button id="settings-save">Save</button>
+                    <button id="settings-save">Done</button>
                 </div>
             </div>
 
@@ -184,12 +180,19 @@
                             <li class="settings-content-item">
                                 <h3>Use Online Image</h3>
 
-                                <span id="">Change Background</span>
+                                <span
+                                    class="btn-secondary toggle"
+                                    data-isOn="false"
+                                    id="online-image-btn"
+                                    >Change Background</span
+                                >
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </article>
+
+        <div id="date"></div>
     </body>
 </html>

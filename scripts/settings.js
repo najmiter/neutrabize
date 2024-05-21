@@ -7,6 +7,10 @@ const settings_btn = document.getElementById("settings-btn");
 const settings_wrapper = document.querySelectorAll(".settings-wrapper");
 const change_username_input = document.getElementById("change-username-input");
 
+document.addEventListener("keydown", (key) => {
+    if (key.code === "Escape") settings.style.display = "none";
+});
+
 const previous_name = localStorage.getItem("neutrabize_USERNAME");
 if (previous_name) change_username_input.value = previous_name;
 
