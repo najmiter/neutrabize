@@ -415,7 +415,7 @@ button {
     cursor: pointer;
 }
 
-#change-username-input {
+.settings-content-item input {
     cursor: text;
     font-size: 1.7rem;
     font-weight: bold;

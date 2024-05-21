@@ -71,6 +71,11 @@ function get_username_from_localStorage() {
     if (name) remove_username_input_and_replace_with_div();
 }
 
+function get_document_title_from_localStorage() {
+    const name = localStorage.getItem("neutrabize_TITLE");
+    if (name) document.title = name;
+}
+
 function read_localStorage() {
     get_name_from_localStorage();
     read_bg_from_localStorage();
@@ -78,4 +83,5 @@ function read_localStorage() {
     get_main_color_from_localStorage();
     get_show_shortcuts_from_localStorage();
     get_username_from_localStorage();
+    get_document_title_from_localStorage();
 }
