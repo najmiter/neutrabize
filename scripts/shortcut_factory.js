@@ -6,6 +6,10 @@ function render_shortcuts() {
         links.forEach((item) =>
             shortcuts.appendChild(create_shortcut_item(item, item))
         );
+        const add_btn = document.createElement("button");
+        add_btn.setAttribute("class", "shortcut-item add-shortcut-btn");
+        add_btn.textContent = "+";
+        shortcuts.appendChild(add_btn);
     } else {
         shortcuts.style.display = "none";
         shortcuts.innerHTML = "";

@@ -9,7 +9,20 @@ const name = document.getElementById("name");
 const meteor = document.getElementById("meteor");
 const menu = document.getElementById("menu");
 const shortcuts = document.getElementById("shortcuts");
+const username_input = document.querySelector("#username input");
 let show_shortcuts = true;
+
+function remove_username_input_and_replace_with_div() {
+    const name = localStorage.getItem("neutrabize_USERNAME");
+    const username = document.getElementById("username");
+
+    username.removeChild(username_input);
+
+    const name_div = document.createElement("h3");
+    name_div.textContent = name;
+
+    username.appendChild(name_div);
+}
 
 function update_bg(img) {
     document
@@ -53,10 +66,16 @@ function get_show_shortcuts_from_localStorage() {
     if (should) show_shortcuts = should === "true";
 }
 
+function get_username_from_localStorage() {
+    const name = localStorage.getItem("neutrabize_USERNAME");
+    if (name) remove_username_input_and_replace_with_div();
+}
+
 function read_localStorage() {
     get_name_from_localStorage();
     read_bg_from_localStorage();
     get_animations_toggle_from_localStorage();
     get_main_color_from_localStorage();
     get_show_shortcuts_from_localStorage();
+    get_username_from_localStorage();
 }

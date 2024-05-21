@@ -31,14 +31,24 @@ function suuii(thing) {
 function update_greeting_msg() {
     const hour = new Date().getHours();
     if (hour <= 6) {
-        greeting_msg.textContent = "Hello there!";
+        greeting_msg.textContent = "Good night";
     } else if (hour < 12 && hour > 6) {
-        greeting_msg.textContent = "Good morning to me.";
+        greeting_msg.textContent = "Good morning";
     } else if (hour < 14) {
-        greeting_msg.textContent = "Good afternoon to me.";
+        greeting_msg.textContent = "Good afternoon";
     } else if (hour < 19) {
-        greeting_msg.textContent = "Good evening to me.";
+        greeting_msg.textContent = "Good evening";
     } else {
-        greeting_msg.textContent = "Good night to me.";
+        greeting_msg.textContent = "Good night";
     }
 }
+
+username_input.addEventListener("input", (e) => {
+    const input = e.target.value;
+    localStorage.setItem("neutrabize_USERNAME", input);
+});
+
+username_input.addEventListener(
+    "blur",
+    remove_username_input_and_replace_with_div
+);

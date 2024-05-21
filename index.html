@@ -20,6 +20,7 @@
         <script src="scripts/weather.js" defer></script>
         <script src="scripts/shortcut_factory.js" defer></script>
         <script src="scripts/hide_show_shortcuts_btn.js" defer></script>
+        <script src="scripts/settings.js" defer></script>
         <script src="main.js" defer></script>
     </head>
     <body id="jism">
@@ -66,9 +67,37 @@
                     <div id="minutes"></div>
                     <div id="meridiem"></div>
                 </h1>
-                <h3 id="greeting-msg" contenteditable></h3>
+                <div id="greeting-wrapper">
+                    <h3 id="greeting-msg"></h3>
+                    <span>,&nbsp;</span>
+                    <div id="username">
+                        <input type="text" placeholder="your name" />
+                    </div>
+                </div>
             </div>
             <div id="shortcuts"></div>
         </main>
+
+        <button id="settings-btn">⚙️</button>
+
+        <article id="settings">
+            <div id="settings-sidebar">
+                <h2>Settings</h2>
+                <nav>
+                    <ul class="settings-nav">
+                        <li class="settings-nav-item" aria-active="true">
+                            Account
+                        </li>
+                        <li class="settings-nav-item">Colors</li>
+                        <li class="settings-nav-item">Background</li>
+                    </ul>
+                </nav>
+                <div class="cta-wrapper">
+                    <button id="settings-close">Close</button>
+                    <button id="settings-save">Save</button>
+                </div>
+            </div>
+            <div id="settings-editor"></div>
+        </article>
     </body>
 </html>

@@ -21,7 +21,7 @@
 :root {
     --mix-color: color-mix(in lab, currentColor, rgb(89, 173, 210) 50%);
     --bg-color: rgba(27, 27, 27, 0.7);
-    --hover-color: rgb(29, 37, 44);
+    --hover-color: 29, 37, 44;
 }
 
 html {
@@ -102,6 +102,17 @@ a {
     color: currentColor;
 }
 
+li {
+    list-style: none;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
 .shortcut-link {
     width: 3rem;
     aspect-ratio: 1;
@@ -124,7 +135,7 @@ a {
 }
 
 .shortcut-item:hover {
-    background-color: var(--hover-color);
+    background-color: rgb(var(--hover-color));
 }
 
 #menu {
@@ -147,7 +158,7 @@ a {
 }
 
 .menu-item:hover {
-    background-color: var(--hover-color);
+    background-color: rgb(var(--hover-color));
 }
 
 .fall {
@@ -182,14 +193,24 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    width: 100vw;
+}
+
+#greeting-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cbcbcbd2;
+    font-size: clamp(2.7rem, 3dvw, 4rem);
+    font-family: 'chulbul', system-ui;
+
+    transition: all 300ms;
 }
 
 #greeting-msg {
-    font-family: 'chulbul', system-ui;
-    font-size: clamp(2.7rem, 3dvw, 4.7rem);
     letter-spacing: .2rem;
-    color: var(--main-color);
     text-shadow: 5px 5px 25px black;
+    outline: none;
 }
 
 #meridiem {
@@ -212,4 +233,114 @@ a {
 
 #date {
     text-align: right;
+}
+
+.add-shortcut-btn {
+    border: none;
+    outline: none;
+    font-size: 3rem;
+    padding-inline: 2rem;
+}
+
+#username {
+    width: fit-content;
+}
+
+#username h3 {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+}
+
+#username input {
+    width: 23rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+#settings-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 2rem;
+    background-color: #323232a5;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+
+#settings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222222c3;
+    backdrop-filter: blur(10rem);
+
+    display: none;
+    grid-template-columns: 300px 1fr;
+}
+
+#settings-sidebar {
+    background-color: rgba(42, 42, 42, 0.8);
+    padding: 2rem 3rem;
+    text-align: left;
+    color: #aaa;
+    font-family: 'chulbul';
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#settings-sidebar h2 {
+    font-size: 2rem;
+}
+
+#settings-sidebar nav {
+    padding: 0;
+}
+
+.settings-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.settings-nav-item {
+    font-family: system-ui;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.settings-nav-item[aria-active="true"],
+.settings-nav-item:hover {
+    background-color: rgba(99, 99, 99, 0.2);
+}
+
+.cta-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.cta-wrapper button {
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.cta-wrapper button:hover {
+    background-color: rgba(var(--hover-color), 0.5) !important;
+}
+
+#settings-close {
+    background-color: var(--bg-color);
+}
+
+#settings-save {
+    background-color: rgb(1, 105, 208);
 }
