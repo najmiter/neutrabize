@@ -5,6 +5,10 @@ const cta_wrapper_buttons = document.querySelectorAll(".cta-wrapper button");
 const settings_nav_items = document.querySelectorAll(".settings-nav-item");
 const settings_btn = document.getElementById("settings-btn");
 const settings_wrapper = document.querySelectorAll(".settings-wrapper");
+const change_username_input = document.getElementById("change-username-input");
+
+const previous_name = localStorage.getItem("neutrabize_USERNAME");
+if (previous_name) change_username_input.value = previous_name;
 
 settings_btn.addEventListener("click", () => {
     settings.style.display = "grid";
@@ -33,3 +37,10 @@ settings_nav_items.forEach((item) => {
 function hideSettings() {
     settings.style.display = "none";
 }
+
+change_username_input.addEventListener("input", (e) => {
+    const new_name = e.target.value;
+    localStorage.setItem("neutrabize_USERNAME", new_name);
+
+    document.querySelector("#username h3").textContent = new_name;
+});

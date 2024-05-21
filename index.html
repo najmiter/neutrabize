@@ -25,11 +25,7 @@
     </head>
     <body id="jism">
         <div id="meteor" aria-should-play="false"></div>
-        <div id="menu">
-            <span class="menu-item" id="hide-show-shortcut-btn"
-                >Hide/Show Shortcuts
-            </span>
-        </div>
+        <div id="menu"></div>
         <nav class="bar">
             <div id="name" contenteditable spellcheck="false">./root</div>
 
@@ -100,16 +96,32 @@
                         <ul>
                             <li class="settings-content-item">
                                 <h3>Change your name</h3>
+
+                                <input
+                                    id="change-username-input"
+                                    type="text"
+                                    placeholder="New name"
+                                />
                             </li>
                             <li class="settings-content-item">
                                 <h3>Toggle Animations</h3>
 
                                 <span
-                                    class="btn-secondary"
+                                    class="btn-secondary toggle"
                                     id="toggle-animations-btn"
                                     data-isOn="false"
                                     >Toggle Animations</span
                                 >
+                            </li>
+                            <li class="settings-content-item">
+                                <h3>Toggle Shortcuts Visibility</h3>
+
+                                <span
+                                    class="btn-secondary toggle"
+                                    id="hide-show-shortcut-btn"
+                                    data-isOn="true"
+                                    >Hide/Show Shortcuts
+                                </span>
                             </li>
                         </ul>
                     </div>

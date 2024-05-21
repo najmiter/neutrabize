@@ -384,22 +384,33 @@ button {
     cursor: pointer;
 }
 
-#toggle-animations-btn {
+#change-username-input {
+    cursor: text;
+    font-size: 1.7rem;
+    font-weight: bold;
+    border: 1px solid #555;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    color: #aaa;
+}
+
+#toggle-animations-btn,
+#hide-show-shortcut-btn {
     position: relative;
     padding-right: 3.5rem;
 }
 
-#toggle-animations-btn::after {
+.toggle::after {
     position: absolute;
     top: 50%;
     right: 0;
     translate: -50% -50%;
 }
 
-#toggle-animations-btn[data-isOn="false"]::after {
+.toggle[data-isOn="false"]::after {
     content: '❌';
 }
 
-#toggle-animations-btn[data-isOn="true"]::after {
+.toggle[data-isOn="true"]::after {
     content: '✅';
 }
