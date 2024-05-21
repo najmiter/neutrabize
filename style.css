@@ -240,7 +240,28 @@ button {
 
 #username {
     width: fit-content;
+    position: relative;
 }
+
+.tooltip {
+    display: none;
+    position: absolute;
+    bottom: -110%;
+    left: -50%;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    min-width: 200%;
+    padding: 2rem 2rem;
+    background-color: #2222228f;
+    backdrop-filter: blur(3rem);
+    color: lightcoral;
+}
+
+#username:hover .tooltip {
+    display: block;
+}
+
+
 
 #username h3 {
     text-decoration: underline;
