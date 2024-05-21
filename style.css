@@ -111,6 +111,14 @@ button {
     border: none;
     outline: none;
     background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #222;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    text-align: center;
 }
 
 .shortcut-link {
@@ -147,18 +155,6 @@ button {
     backdrop-filter: blur(10px);
     width: 24rem;
     background-color: var(--bg-color);
-}
-
-.menu-item {
-    padding-block: 1.5rem;
-    padding-inline: 3rem;
-    border-bottom: 1px solid rgb(146, 146, 146);
-    cursor: pointer;
-    text-align: left;
-}
-
-.menu-item:hover {
-    background-color: rgb(var(--hover-color));
 }
 
 .fall {
@@ -343,4 +339,67 @@ button {
 
 #settings-save {
     background-color: rgb(1, 105, 208);
+}
+
+.settings-wrapper[aria-visible='false'] {
+    display: none;
+}
+
+.settings-editor {
+    padding: 2rem 3rem;
+    display: flex;
+    gap: 3rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.settings-heading {
+    font-size: 3rem;
+}
+
+.settings-content {
+    margin-block: 2rem;
+}
+
+.settings-content ul {
+    display: grid;
+    gap: 1rem;
+}
+
+.settings-content-item {
+    padding: 3rem 5rem;
+    background-color: #4444449e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(232, 232, 232);
+    font-size: 1.5rem;
+}
+
+#change-bg-btn {
+    background-color: #222;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+
+#toggle-animations-btn {
+    position: relative;
+    padding-right: 3.5rem;
+}
+
+#toggle-animations-btn::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    translate: -50% -50%;
+}
+
+#toggle-animations-btn[data-isOn="false"]::after {
+    content: '❌';
+}
+
+#toggle-animations-btn[data-isOn="true"]::after {
+    content: '✅';
 }

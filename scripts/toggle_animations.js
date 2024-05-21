@@ -7,6 +7,7 @@ toggle_animations_btn.addEventListener("click", function () {
 function toggle_animations() {
     const what = meteor.getAttribute("aria-should-play") !== "true";
     meteor.setAttribute("aria-should-play", `${what}`);
+    toggle_animations_btn.setAttribute("data-isOn", what);
     localStorage.setItem("neutrabize_ANIMATE", what);
 }
 

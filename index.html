@@ -26,26 +26,6 @@
     <body id="jism">
         <div id="meteor" aria-should-play="false"></div>
         <div id="menu">
-            <span class="menu-item" id="change-bg-btn"
-                >Change Background
-                <input
-                    type="file"
-                    id="upload-bg-input"
-                    accept="image/*"
-                    style="display: none"
-                />
-            </span>
-            <span class="menu-item" id="toggle-animations-btn"
-                >Toggle Animations</span
-            >
-            <span class="menu-item" id="change-color-btn"
-                >Change Color
-                <input
-                    type="color"
-                    id="change-color-input"
-                    style="visibility: hidden"
-                />
-            </span>
             <span class="menu-item" id="hide-show-shortcut-btn"
                 >Hide/Show Shortcuts
             </span>
@@ -85,11 +65,22 @@
                 <h2>Settings</h2>
                 <nav>
                     <ul class="settings-nav">
-                        <li class="settings-nav-item" aria-active="true">
+                        <li
+                            class="settings-nav-item"
+                            aria-active="true"
+                            data-settings="account"
+                        >
                             Account
                         </li>
-                        <li class="settings-nav-item">Colors</li>
-                        <li class="settings-nav-item">Background</li>
+                        <li class="settings-nav-item" data-settings="colors">
+                            Colors
+                        </li>
+                        <li
+                            class="settings-nav-item"
+                            data-settings="background"
+                        >
+                            Background
+                        </li>
                     </ul>
                 </nav>
                 <div class="cta-wrapper">
@@ -97,7 +88,93 @@
                     <button id="settings-save">Save</button>
                 </div>
             </div>
-            <div id="settings-editor"></div>
+
+            <div class="settings-editor">
+                <div
+                    class="settings-wrapper"
+                    data-settings="account"
+                    aria-visible="true"
+                >
+                    <h1 class="settings-heading">Account</h1>
+                    <div class="settings-content">
+                        <ul>
+                            <li class="settings-content-item">
+                                <h3>Change your name</h3>
+                            </li>
+                            <li class="settings-content-item">
+                                <h3>Toggle Animations</h3>
+
+                                <span
+                                    class="btn-secondary"
+                                    id="toggle-animations-btn"
+                                    data-isOn="false"
+                                    >Toggle Animations</span
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    class="settings-wrapper"
+                    data-settings="colors"
+                    aria-visible="false"
+                >
+                    <h1 class="settings-heading">Colors</h1>
+                    <div class="settings-content">
+                        <ul>
+                            <li class="settings-content-item">
+                                <h3>Change Theme Color</h3>
+
+                                <span
+                                    id="change-color-btn"
+                                    class="btn-secondary"
+                                    >Change Color
+                                    <input
+                                        type="color"
+                                        id="change-color-input"
+                                        style="
+                                            visibility: hidden;
+                                            width: 0;
+                                            height: 0;
+                                        "
+                                    />
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    class="settings-wrapper"
+                    data-settings="background"
+                    aria-visible="false"
+                >
+                    <h1 class="settings-heading">Background</h1>
+                    <div class="settings-content">
+                        <ul>
+                            <li class="settings-content-item">
+                                <h3>Change Background Image</h3>
+
+                                <span id="change-bg-btn" class="btn-secondary"
+                                    >Change Background
+                                    <input
+                                        type="file"
+                                        id="upload-bg-input"
+                                        accept="image/*"
+                                        style="display: none"
+                                    />
+                                </span>
+                            </li>
+                            <li class="settings-content-item">
+                                <h3>Use Online Image</h3>
+
+                                <span id="">Change Background</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </article>
     </body>
 </html>
