@@ -17,6 +17,7 @@ All of **these settings will remain consistent even after you reload**. Only whe
 Future features involve much more customisations and improvements.
 
 Preview before installing: [preview neutrabize](https://najmiter.github.io/neutrabize/)
+
 Get the latest version at: https://bit.ly/neutrabize
 
 Thanks **open-meteo** for their free weather api:
