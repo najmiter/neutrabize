@@ -6,4 +6,5 @@ hide_show_shortcuts.addEventListener("click", function () {
 
     hide_show_shortcuts.setAttribute("data-isOn", show_shortcuts);
     localStorage.setItem("neutrabize_SHOWSHORTCUTS", show_shortcuts);
+    show_message("Shorcuts visibility settings updated.");
 });

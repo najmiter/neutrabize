@@ -10,7 +10,28 @@ const meteor = document.getElementById("meteor");
 const menu = document.getElementById("menu");
 const shortcuts = document.getElementById("shortcuts");
 const username_input = document.querySelector("#username input");
+// const message_text = document.getElementById("message-text");
+const message = document.getElementById("message");
 let show_shortcuts = true;
+let message_interval_id;
+const messages = [];
+
+function show_message(msg, status = "success") {
+    const msg_div = document.createElement("div");
+    msg_div.setAttribute("class", "message-wrapper");
+    msg_div.innerHTML = `
+        <img src="imgs/svgs/${status}.svg" alt="">
+        <div class="message-text">
+            ${msg}
+        </div>
+    `;
+
+    message.appendChild(msg_div);
+
+    setTimeout(() => {
+        message.removeChild(msg_div);
+    }, 3 * 1000);
+}
 
 function remove_username_input_and_replace_with_div() {
     const name = localStorage.getItem("neutrabize_USERNAME");

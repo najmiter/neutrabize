@@ -477,3 +477,57 @@ button {
     border: 1px solid #333;
     border-radius: 1rem;
 }
+
+#message {
+    position: fixed;
+    z-index: 10000000;
+    inset: 1%;
+    background-color: transparent;
+    pointer-events: none;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 300ms;
+}
+
+.message-wrapper {
+    font-family: system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    background-color: #333;
+    pointer-events: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    animation: message 3s ease-in forwards;
+}
+
+.message-wrapper img {
+    max-width: 20px;
+}
+
+.message-text {
+    font-size: 1.5rem;
+    color: #eee;
+}
+
+@keyframes message {
+    0% {
+        scale: 0;
+    }
+
+    5% {
+        scale: 1;
+    }
+
+    95% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 0;
+    }
+}

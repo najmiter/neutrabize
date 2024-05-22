@@ -24,6 +24,12 @@
         <script src="main.js" defer></script>
     </head>
     <body id="jism">
+        <div id="message">
+            <div class="message-wrapper">
+                <img src="imgs/svgs/success.svg" alt="" />
+                <div class="message-text">This is an alert message</div>
+            </div>
+        </div>
         <div id="meteor" aria-should-play="false"></div>
         <div id="menu"></div>
         <nav class="bar">
@@ -78,7 +84,10 @@
                             placeholder="Online link to your shortcut icon"
                         />
                     </div>
-                    <div>
+                    <div style="display: flex; justify-content: space-around">
+                        <button class="btn-secondary" id="close-dialog-btn">
+                            Close
+                        </button>
                         <button class="btn-primary" id="add-shortcut-btn">
                             Add
                         </button>

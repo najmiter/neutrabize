@@ -11,6 +11,7 @@ bg_input.addEventListener("change", function (file) {
 
     reader.onload = function () {
         update_bg(reader.result);
+        show_message("Background image updated");
     };
 
     reader.readAsDataURL(file.target.files[0]);

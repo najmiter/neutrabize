@@ -8,6 +8,7 @@ const links = [
 ];
 const add_shortcut_dialog = document.getElementById("add-shortcut-dialog");
 const add_shortcut_btn = document.getElementById("add-shortcut-btn");
+const close_dialog_btn = document.getElementById("close-dialog-btn");
 const shortcut_link_input = document.getElementById("shortcut-link-input");
 const shortcut_icon_input = document.getElementById("shortcut-icon-input");
 
@@ -16,6 +17,10 @@ add_btn.setAttribute("class", "shortcut-item add-shortcut-btn");
 add_btn.textContent = "+";
 add_btn.addEventListener("click", () => {
     add_shortcut_dialog.showModal();
+});
+
+close_dialog_btn.addEventListener("click", () => {
+    add_shortcut_dialog.close();
 });
 
 add_shortcut_btn.addEventListener("click", () => {
@@ -29,9 +34,10 @@ add_shortcut_btn.addEventListener("click", () => {
             "neutrabize_SHORTCUTS",
             JSON.stringify(stored_shortcuts)
         );
+        show_message("Shortcut added");
 
         render_shortcuts();
-    }
+    } else show_message("Link is required", "failure");
 });
 
 let stored_shortcuts = localStorage.getItem("neutrabize_SHORTCUTS");
