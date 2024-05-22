@@ -67,7 +67,10 @@ function render_shortcuts() {
 }
 
 function create_shortcut_item(link, name) {
-    const shortcut_item = document.createElement("div");
+    const shortcut_item = document.createElement("a");
+    if (!link.startsWith("http")) link = `https://${link}`;
+
+    shortcut_item.setAttribute("href", link);
     shortcut_item.setAttribute("class", "shortcut-item");
 
     shortcut_item.innerHTML = `
