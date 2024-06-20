@@ -1,3 +1,5 @@
 prod
 bro.sh
 *.zip
+tailwind.config.js
+dev

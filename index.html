@@ -4,241 +4,56 @@
         <meta charset="UTF-8" />
         <link
             rel="shortcut icon"
-            href="imgs/neutralize-50.png"
+            href="./neutrabize-128.png"
             type="image/x-icon"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>New Tab</title>
-
-        <link rel="stylesheet" href="style.css" />
-        <script src="scripts/globals.js" defer></script>
-        <script src="scripts/logicking.js" defer></script>
-        <script src="scripts/context_menu.js" defer></script>
-        <script src="scripts/change_bg_btn.js" defer></script>
-        <script src="scripts/toggle_animations.js" defer></script>
-        <script src="scripts/change_color_btn.js" defer></script>
-        <script src="scripts/weather.js" defer></script>
-        <script src="scripts/shortcut_factory.js" defer></script>
-        <script src="scripts/hide_show_shortcuts_btn.js" defer></script>
-        <script src="scripts/settings.js" defer></script>
-        <script src="main.js" defer></script>
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./main.js" defer></script>
     </head>
-    <body id="jism">
-        <div id="message"></div>
-        <div id="meteor" aria-should-play="false"></div>
-        <div id="menu"></div>
-        <nav class="bar">
-            <div id="name" contenteditable spellcheck="false">./root</div>
-            <div id="weather-wrapper">
-                <span id="weather">Loading weather data...</span>
-                <span id="unit"></span>
-            </div>
-            <button id="settings-btn">⚙️</button>
-        </nav>
+    <body
+        id="jism"
+        class="max-h-full w-[100vw] bg-white overflow-hidden selection:bg-emerald-600 selection:text-white"
+    >
         <main>
-            <div id="clock-msg">
-                <h1 id="clock">
-                    <div id="hours"></div>
-                    <div id="mkhi" class="vis-hid">:</div>
-                    <div id="minutes"></div>
-                    <div id="meridiem"></div>
-                </h1>
-                <div id="greeting-wrapper">
-                    <h3 id="greeting-msg"></h3>
-                    <span>,&nbsp;</span>
-                    <div id="username">
-                        <input
-                            maxlength="30"
-                            type="text"
-                            placeholder="your name"
+            <div class="relative -z-10">
+                <img
+                    src="./imgs/bg/night2.jpg"
+                    class="absolute top-0 left-0 min-h-screen min-w-full object-cover"
+                    alt=""
+                />
+
+                <div class="fixed inset-0 bg-black/40"></div>
+            </div>
+            <div
+                class="grid place-content-center min-h-[60vh] text-center space-y-4 cursor-default"
+            >
+                <div class="flex justify-center">
+                    <div class="flex items-center gap-4 relative">
+                        <img
+                            id="weather-icon"
+                            class="animate-in absolute left-0 text-center transition-all data-[good=false]:hidden"
+                            alt="weather icon"
+                            data-good="false"
                         />
-                        <p class="tooltip">
-                            To change username, go to settings
-                        </p>
+                        <h2
+                            id="temperature"
+                            class="text-base animate-appear font-light text-gray-300 ml-10"
+                        >
+                            Loading...
+                        </h2>
                     </div>
                 </div>
+                <h1
+                    id="time"
+                    class="text-9xl font-bold bg-gradient-to-b from-emerald-300/70 to-emerald-500/10 bg-clip-text text-transparent"
+                ></h1>
+                <h3
+                    id="date"
+                    class="bg-gradient-to-b from-emerald-300 to-emerald-200/30 bg-clip-text text-transparent font-extralight text-xl"
+                ></h3>
             </div>
-            <div id="shortcut-wrapper">
-                <div id="shortcuts"></div>
-            </div>
-            <dialog id="add-shortcut-dialog">
-                <div>
-                    <div>
-                        <label for="shortcut-link-input">Link</label>
-                        <input
-                            id="shortcut-link-input"
-                            type="text"
-                            placeholder="Link to your shortcut"
-                        />
-                    </div>
-                    <div>
-                        <label for="shortcut-icon-input">Icon (optional)</label>
-                        <input
-                            id="shortcut-icon-input"
-                            type="text"
-                            placeholder="Online link to your shortcut icon"
-                        />
-                    </div>
-                    <div style="display: flex; justify-content: space-around">
-                        <button class="btn-secondary" id="close-dialog-btn">
-                            Close
-                        </button>
-                        <button class="btn-primary" id="add-shortcut-btn">
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </dialog>
         </main>
-
-        <article id="settings">
-            <div id="settings-sidebar">
-                <h2>Settings</h2>
-                <nav>
-                    <ul class="settings-nav">
-                        <li
-                            class="settings-nav-item"
-                            aria-active="true"
-                            data-settings="account"
-                        >
-                            Account
-                        </li>
-                        <li class="settings-nav-item" data-settings="colors">
-                            Colors
-                        </li>
-                        <li
-                            class="settings-nav-item"
-                            data-settings="background"
-                        >
-                            Background
-                        </li>
-                    </ul>
-                </nav>
-                <div class="cta-wrapper">
-                    <button id="settings-save">Done</button>
-                </div>
-            </div>
-
-            <div class="settings-editor">
-                <div
-                    class="settings-wrapper"
-                    data-settings="account"
-                    aria-visible="true"
-                >
-                    <h1 class="settings-heading">Account</h1>
-                    <div class="settings-content">
-                        <ul>
-                            <li class="settings-content-item">
-                                <h3>Change your name</h3>
-
-                                <input
-                                    id="change-username-input"
-                                    type="text"
-                                    placeholder="New name"
-                                    maxlength="30"
-                                />
-                            </li>
-                            <li class="settings-content-item">
-                                <h3>Change Tab Title</h3>
-
-                                <input
-                                    id="change-title-input"
-                                    type="text"
-                                    placeholder="New title"
-                                    maxlength="30"
-                                />
-                            </li>
-                            <li class="settings-content-item">
-                                <h3>Toggle Animations</h3>
-
-                                <span
-                                    class="btn-secondary toggle"
-                                    id="toggle-animations-btn"
-                                    data-isOn="false"
-                                    >Toggle Animations</span
-                                >
-                            </li>
-                            <li class="settings-content-item">
-                                <h3>Toggle Shortcuts Visibility</h3>
-
-                                <span
-                                    class="btn-secondary toggle"
-                                    id="hide-show-shortcut-btn"
-                                    data-isOn="true"
-                                    >Hide/Show Shortcuts
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div
-                    class="settings-wrapper"
-                    data-settings="colors"
-                    aria-visible="false"
-                >
-                    <h1 class="settings-heading">Colors</h1>
-                    <div class="settings-content">
-                        <ul>
-                            <li class="settings-content-item">
-                                <h3>Change Theme Color</h3>
-
-                                <span
-                                    id="change-color-btn"
-                                    class="btn-secondary"
-                                    >Change Color
-                                    <input
-                                        type="color"
-                                        id="change-color-input"
-                                        style="
-                                            visibility: hidden;
-                                            width: 0;
-                                            height: 0;
-                                        "
-                                    />
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div
-                    class="settings-wrapper"
-                    data-settings="background"
-                    aria-visible="false"
-                >
-                    <h1 class="settings-heading">Background</h1>
-                    <div class="settings-content">
-                        <ul>
-                            <li class="settings-content-item">
-                                <h3>Change Background Image</h3>
-
-                                <span id="change-bg-btn" class="btn-secondary"
-                                    >Change Background
-                                    <input
-                                        type="file"
-                                        id="upload-bg-input"
-                                        accept="image/*"
-                                        style="display: none"
-                                    />
-                                </span>
-                            </li>
-                            <li class="settings-content-item">
-                                <h3>Use Online Image</h3>
-
-                                <span
-                                    class="btn-secondary toggle"
-                                    data-isOn="false"
-                                    id="online-image-btn"
-                                    >Change Background</span
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <div id="date"></div>
     </body>
 </html>
