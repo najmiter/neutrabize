@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="./style.css" />
         <script src="./scripts/weather.js" defer></script>
         <script src="./scripts/top-sites.js" defer></script>
+        <script src="./scripts/settings.js" defer></script>
+        <script src="./scripts/quote.js" defer></script>
         <script src="./main.js" defer></script>
     </head>
     <body
@@ -60,9 +62,13 @@
             </div>
 
             <div
-                class="text-center font-serif text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-400"
+                id="quote"
+                class="text-center font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-400"
             >
-                <h1 id="quote-quote" class="max-w-prose mx-auto animate-enter2">
+                <h1
+                    id="quote-quote"
+                    class="max-w-[50rem] mx-auto animate-enter2"
+                >
                     &ldquo;You have to keep breaking your heart until it
                     opens.&rdquo;
                 </h1>
@@ -101,5 +107,32 @@
                 </ul>
             </div>
         </main>
+
+        <div id="settings" class="fixed right-5 top-5 flex flex-col items-end">
+            <button id="settings-btn">
+                <img src="./imgs/icons/setting.svg" alt="settings icon" />
+            </button>
+
+            <div
+                id="settings-wrapper"
+                class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base"
+            >
+                <div
+                    id="settings-content"
+                    class="flex justify-between items-center cursor-pointer toggle"
+                >
+                    <button class="toggle">Show quotes</button>
+                    <div
+                        id="show-quote-toggle"
+                        data-on="false"
+                        class="toggle rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+                    >
+                        <div
+                            class="toggle absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
