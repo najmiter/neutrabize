@@ -13,10 +13,16 @@ if (previousQuote) {
         const quote = JSON.parse(previousQuote);
 
         if (quote.fetchedAt !== fetchedAt) {
-            fetchNewQuote().then((quote) => updateQuote(quote));
+            fetchNewQuote()
+                .then((quote) => updateQuote(quote))
+                .catch(() => updateQuote(quote));
         } else updateQuote(quote);
     } catch {}
-} else fetchNewQuote().then((quote) => updateQuote(quote));
+} else {
+    fetchNewQuote()
+        .then((quote) => updateQuote(quote))
+        .catch(() => {});
+}
 
 async function fetchNewQuote() {
     const jwb = await fetch("https://api.quotable.io/random");

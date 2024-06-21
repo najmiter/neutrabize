@@ -34,5 +34,14 @@ function handleQuoteToggle() {
     toggle.dataset.on = toggle.dataset.on === "false";
 
     const quote = document.getElementById("quote");
-    quote.style.display = toggle.dataset.on === "true" ? "block" : "none";
+    quote.classList.toggle("animate-away");
+    setTimeout(
+        () => {
+            quote.style.display =
+                toggle.dataset.on === "true" ? "block" : "none";
+        },
+        quote.classList.contains("animate-away") ? 400 : 0
+    );
+
+    localStorage.setItem("neutrabize_SHOULDSHOWQUOTE", toggle.dataset.on);
 }

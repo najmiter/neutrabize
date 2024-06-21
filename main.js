@@ -1,6 +1,16 @@
 const time = document.getElementById("time");
 const date = document.getElementById("date");
 
+const shouldShowQuote = localStorage.getItem("neutrabize_SHOULDSHOWQUOTE");
+
+if (shouldShowQuote && shouldShowQuote === "true") {
+    const quote = document.getElementById("quote");
+    const toggle = document.getElementById("show-quote-toggle");
+    quote.classList.remove("animate-away");
+    toggle.dataset.on = "true";
+    quote.style.display = "block";
+}
+
 date.textContent = new Date().toLocaleDateString("en-us", {
     weekday: "long",
     month: "long",
