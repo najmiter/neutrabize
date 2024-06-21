@@ -3,7 +3,7 @@
     "name": "neutrabize",
     "version": "3.0",
     "description": "Your own customisable Chrome new tab and home page",
-    "permissions": ["geolocation"],
+    "permissions": ["geolocation", "topSites", "favicon"],
 
     "icons": {
         "32": "./neutrabize-128.png",

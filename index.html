@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>New Tab</title>
         <link rel="stylesheet" href="./style.css" />
+        <script src="./scripts/weather.js" defer></script>
         <script src="./main.js" defer></script>
     </head>
     <body
@@ -19,7 +20,7 @@
         <main>
             <div class="relative -z-10">
                 <img
-                    src="./imgs/bg/night2.jpg"
+                    src="./imgs/bg/ai-mountain.jpg"
                     class="absolute top-0 left-0 min-h-screen min-w-full object-cover"
                     alt=""
                 />
@@ -47,12 +48,44 @@
                 </div>
                 <h3
                     id="date"
-                    class="bg-gradient-to-b from-emerald-300 to-emerald-200/30 bg-clip-text text-transparent font-extralight text-xl"
+                    class="bg-gradient-to-b from-violet-300 to-violet-200/60 bg-clip-text text-transparent font-extralight text-xl"
                 ></h3>
-                <h1
-                    id="time"
-                    class="text-9xl font-bold bg-gradient-to-b from-emerald-300/70 to-emerald-500/10 bg-clip-text text-transparent"
-                ></h1>
+                <div class="relative">
+                    <h1
+                        id="time"
+                        class="text-9xl font-bold bg-gradient-to-b from-violet-400 to-violet-100/40 bg-clip-text text-transparent"
+                    ></h1>
+                </div>
+            </div>
+
+            <div
+                id="shortcuts-bar"
+                data-show="true"
+                class="w-full fixed bottom-0 bg-violet-950/40 backdrop-blur-lg py-2 data-[show=false]:hidden"
+            >
+                <ul
+                    id="shortcuts"
+                    class="flex justify-center gap-3 max-w-[900px] flex-wrap mx-auto"
+                >
+                    <a
+                        style="display: none"
+                        class="flex flex-col items-center gap-3 hover:text-blue-400 group relative animate-enter origin-bottom"
+                        href="https://github.com/najmiter"
+                    >
+                        <li class="max-w-[40px]">
+                            <img
+                                class="hover:bg-slate-800/50 hover:backdrop-blur-sm rounded-md p-2 min-w-[40px]"
+                                src="https://logo.clearbit.com/github.com?size=32"
+                                alt=""
+                            />
+                        </li>
+                        <p
+                            class="text-xs text-violet-100 bg-stone-800 border border-stone-500 py-1 px-3 rounded hidden group-hover:block absolute left-1/2 -translate-x-1/2 -top-9 overflow-hidden max-w-40 whitespace-nowrap overflow-ellipsis"
+                        >
+                            Welcome back! Login to start learning now!
+                        </p>
+                    </a>
+                </ul>
             </div>
         </main>
     </body>

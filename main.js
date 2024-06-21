@@ -9,7 +9,7 @@ date.textContent = new Date().toLocaleDateString("en-us", {
 });
 
 function updateTime() {
-    time.textContent = new Date()
+    const now = new Date()
         .toLocaleTimeString("en-us", {
             hour: "numeric",
             minute: "2-digit",
@@ -17,86 +17,60 @@ function updateTime() {
         })
         .split(" ")
         .at(0);
+
+    time.textContent = now;
 }
 
 updateTime();
+update_weather();
+
 setInterval(updateTime, 1 * 1000);
 
-const temperature = document.getElementById("temperature");
-const weather_previously_fetched = localStorage.getItem("neutrabize_WEATHER");
-const weatherIcon = document.getElementById("weather-icon");
+document.addEventListener("DOMContentLoaded", () => {
+    chrome.topSites.get((topSites) => {
+        displayTopSites(topSites);
+    });
+});
 
-function update_weather() {
-    if (weather_previously_fetched) {
-        const { temperature: old, at } = JSON.parse(weather_previously_fetched);
-
-        if (Date.now() > at + 1000 * 60 * 60) {
-            do_da_weather_thing();
-        } else {
-            temperature.textContent = `${old.temp}`;
-            weatherIcon.src = `./imgs/icons/${old.icon}.svg`;
-            weatherIcon.dataset.good = "true";
-        }
-    } else {
-        do_da_weather_thing();
-    }
+function displayTopSites(sites) {
+    const shortcuts = document.getElementById("shortcuts");
+    shortcuts.innerHTML = "";
+    sites.forEach((site) => {
+        const link = createSiteElement(site);
+        shortcuts.appendChild(link);
+    });
 }
 
-function do_da_weather_thing() {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(async function (position) {
-            const lati = position.coords.latitude;
-            const long = position.coords.longitude;
+function createSiteElement(site) {
+    const link = document.createElement("a");
+    link.setAttribute(
+        "class",
+        "flex flex-col items-center gap-3 hover:text-blue-400 group relative animate-enter origin-bottom"
+    );
 
-            const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day`;
+    link.href = site.url;
 
-            try {
-                const choosni = await fetch(WEATHER_API);
+    link.innerHTML = `
+        <li class="max-w-[40px]">
+            <img
+                class="hover:bg-slate-800/50 hover:backdrop-blur-sm rounded-md p-2 min-w-[40px]"
+                src=${yoChromeGiveMeSomeOfThatShit(site.url)}
+                alt="favicon"
+            />
+        </li>
+        <p
+            class="text-xs text-violet-100 bg-stone-800 border border-stone-500 py-1 px-3 rounded hidden group-hover:block absolute left-1/2 -translate-x-1/2 -top-9 overflow-hidden max-w-40 whitespace-nowrap overflow-ellipsis"
+        >
+            ${site.title}
+        </p>
+    `;
 
-                if (choosni.ok) {
-                    const khbr = await choosni.json();
-                    const icon = khbr.current.rain
-                        ? "rainy"
-                        : khbr.current.is_day
-                          ? "sunny"
-                          : "night";
-
-                    temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
-                    weatherIcon.src = `./imgs/icons/${icon}.svg`;
-                    weatherIcon.dataset.good = "true";
-
-                    localStorage.setItem(
-                        "neutrabize_WEATHER",
-                        JSON.stringify({
-                            at: Date.now(),
-                            temperature: {
-                                temp: temperature.textContent,
-                                icon,
-                            },
-                        })
-                    );
-                } else {
-                    throw new Error(`Couldn't get the temperature`);
-                }
-            } catch (probably_the_network_thing) {
-                reset_weather_to_previous_or_empty();
-            }
-        }, reset_weather_to_previous_or_empty);
-    } else {
-        temperature.textContent = "";
-        console.error("temperature data could not be displayed");
-    }
+    return link;
 }
 
-function reset_weather_to_previous_or_empty() {
-    if (weather_previously_fetched) {
-        const { temperature: old } = JSON.parse(weather_previously_fetched);
-        temperature.textContent = old.temp;
-        weatherIcon.src = `./imgs/icons/${old.icon}.svg`;
-        weatherIcon.dataset.good = "true";
-    } else {
-        temperature.textContent = "";
-    }
+function yoChromeGiveMeSomeOfThatShit(u) {
+    const url = new URL(chrome.runtime.getURL("/_favicon/"));
+    url.searchParams.set("pageUrl", u);
+    url.searchParams.set("size", "64");
+    return url.toString();
 }
-
-update_weather();

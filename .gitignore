@@ -3,3 +3,4 @@ bro.sh
 *.zip
 tailwind.config.js
 dev
+background.js
