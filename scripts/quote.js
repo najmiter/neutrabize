@@ -26,7 +26,6 @@ if (previousQuote) {
 
 async function fetchNewQuote() {
     const jwb = await fetch("https://api.quotable.io/random");
-
     const quote = await jwb.json();
 
     localStorage.setItem(

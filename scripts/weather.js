@@ -20,7 +20,7 @@ function update_weather() {
 
 function do_da_weather_thing() {
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(async function (position) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
             const lati = position.coords.latitude;
             const long = position.coords.longitude;
 
