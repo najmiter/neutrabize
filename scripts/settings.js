@@ -18,7 +18,7 @@ settingsBtn.addEventListener("click", () => {
         settingsWrapper.style.padding = 0;
         settingsContent.style.display = "none";
     } else {
-        settingsWrapper.style.height = "142px";
+        settingsWrapper.style.height = "366px";
         settingsWrapper.style.padding = "16px";
         settingsContent.style.display = "grid";
     }
@@ -29,7 +29,6 @@ toggleQuote.addEventListener("click", () => {
 
     toggle.dataset.on = toggle.dataset.on === "false";
 
-    const quote = document.getElementById("quote");
     quote.classList.toggle("animate-away");
     setTimeout(
         () => {

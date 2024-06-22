@@ -10,10 +10,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>New Tab</title>
         <link rel="stylesheet" href="./style.css" />
+        <script src="./scripts/globals.js" defer></script>
         <script src="./scripts/top-sites.js" defer></script>
         <script src="./scripts/settings.js" defer></script>
         <script src="./scripts/quote.js" defer></script>
         <script src="./scripts/weather.js" defer></script>
+        <script src="./scripts/theme.js" defer></script>
         <script src="./main.js" defer></script>
     </head>
     <body
@@ -23,7 +25,8 @@
         <main>
             <div class="relative -z-10">
                 <img
-                    src="./imgs/bg/ai-mountain.jpg"
+                    id="wallpaper"
+                    src="./imgs/bg/night2.jpg"
                     class="absolute top-0 left-0 min-h-screen min-w-full object-cover"
                     alt=""
                 />
@@ -49,25 +52,19 @@
                         </h2>
                     </div>
                 </div>
-                <h3
-                    id="date"
-                    class="bg-gradient-to-b from-violet-300 to-violet-200/60 bg-clip-text text-transparent font-extralight text-xl"
-                ></h3>
+                <h3 id="date" class="theme__city-date theme__date"></h3>
                 <div class="relative">
-                    <h1
-                        id="time"
-                        class="text-9xl font-bold bg-gradient-to-b from-violet-400 to-violet-100/40 bg-clip-text text-transparent"
-                    ></h1>
+                    <h1 id="time" class="theme__city-time theme__time"></h1>
                 </div>
             </div>
 
             <div
                 id="quote"
-                class="text-center animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-400"
+                class="text-center animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300"
             >
                 <h1
                     id="quote-quote"
-                    class="max-w-[50rem] mx-auto animate-enter2"
+                    class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]"
                 >
                     &ldquo;You have to keep breaking your heart until it
                     opens.&rdquo;
@@ -84,7 +81,7 @@
             >
                 <ul
                     id="shortcuts"
-                    class="animate-away flex justify-center gap-3 max-w-[900px] flex-wrap mx-auto"
+                    class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-center gap-3 w-fit max-w-[900px] flex-wrap mx-auto"
                 ></ul>
             </div>
         </main>
@@ -136,6 +133,42 @@
                             <div
                                 class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
                             ></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h1 class="px-2">Themes</h1>
+                        <div class="flex gap-3 overflow-scroll">
+                            <div
+                                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70"
+                            >
+                                <div
+                                    role="presentation"
+                                    class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                                    data-name="city"
+                                ></div>
+                                <img
+                                    src="./imgs/bg/night2.jpg"
+                                    class="max-w-32 aspect-square object-cover rounded-md"
+                                    alt=""
+                                />
+                                <h3 class="text-lg">City</h3>
+                            </div>
+                            <div
+                                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70"
+                            >
+                                <div
+                                    role="presentation"
+                                    class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                                    data-name="alienet"
+                                ></div>
+                                <img
+                                    src="./imgs/bg/ai-mountain.jpg"
+                                    class="max-w-32 aspect-square object-cover rounded-md"
+                                    alt=""
+                                />
+                                <h3 class="text-lg">Alienet</h3>
+                            </div>
                         </div>
                     </div>
                 </div>

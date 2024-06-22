@@ -1,13 +1,10 @@
-const time = document.getElementById("time");
-const date = document.getElementById("date");
-
 const shouldShowQuote = localStorage.getItem("neutrabize_SHOULDSHOWQUOTE");
 const shouldShowShortcuts = localStorage.getItem(
     "neutrabize_SHOULDSHOWSHORTCUTS"
 );
+const activeTheme = localStorage.getItem("neutrabize_THEMEDATA");
 
 if (shouldShowQuote === "true") {
-    const quote = document.getElementById("quote");
     const toggle = document.getElementById("show-quote-toggle");
 
     toggle.dataset.on = "true";
@@ -21,7 +18,14 @@ if (shouldShowShortcuts === "false") {
 
     toggle.dataset.on = "false";
     shortcutsBar.dataset.show = "false";
-} else document.getElementById("shortcuts").classList.remove("animate-away");
+} else shortcuts.classList.remove("animate-away");
+
+if (activeTheme) {
+    try {
+        const theme = JSON.parse(activeTheme);
+        updateTheme(theme);
+    } catch {}
+}
 
 date.textContent = new Date().toLocaleDateString("en-us", {
     weekday: "long",

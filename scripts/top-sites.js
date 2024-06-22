@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function displayTopSites(sites) {
-    const shortcuts = document.getElementById("shortcuts");
     shortcuts.innerHTML = "";
     sites.forEach((site) => {
         const link = createSiteElement(site);
