@@ -6,17 +6,13 @@ const toggleShortcuts = document.getElementById("toggle-shortcuts");
 
 document.addEventListener("click", (e) => {
     if (!document.getElementById("settings").contains(e.target)) {
-        settingsWrapper.style.height = 0;
-        settingsWrapper.style.padding = 0;
-        settingsContent.style.display = "none";
+        hideSettings();
     }
 });
 
 settingsBtn.addEventListener("click", () => {
     if (window.getComputedStyle(settingsWrapper).height !== "0px") {
-        settingsWrapper.style.height = 0;
-        settingsWrapper.style.padding = 0;
-        settingsContent.style.display = "none";
+        hideSettings();
     } else {
         settingsWrapper.style.height = "366px";
         settingsWrapper.style.padding = "16px";
@@ -58,3 +54,9 @@ toggleShortcuts.addEventListener("click", () => {
 
     localStorage.setItem("neutrabize_SHOULDSHOWSHORTCUTS", toggle.dataset.on);
 });
+
+function hideSettings() {
+    settingsWrapper.style.height = 0;
+    settingsWrapper.style.padding = 0;
+    settingsContent.style.display = "none";
+}
