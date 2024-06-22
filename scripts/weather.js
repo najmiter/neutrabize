@@ -25,7 +25,6 @@ function do_da_weather_thing() {
             const long = position.coords.longitude;
 
             const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day`;
-            console.log("we here");
 
             try {
                 const choosni = await fetch(WEATHER_API);
