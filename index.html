@@ -10,10 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>New Tab</title>
         <link rel="stylesheet" href="./style.css" />
-        <script src="./scripts/weather.js" defer></script>
         <script src="./scripts/top-sites.js" defer></script>
         <script src="./scripts/settings.js" defer></script>
         <script src="./scripts/quote.js" defer></script>
+        <script src="./scripts/weather.js" defer></script>
         <script src="./main.js" defer></script>
     </head>
     <body
@@ -84,27 +84,8 @@
             >
                 <ul
                     id="shortcuts"
-                    class="flex justify-center gap-3 max-w-[900px] flex-wrap mx-auto"
-                >
-                    <a
-                        style="display: none"
-                        class="flex flex-col items-center gap-3 hover:text-blue-400 group relative animate-enter origin-bottom"
-                        href="https://github.com/najmiter"
-                    >
-                        <li class="max-w-[40px]">
-                            <img
-                                class="hover:bg-slate-800/50 hover:backdrop-blur-sm rounded-md p-2 min-w-[40px]"
-                                src="https://logo.clearbit.com/github.com?size=32"
-                                alt=""
-                            />
-                        </li>
-                        <p
-                            class="text-xs text-violet-100 bg-stone-800 border border-stone-500 py-1 px-3 rounded hidden group-hover:block absolute left-1/2 -translate-x-1/2 -top-9 overflow-hidden max-w-40 whitespace-nowrap overflow-ellipsis"
-                        >
-                            Welcome back! Login to start learning now!
-                        </p>
-                    </a>
-                </ul>
+                    class="animate-away flex justify-center gap-3 max-w-[900px] flex-wrap mx-auto"
+                ></ul>
             </div>
         </main>
 
@@ -117,19 +98,45 @@
                 id="settings-wrapper"
                 class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base"
             >
-                <div
-                    id="settings-content"
-                    class="flex justify-between items-center cursor-pointer toggle"
-                >
-                    <button class="toggle">Show quotes</button>
+                <div id="settings-content" class="grid gap-5">
                     <div
-                        id="show-quote-toggle"
-                        data-on="false"
-                        class="toggle rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+                        class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
                     >
                         <div
-                            class="toggle absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+                            role="presentation"
+                            id="toggle-quote"
+                            class="absolute top-0 left-0 w-full h-full bg-transparent z-10"
                         ></div>
+                        <button>Show quotes</button>
+                        <div
+                            id="show-quote-toggle"
+                            data-on="false"
+                            class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+                        >
+                            <div
+                                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
+                    >
+                        <div
+                            role="presentation"
+                            id="toggle-shortcuts"
+                            class="absolute top-0 left-0 w-full h-full bg-transparent z-10"
+                        ></div>
+                        <button>Show shortcuts</button>
+                        <div
+                            id="show-shortcuts-toggle"
+                            data-on="true"
+                            class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+                        >
+                            <div
+                                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>

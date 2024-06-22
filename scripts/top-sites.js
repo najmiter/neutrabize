@@ -15,6 +15,7 @@ function displayTopSites(sites) {
 
 function createSiteElement(site) {
     const link = document.createElement("a");
+
     link.setAttribute(
         "class",
         "flex flex-col items-center gap-3 hover:text-blue-400 group relative animate-enter origin-bottom"

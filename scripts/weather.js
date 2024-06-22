@@ -25,6 +25,7 @@ function do_da_weather_thing() {
             const long = position.coords.longitude;
 
             const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day`;
+            console.log("we here");
 
             try {
                 const choosni = await fetch(WEATHER_API);
@@ -37,9 +38,9 @@ function do_da_weather_thing() {
                           ? "sunny"
                           : "night";
 
-                    temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
                     weatherIcon.src = `./imgs/icons/${icon}.svg`;
                     weatherIcon.dataset.good = "true";
+                    temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
 
                     localStorage.setItem(
                         "neutrabize_WEATHER",
