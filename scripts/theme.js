@@ -15,6 +15,12 @@ const themesData = {
     },
 };
 
+if (!localStorage.getItem("neutrabize_THEMEDATA"))
+    localStorage.setItem(
+        "neutrabize_THEMEDATA",
+        JSON.stringify(themesData.alienet)
+    );
+
 const themes = document.querySelectorAll(".theme");
 
 themes?.forEach((theme) => {

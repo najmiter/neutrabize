@@ -3,6 +3,12 @@ const shouldShowShortcuts = localStorage.getItem(
     "neutrabize_SHOULDSHOWSHORTCUTS"
 );
 const activeTheme = localStorage.getItem("neutrabize_THEMEDATA");
+if (activeTheme) {
+    try {
+        const theme = JSON.parse(activeTheme);
+        updateTheme(theme);
+    } catch {}
+}
 
 if (shouldShowQuote === "true") {
     const toggle = document.getElementById("show-quote-toggle");
@@ -19,13 +25,6 @@ if (shouldShowShortcuts === "false") {
     toggle.dataset.on = "false";
     shortcutsBar.dataset.show = "false";
 } else shortcuts.classList.remove("animate-away");
-
-if (activeTheme) {
-    try {
-        const theme = JSON.parse(activeTheme);
-        updateTheme(theme);
-    } catch {}
-}
 
 date.textContent = new Date().toLocaleDateString("en-us", {
     weekday: "long",
