@@ -11,9 +11,20 @@ document.addEventListener("click", (e) => {
 });
 
 settingsBtn.addEventListener("click", () => {
+    const themes = document.querySelectorAll("#themes>div");
+
     if (window.getComputedStyle(settingsWrapper).height !== "0px") {
+        themes.forEach((theme) => {
+            theme.classList.remove("animate-come-in");
+            theme.classList.add("animate-come-out");
+        });
         hideSettings();
     } else {
+        themes.forEach((theme) => {
+            theme.classList.remove("animate-come-out");
+            theme.style.opacity = 0;
+            setTimeout(() => theme.classList.add("animate-come-in"), 130);
+        });
         settingsWrapper.style.height = "366px";
         settingsWrapper.style.padding = "16px";
         settingsContent.style.display = "grid";

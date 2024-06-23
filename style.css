@@ -1155,6 +1155,33 @@ html {
   line-height: 1;
 }
 
+@keyframes come-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes come-out {
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+.animate-come-in {
+  animation: come-in 350ms forwards;
+}
+
+.animate-come-out {
+  animation: come-out 350ms forwards;
+}
+
 .selection\:bg-blue-600 *::-moz-selection {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
