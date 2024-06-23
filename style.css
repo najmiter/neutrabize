@@ -1218,22 +1218,6 @@ html {
   display: block;
 }
 
-.has-\[data-active\=true\]\:bg-stone-900\/70:has(data-active=true) {
-  background-color: rgb(28 25 23 / 0.7);
-}
-
-.has-\[div\[data-active\=true\]\]\:bg-stone-900\/70:has(div[data-active=true]) {
-  background-color: rgb(28 25 23 / 0.7);
-}
-
-.has-\[div\[data-active\=true\]\]\:bg-stone-900\/30:has(div[data-active=true]) {
-  background-color: rgb(28 25 23 / 0.3);
-}
-
-.has-\[div\[data-active\=true\]\]\:bg-stone-400\/70:has(div[data-active=true]) {
-  background-color: rgb(168 162 158 / 0.7);
-}
-
 .has-\[div\[data-active\=true\]\]\:bg-stone-400\/30:has(div[data-active=true]) {
   background-color: rgb(168 162 158 / 0.3);
 }
@@ -1249,10 +1233,6 @@ html {
 .data-\[on\=true\]\:bg-emerald-400[data-on=true] {
   --tw-bg-opacity: 1;
   background-color: rgb(52 211 153 / var(--tw-bg-opacity));
-}
-
-.data-\[active\=true\]\:bg-stone-900\/70[data-active=true] {
-  background-color: rgb(28 25 23 / 0.7);
 }
 
 .group[data-on=true] .group-data-\[on\=true\]\:left-\[calc\(95\%-24px\)\] {
