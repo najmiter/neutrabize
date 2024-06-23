@@ -3,6 +3,8 @@ const shouldShowShortcuts = localStorage.getItem(
     "neutrabize_SHOULDSHOWSHORTCUTS"
 );
 const activeTheme = localStorage.getItem("neutrabize_THEMEDATA");
+const shouldShowBattery = localStorage.getItem("neutrabize_SHOULDSHOWBATTERY");
+
 if (activeTheme) {
     try {
         const theme = JSON.parse(activeTheme);
@@ -30,6 +32,13 @@ if (shouldShowShortcuts === "false") {
     toggle.dataset.on = "false";
     shortcutsBar.dataset.show = "false";
 } else shortcuts.classList.remove("animate-away");
+
+if (shouldShowBattery === "true") {
+    const toggle = document.getElementById("show-battery-toggle");
+
+    toggle.dataset.on = "true";
+    batteryContainer.dataset.show = "true";
+} else batteryContainer.classList.add("hidden");
 
 date.textContent = new Date().toLocaleDateString("en-us", {
     weekday: "long",

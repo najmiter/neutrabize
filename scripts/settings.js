@@ -3,6 +3,7 @@ const settingsWrapper = document.getElementById("settings-wrapper");
 const settingsContent = document.getElementById("settings-content");
 const toggleQuote = document.getElementById("toggle-quote");
 const toggleShortcuts = document.getElementById("toggle-shortcuts");
+const toggleBattery = document.getElementById("toggle-battery");
 
 document.addEventListener("click", (e) => {
     if (!document.getElementById("settings").contains(e.target)) {
@@ -25,7 +26,7 @@ settingsBtn.addEventListener("click", () => {
             theme.style.opacity = 0;
             setTimeout(() => theme.classList.add("animate-come-in"), 130);
         });
-        settingsWrapper.style.height = "366px";
+        settingsWrapper.style.height = "431px";
         settingsWrapper.style.padding = "16px";
         settingsContent.style.display = "grid";
     }
@@ -64,6 +65,16 @@ toggleShortcuts.addEventListener("click", () => {
     );
 
     localStorage.setItem("neutrabize_SHOULDSHOWSHORTCUTS", toggle.dataset.on);
+});
+
+toggleBattery.addEventListener("click", () => {
+    const toggle = document.getElementById("show-battery-toggle");
+    batteryContainer.classList.remove("hidden");
+
+    toggle.dataset.on = toggle.dataset.on === "false";
+    batteryContainer.dataset.show = toggle.dataset.on;
+
+    localStorage.setItem("neutrabize_SHOULDSHOWBATTERY", toggle.dataset.on);
 });
 
 function hideSettings() {
