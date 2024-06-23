@@ -23,6 +23,7 @@ if ("getBattery" in navigator) {
 
             navigator.getBattery().then((battery) => {
                 updateSvg(battery);
+                isChargingIcon.dataset.charging = battery.charging;
 
                 battery.onlevelchange = () => updateSvg(battery);
                 battery.onchargingchange = () =>
