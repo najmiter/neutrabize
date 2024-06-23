@@ -851,16 +851,6 @@ video {
   animation: in 250ms ease-in forwards;
 }
 
-@keyframes leave {
-  to {
-    scale: 0;
-  }
-}
-
-.animate-leave {
-  animation: leave 400ms forwards;
-}
-
 .cursor-default {
   cursor: default;
 }
@@ -1271,10 +1261,6 @@ html {
 
 .has-\[div\[data-active\=true\]\]\:bg-stone-400\/30:has(div[data-active=true]) {
   background-color: rgb(168 162 158 / 0.3);
-}
-
-.data-\[show\=false\]\:invisible[data-show=false] {
-  visibility: hidden;
 }
 
 .data-\[charging\=false\]\:hidden[data-charging=false] {
