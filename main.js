@@ -7,6 +7,11 @@ if (activeTheme) {
     try {
         const theme = JSON.parse(activeTheme);
         updateTheme(theme);
+
+        themes.forEach(
+            (_theme) =>
+                (_theme.dataset.active = _theme.dataset.name === theme.name)
+        );
     } catch {}
 }
 
