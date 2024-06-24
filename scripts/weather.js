@@ -14,6 +14,7 @@ function update_weather() {
             weatherIcon.dataset.good = "true";
         }
     } else {
+        localStorage.removeItem("neutrabize_WEATHER");
         do_da_weather_thing();
     }
 }
