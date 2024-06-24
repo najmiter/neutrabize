@@ -36,7 +36,7 @@ const themesData = {
 if (!localStorage.getItem("neutrabize_THEMEDATA"))
     localStorage.setItem(
         "neutrabize_THEMEDATA",
-        JSON.stringify(themesData.alienet)
+        JSON.stringify(themesData.dusk)
     );
 
 themes?.forEach((theme) => {

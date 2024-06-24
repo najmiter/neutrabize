@@ -573,8 +573,8 @@ video {
   top: -2.25rem;
 }
 
-.bottom-36 {
-  bottom: 9rem;
+.bottom-\[clamp\(5px\2c 5\%\2c 144px\)\] {
+  bottom: clamp(5px,5%,144px);
 }
 
 .left-0 {
@@ -603,6 +603,26 @@ video {
 
 .top-5 {
   top: 1.25rem;
+}
+
+.bottom-\[clamp\(5px\2c 10\%\2c 144px\)\] {
+  bottom: clamp(5px,10%,144px);
+}
+
+.bottom-\[clamp\(5px\2c 15\%\2c 125px\)\] {
+  bottom: clamp(5px,15%,125px);
+}
+
+.bottom-\[clamp\(2px\2c 15\%\2c 125px\)\] {
+  bottom: clamp(2px,15%,125px);
+}
+
+.bottom-\[clamp\(2px\2c 20\%\2c 125px\)\] {
+  bottom: clamp(2px,20%,125px);
+}
+
+.bottom-\[clamp\(2px\2c 20\%\2c 130px\)\] {
+  bottom: clamp(2px,20%,130px);
 }
 
 .-z-10 {
@@ -675,6 +695,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-\[47vh\] {
+  min-height: 47vh;
 }
 
 .w-14 {

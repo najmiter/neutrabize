@@ -34,7 +34,7 @@
             </div>
 
             <div
-                class="grid place-content-center min-h-[50vh] text-center space-y-2 cursor-default"
+                class="grid place-content-center min-h-[47vh] text-center space-y-2 cursor-default"
             >
                 <div class="flex justify-center">
                     <div class="flex items-center gap-4 relative">
@@ -97,7 +97,7 @@
             <div
                 id="shortcuts-bar"
                 data-show="true"
-                class="w-full fixed bottom-36 py-2 data-[show=false]:hidden"
+                class="w-full fixed bottom-[clamp(2px,20%,130px)] py-2 data-[show=false]:hidden"
             >
                 <ul
                     id="shortcuts"
@@ -188,6 +188,21 @@
                                 <div
                                     role="presentation"
                                     class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                                    data-name="dusk"
+                                ></div>
+                                <img
+                                    src="./imgs/bg/dusk.jpg"
+                                    class="max-w-32 aspect-square object-cover rounded-md"
+                                    alt=""
+                                />
+                                <h3 class="text-lg">Dusk</h3>
+                            </div>
+                            <div
+                                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+                            >
+                                <div
+                                    role="presentation"
+                                    class="theme absolute top-0 left-0 w-full h-full bg-transparent"
                                     data-name="city"
                                 ></div>
                                 <img
@@ -226,21 +241,6 @@
                                     alt=""
                                 />
                                 <h3 class="text-lg">Jant</h3>
-                            </div>
-                            <div
-                                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-                            >
-                                <div
-                                    role="presentation"
-                                    class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                                    data-name="dusk"
-                                ></div>
-                                <img
-                                    src="./imgs/bg/dusk.jpg"
-                                    class="max-w-32 aspect-square object-cover rounded-md"
-                                    alt=""
-                                />
-                                <h3 class="text-lg">Dusk</h3>
                             </div>
                         </div>
                     </div>
