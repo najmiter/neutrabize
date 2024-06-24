@@ -29,7 +29,7 @@ async function fetchNewQuote() {
         const jwb = await fetch("https://api.quotable.io/random");
         const quote = await jwb.json();
 
-        if (quote.content.length > 100) continue;
+        if (quote.content.length > 75) continue;
 
         localStorage.setItem(
             "neutrabize_QUOTE",
