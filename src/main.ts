@@ -6,7 +6,7 @@ import getStarfield from './getStarfield.js';
 import { getFresnelMat } from './getFresnelMat.js';
 
 import './style.css';
-import { setDateTime } from './setDateTime.js';
+import { getShortcuts, setDateTime } from './setDateTime.js';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -130,8 +130,27 @@ gsap.to(camera.position, {
   },
 });
 
+const welcomeChars = document.getElementsByClassName(
+  'welcome-text'
+) as HTMLCollectionOf<HTMLSpanElement>;
+for (let i = 0; i < welcomeChars.length; i++) {
+  const char = welcomeChars.item(i);
+
+  gsap.to(char, {
+    y: -20,
+    x: 50,
+    opacity: 0,
+    duration: 0.2,
+    delay: 0.025 * i + 1.5,
+    ease: 'power3.inOut',
+  });
+}
+
 //
 
 ////
 
-window.onload = setDateTime;
+window.onload = () => {
+  setDateTime();
+  getShortcuts();
+};

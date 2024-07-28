@@ -20,9 +20,9 @@ export const setDateTime = () => {
       ease: 'power3.inOut',
     }
   );
+};
 
-  // ////
-
+export const getShortcuts = () => {
   const shortcuts = document.getElementById('shortcuts') as HTMLDivElement;
 
   chrome.topSites.get((topSites) => {

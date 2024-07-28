@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "neutrabize",
-  "version": "4.00",
+  "version": "4.01",
   "description": "Chrome new tab and home page - 3D space live wallpaper",
   "permissions": ["topSites", "favicon"],
 
