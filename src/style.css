@@ -22,7 +22,7 @@ body {
 }
 
 #date {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 #time {
@@ -35,15 +35,15 @@ body {
 #shortcuts {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
   max-width: 80rem;
   background-color: #222222c3;
-  border: 1px solid #666;
+  backdrop-filter: blur(50px);
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
 }
 
 li {

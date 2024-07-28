@@ -3,7 +3,7 @@
   "name": "neutrabize",
   "version": "4.01",
   "description": "Chrome new tab and home page - 3D space live wallpaper",
-  "permissions": ["topSites", "favicon"],
+  "permissions": ["topSites", "favicon", "tabs"],
 
   "icons": {
     "32": "./neutrabize-128.png",

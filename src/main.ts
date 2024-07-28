@@ -6,7 +6,9 @@ import getStarfield from './getStarfield.js';
 import { getFresnelMat } from './getFresnelMat.js';
 
 import './style.css';
-import { getShortcuts, setDateTime } from './setDateTime.js';
+import { setDateTime } from './setDateTime.js';
+import { getShortcuts } from './getShortcuts.js';
+import { setWelcomeText } from './setWelcomeText.js';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -118,8 +120,6 @@ function handleWindowResize() {
 }
 window.addEventListener('resize', handleWindowResize, false);
 
-animate();
-
 gsap.to(camera.position, {
   z: 5,
   y: w / h,
@@ -130,27 +130,10 @@ gsap.to(camera.position, {
   },
 });
 
-const welcomeChars = document.getElementsByClassName(
-  'welcome-text'
-) as HTMLCollectionOf<HTMLSpanElement>;
-for (let i = 0; i < welcomeChars.length; i++) {
-  const char = welcomeChars.item(i);
-
-  gsap.to(char, {
-    y: -20,
-    x: 50,
-    opacity: 0,
-    duration: 0.2,
-    delay: 0.025 * i + 1.5,
-    ease: 'power3.inOut',
-  });
-}
-
-//
-
-////
-
 window.onload = () => {
   setDateTime();
   getShortcuts();
 };
+
+animate();
+setWelcomeText();
