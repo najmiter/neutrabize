@@ -1,21 +1,35 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="shortcut icon" href="/neutrabize-128.png" type="image/x-icon" />
     <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/neutrabize-128.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css" />
     <title>Homepage</title>
   </head>
   <body>
-    <div id="app"></div>
-    <div id="date-time">
-      <div id="date"></div>
-      <div id="time"></div>
-    </div>
-    <div id="shortcuts"></div>
-    <div id="welcome">
-      <h1></h1>
-    </div>
+    <main class="h-screen">
+      <div class="absolute left-20 top-20">
+        <p
+          aria-hidden="true"
+          class="text-6xl text-white/30 blur-sm font-bold time"
+        >
+          00:00
+        </p>
+        <p class="text-6xl text-white/60 font-bold absolute top-0 time">
+          00:00
+        </p>
+      </div>
+      <video
+        loop
+        muted
+        autoplay
+        id="wallpaper"
+        class="w-full h-full object-cover"
+      >
+        <source src="/night.mp4" type="video/mp4" />
+      </video>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
