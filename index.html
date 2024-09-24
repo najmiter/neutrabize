@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="./src/style.css" />
     <title>Homepage</title>
   </head>
-  <body>
+  <body class="max-h-screen overflow-hidden">
     <main class="h-screen">
-      <div class="absolute right-20 top-20">
+      <div class="absolute right-20 top-[5vh] z-50">
         <p
           aria-hidden="true"
           class="text-6xl text-white/30 blur-sm font-bold time"
@@ -29,6 +29,19 @@
           />
           <div id="temperature" class="text-lg"></div>
         </div>
+        <div class="mt-5 h-[65vh] overflow-auto scrollbar-hidden">
+          <ul class="grid gap-2 w-fit ml-auto" id="shortcuts">
+            <li
+              class="cursor-pointer rounded-lg p-1.5 bg-stone-800 transition-all opacity-0 animate-get-in hover:bg-stone-600"
+            >
+              <a href="https://google.com"
+                ><img
+                  src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png"
+                  width="32"
+              /></a>
+            </li>
+          </ul>
+        </div>
       </div>
       <video
         loop
@@ -42,5 +55,6 @@
     </main>
     <script type="module" src="/src/js/main.ts"></script>
     <script type="module" src="/src/js/weather.ts"></script>
+    <script type="module" src="/src/js/top-sites.ts"></script>
   </body>
 </html>
