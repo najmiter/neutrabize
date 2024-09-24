@@ -9,7 +9,7 @@
   </head>
   <body>
     <main class="h-screen">
-      <div class="absolute left-20 top-20">
+      <div class="absolute right-20 top-20">
         <p
           aria-hidden="true"
           class="text-6xl text-white/30 blur-sm font-bold time"
@@ -19,6 +19,16 @@
         <p class="text-6xl text-white/60 font-bold absolute top-0 time">
           00:00
         </p>
+        <div class="text-white/70 mt-2 flex items-center justify-end gap-1">
+          <img
+            src="/weather/loading.gif"
+            alt="weather icon"
+            id="weather-icon"
+            width="30"
+            height="30"
+          />
+          <div id="temperature" class="text-lg"></div>
+        </div>
       </div>
       <video
         loop
@@ -30,6 +40,7 @@
         <source src="/night.mp4" type="video/mp4" />
       </video>
     </main>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/js/main.ts"></script>
+    <script type="module" src="/src/js/weather.ts"></script>
   </body>
 </html>
