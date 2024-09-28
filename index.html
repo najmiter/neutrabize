@@ -9,6 +9,45 @@
   </head>
   <body class="max-h-screen overflow-hidden">
     <main class="h-screen">
+      <div
+        id="downloads-container"
+        class="absolute text-slate-100 space-y-2 top-5 left-5 h-full max-h-[calc(100%-40px)] w-fit bg-black/50 backdrop-blur-2xl p-2 rounded-xl transition-all overflow-hidden scrollbar-hidden"
+      >
+        <button
+          class="px-4 py-2 w-full font-light flex gap-3 items-center justify-between"
+          data-isopened="false"
+          id="downloads-trigger"
+        >
+          <span class="z-10">Downloads</span>
+          <span id="chevron" class="z-10 transition-all"
+            ><svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 448 512"
+              height="14"
+              width="14"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
+              ></path>
+            </svg>
+          </span>
+        </button>
+        <div
+          class="flex flex-col gap-2 h-[calc(100vh-40px-60px)] overflow-auto scrollbar-hidden"
+          id="downloads"
+        >
+          <!-- <div class="download-file">
+            <img src="/files/file.png" alt="" class="w-12" />
+            <div class="grid gap-1">
+              <h1 class="font-normal text-sm">Assignment 01.pdf</h1>
+              <p class="text-xs font-light text-gray-200">September 19, 2024</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
       <div class="absolute right-20 top-[5vh] z-50">
         <p
           aria-hidden="true"
@@ -31,7 +70,7 @@
         </div>
         <div class="mt-5 h-[65vh] overflow-auto scrollbar-hidden">
           <ul class="grid gap-2 w-fit ml-auto" id="shortcuts">
-            <li
+            <!-- <li
               class="cursor-pointer rounded-lg p-1.5 bg-stone-800 transition-all opacity-0 animate-get-in hover:bg-stone-600"
             >
               <a href="https://google.com"
@@ -39,7 +78,7 @@
                   src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png"
                   width="32"
               /></a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -48,7 +87,7 @@
         muted
         autoplay
         id="wallpaper"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover pointer-events-none"
       >
         <source src="/night.mp4" type="video/mp4" />
       </video>
@@ -56,5 +95,6 @@
     <script type="module" src="/src/js/main.ts"></script>
     <script type="module" src="/src/js/weather.ts"></script>
     <script type="module" src="/src/js/top-sites.ts"></script>
+    <script type="module" src="/src/js/downloads.ts"></script>
   </body>
 </html>
