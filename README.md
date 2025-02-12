@@ -6,11 +6,11 @@
 
 We currently have the following
 
--   Change background image
--   Change the theme color
--   Show current weather based on your location (fetches every hour, not every reload)
--   Toggle animation (nothing fancy, just a meteor like div falls every 3 seconds)
--   Hide or show the shortcuts (can't edit them yet)
+- Change background image
+- Change the theme color
+- Show current weather based on your location (fetches every hour, not every reload)
+- Toggle animation (nothing fancy, just a meteor like div falls every 3 seconds)
+- Hide or show the shortcuts (can't edit them yet)
 
 All of **these settings will remain consistent even after you reload**. Only when you clear the browser cache or do any sort of system reset.
 

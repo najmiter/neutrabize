@@ -2,99 +2,289 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="/neutrabize-128.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./neutrabize-128.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <title>Homepage</title>
+    <title>New Tab</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./scripts/globals.js" defer></script>
+    <script src="./scripts/top-sites.js" defer></script>
+    <script src="./scripts/settings.js" defer></script>
+    <script src="./scripts/quote.js" defer></script>
+    <script src="./scripts/weather.js" defer></script>
+    <script src="./scripts/theme.js" defer></script>
+    <script src="./scripts/battery.js" defer></script>
+    <script src="./main.js" defer></script>
   </head>
-  <body class="max-h-screen overflow-hidden">
-    <main class="h-screen">
+  <body
+    class="max-h-full w-[100vw] overflow-hidden selection:bg-blue-600 selection:text-white"
+  >
+    <main>
+      <div class="relative -z-10">
+        <img
+          id="wallpaper"
+          alt="wallpaper"
+          class="absolute animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
+        />
+        <video
+          id="live-wallpaper-vid"
+          autoplay
+          loop
+          muted
+          class="absolute animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
+        >
+          <source id="live-wallpaper-src" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="fixed inset-0 bg-black/40"></div>
+      </div>
+
       <div
-        id="downloads-container"
-        class="absolute text-slate-100 space-y-2 top-5 left-5 h-full max-h-[calc(100%-40px)] w-fit bg-black/50 backdrop-blur-2xl p-2 rounded-xl transition-all overflow-hidden scrollbar-hidden"
+        class="grid place-content-center min-h-[47vh] text-center space-y-2 cursor-default"
       >
-        <button
-          class="px-4 py-2 w-full font-light flex gap-3 items-center justify-between"
-          data-isopened="false"
-          id="downloads-trigger"
-        >
-          <span class="z-10">Downloads</span>
-          <span id="chevron" class="z-10 transition-all"
-            ><svg
-              stroke="currentColor"
-              fill="currentColor"
-              stroke-width="0"
-              viewBox="0 0 448 512"
-              height="14"
-              width="14"
-              xmlns="http://www.w3.org/2000/svg"
+        <div class="flex justify-center">
+          <div class="flex items-center gap-4 relative">
+            <img
+              id="weather-icon"
+              class="animate-in absolute left-0 text-center transition-all data-[good=false]:hidden"
+              alt="weather icon"
+              data-good="false"
+            />
+            <h2
+              id="temperature"
+              class="text-base animate-appear font-light text-gray-300 ml-10"
             >
-              <path
-                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
-              ></path>
-            </svg>
-          </span>
-        </button>
+              Loading...
+            </h2>
+          </div>
+        </div>
+        <h3 id="date" class="theme__date"></h3>
+        <div class="relative">
+          <h1 id="time" class="theme__time"></h1>
+        </div>
         <div
-          class="flex flex-col gap-2 h-[calc(100vh-40px-60px)] overflow-auto scrollbar-hidden"
-          id="downloads"
+          data-show="false"
+          id="battery-container"
+          class="flex gap-2 items-center justify-center data-[show=true]:animate-appear text-[#aaa] data-[show=false]:animate-disappear"
         >
-          <!-- <div class="download-file">
-            <img src="/files/file.png" alt="" class="w-12" />
-            <div class="grid gap-1">
-              <h1 class="font-normal text-sm">Assignment 01.pdf</h1>
-              <p class="text-xs font-light text-gray-200">September 19, 2024</p>
-            </div>
-          </div> -->
-        </div>
-      </div>
-      <div class="absolute right-20 top-[5vh] z-50">
-        <p
-          aria-hidden="true"
-          class="text-6xl text-white/30 blur-sm font-bold time"
-        >
-          00:00
-        </p>
-        <p class="text-6xl text-white/60 font-bold absolute top-0 time">
-          00:00
-        </p>
-        <div class="text-white/70 mt-2 flex items-center justify-end gap-1">
-          <img
-            src="/weather/loading.gif"
-            alt="weather icon"
-            id="weather-icon"
-            width="30"
-            height="30"
-          />
-          <div id="temperature" class="text-lg"></div>
-        </div>
-        <div class="mt-5 h-[65vh] overflow-auto scrollbar-hidden">
-          <ul class="grid gap-2 w-fit ml-auto" id="shortcuts">
-            <!-- <li
-              class="cursor-pointer rounded-lg p-1.5 bg-stone-800 transition-all opacity-0 animate-get-in hover:bg-stone-600"
+          <div id="battery-progress"></div>
+          <div class="relative">
+            <div id="battery-icon"></div>
+            <div
+              data-charging="false"
+              id="battery-charging"
+              class="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[charging=false]:hidden"
             >
-              <a href="https://google.com"
-                ><img
-                  src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png"
-                  width="32"
-              /></a>
-            </li> -->
-          </ul>
+              <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
+            </div>
+          </div>
         </div>
       </div>
-      <video
-        loop
-        muted
-        autoplay
-        id="wallpaper"
-        class="w-full h-full object-cover pointer-events-none"
+
+      <div
+        id="quote"
+        class="text-center animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300"
       >
-        <source src="/night.mp4" type="video/mp4" />
-      </video>
+        <h1
+          id="quote-quote"
+          class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]"
+        >
+          &ldquo;You have to keep breaking your heart until it opens.&rdquo;
+        </h1>
+        <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
+      </div>
+
+      <div
+        id="shortcuts-bar"
+        data-show="true"
+        class="w-full fixed bottom-[clamp(2px,20%,130px)] py-2 data-[show=false]:hidden"
+      >
+        <ul
+          id="shortcuts"
+          class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-center gap-3 w-fit max-w-[900px] flex-wrap mx-auto"
+        ></ul>
+      </div>
     </main>
-    <script type="module" src="/src/js/main.ts"></script>
-    <script type="module" src="/src/js/weather.ts"></script>
-    <script type="module" src="/src/js/top-sites.ts"></script>
-    <script type="module" src="/src/js/downloads.ts"></script>
+
+    <div id="settings" class="fixed right-5 top-5 flex flex-col items-end">
+      <button id="settings-btn">
+        <img src="./imgs/icons/setting.svg" alt="settings icon" />
+      </button>
+
+      <div
+        id="settings-wrapper"
+        class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base"
+      >
+        <div id="settings-content" class="grid gap-5">
+          <div
+            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
+          >
+            <div
+              role="presentation"
+              id="toggle-quote"
+              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"
+            ></div>
+            <button>Show quotes</button>
+            <div
+              id="show-quote-toggle"
+              data-on="false"
+              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+            >
+              <div
+                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
+          >
+            <div
+              role="presentation"
+              id="toggle-shortcuts"
+              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"
+            ></div>
+            <button>Show shortcuts</button>
+            <div
+              id="show-shortcuts-toggle"
+              data-on="true"
+              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+            >
+              <div
+                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
+          >
+            <div
+              role="presentation"
+              id="toggle-battery"
+              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"
+            ></div>
+            <button>Show battery</button>
+            <div
+              id="show-battery-toggle"
+              data-on="false"
+              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-emerald-400 relative"
+            >
+              <div
+                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
+              ></div>
+            </div>
+          </div>
+
+          <div class="max-w-full">
+            <h1 class="px-2">Themes</h1>
+            <div id="themes" class="flex gap-3 overflow-x-scroll w-[360px]">
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="exoPlanet"
+                ></div>
+                <video
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  style="pointer-events: none"
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                >
+                  <source src="./imgs/bg/video/night.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <h3 class="text-lg">Exo Planet</h3>
+              </div>
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="beach"
+                ></div>
+                <video
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                  style="pointer-events: none"
+                >
+                  <source src="./imgs/bg/video/day.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <h3 class="text-lg">Beach</h3>
+              </div>
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="dusk"
+                ></div>
+                <img
+                  src="./imgs/bg/dusk.jpg"
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                  alt=""
+                />
+                <h3 class="text-lg">Dusk</h3>
+              </div>
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="city"
+                ></div>
+                <img
+                  src="./imgs/bg/night2.jpg"
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                  alt=""
+                />
+                <h3 class="text-lg">City</h3>
+              </div>
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="alienet"
+                ></div>
+                <img
+                  src="./imgs/bg/ai-mountain.jpg"
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                  alt=""
+                />
+                <h3 class="text-lg">Alienet</h3>
+              </div>
+              <div
+                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
+              >
+                <div
+                  role="presentation"
+                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
+                  data-name="jant"
+                ></div>
+                <img
+                  src="./imgs/bg/jant.jpg"
+                  class="max-w-32 aspect-square object-cover rounded-md"
+                  alt=""
+                />
+                <h3 class="text-lg">Jant</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
