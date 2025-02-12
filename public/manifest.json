@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "neutrabize | Customised Home Screen With A Dynamic Live Wallpaper",
+  "version": "4.11",
+  "description": "Chrome new tab and home page with a live wallpaper",
+  "permissions": ["favicon", "topSites", "downloads", "downloads.open"],
+
+  "icons": {
+    "32": "./neutrabize-128.png",
+    "64": "./neutrabize-128.png",
+    "128": "./neutrabize-128.png"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}

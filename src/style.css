@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .download-file {
+    @apply flex gap-2 items-start p-2 cursor-pointer rounded-xl transition-colors hover:bg-black/20
+  }
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
