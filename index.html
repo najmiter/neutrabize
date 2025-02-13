@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="./neutrabize-128.png" type="image/x-icon" />
@@ -11,63 +11,67 @@
     class="max-h-full w-[100vw] overflow-hidden selection:bg-blue-600 selection:text-white"
   >
     <main>
-      <div class="relative -z-10">
+      <div class="relative pointer-events-none -z-10">
         <img
           id="wallpaper"
           alt="wallpaper"
-          class="absolute animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
+          class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
         />
         <video
           id="live-wallpaper-vid"
           autoplay
           loop
           muted
-          class="absolute animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
+          class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black"
         >
           <source id="live-wallpaper-src" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-
-        <div class="fixed inset-0 bg-black/40"></div>
+        <div class="fixed inset-0 bg-black/30"></div>
       </div>
 
       <div
-        class="grid place-content-center min-h-[47vh] text-center space-y-2 cursor-default"
+        class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default"
       >
-        <div class="flex justify-center">
-          <div class="flex items-center gap-4 relative">
-            <img
-              id="weather-icon"
-              class="animate-in absolute left-0 text-center transition-all data-[good=false]:hidden"
-              alt="weather icon"
-              data-good="false"
-            />
-            <h2
-              id="temperature"
-              class="text-base animate-appear font-light text-gray-300 ml-10"
-            >
-              Loading...
-            </h2>
-          </div>
-        </div>
-        <h3 id="date" class="theme__date"></h3>
-        <div class="relative">
-          <h1 id="time" class="theme__time"></h1>
-        </div>
         <div
-          data-show="false"
-          id="battery-container"
-          class="flex gap-2 items-center justify-center data-[show=true]:animate-appear text-[#aaa] data-[show=false]:animate-disappear"
+          class="bg-black/20 backdrop-blur-3xl space-y-6 py-5 px-10 rounded-2xl border border-slate-700"
         >
-          <div id="battery-progress"></div>
           <div class="relative">
-            <div id="battery-icon"></div>
+            <h1 id="time" class="theme__time"></h1>
+          </div>
+          <div class="flex group gap-4 h-8 text-gray-300 justify-between">
+            <h3 id="date" class="theme__date"></h3>
+            <div class="w-px h-8 line rounded-full bg-slate-500"></div>
             <div
-              data-charging="false"
-              id="battery-charging"
-              class="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[charging=false]:hidden"
+              data-show="true"
+              id="battery-container"
+              class="flex gap-2 items-center data-[battery-hai-e-ni='true']:hidden justify-center data-[show=true]:animate-appear data-[show=false]:animate-disappear"
             >
-              <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
+              <div id="battery-progress" class="text-sm"></div>
+              <div class="relative">
+                <div id="battery-icon"></div>
+                <div
+                  data-charging="false"
+                  id="battery-charging"
+                  class="data-[charging=false]:hidden"
+                >
+                  <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-px group-has-[div[data-battery-hai-e-ni='true']]:hidden group-has-[div[data-show=false]]:hidden h-8 line rounded-full bg-slate-500"
+            ></div>
+            <div class="flex items-center justify-center gap-2 relative">
+              <img
+                id="weather-icon"
+                class="animate-in transition-all data-[good=false]:hidden"
+                alt="weather icon"
+                data-good="false"
+              />
+              <h2 id="temperature" class="text-sm animate-appear font-light">
+                Loading...
+              </h2>
             </div>
           </div>
         </div>
@@ -75,7 +79,7 @@
 
       <div
         id="quote"
-        class="text-center animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300"
+        class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300"
       >
         <h1
           id="quote-quote"
@@ -89,16 +93,16 @@
       <div
         id="shortcuts-bar"
         data-show="true"
-        class="w-full fixed bottom-[clamp(2px,20%,130px)] py-2 data-[show=false]:hidden"
+        class="w-full fixed left-10 bottom-[clamp(2px,10%,130px)] py-2 data-[show=false]:hidden"
       >
         <ul
           id="shortcuts"
-          class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-center gap-3 w-fit max-w-[900px] flex-wrap mx-auto"
+          class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-start w-fit gap-3 max-w-[900px] flex-wrap"
         ></ul>
       </div>
     </main>
 
-    <div id="settings" class="fixed right-5 top-5 flex flex-col items-end">
+    <div id="settings" class="fixed right-10 top-10 flex flex-col items-end">
       <button id="settings-btn">
         <img src="./imgs/icons/setting.svg" alt="settings icon" />
       </button>
@@ -148,7 +152,7 @@
             </div>
           </div>
 
-          <div
+          <!-- <div
             class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2"
           >
             <div
@@ -166,9 +170,9 @@
                 class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"
               ></div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="max-w-full">
+          <div class="max-w-full space-y-8">
             <h1 class="px-2">Themes</h1>
             <div id="themes" class="flex gap-3 overflow-x-scroll w-[360px]">
               <div

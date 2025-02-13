@@ -1,4 +1,4 @@
-import { quote, shortcuts, batteryContainer } from './globals';
+import { quote, shortcuts } from './globals';
 
 const settingsBtn = document.getElementById(
   'settings-btn'
@@ -13,7 +13,7 @@ const toggleQuote = document.getElementById('toggle-quote') as HTMLElement;
 const toggleShortcuts = document.getElementById(
   'toggle-shortcuts'
 ) as HTMLElement;
-const toggleBattery = document.getElementById('toggle-battery') as HTMLElement;
+// const toggleBattery = document.getElementById('toggle-battery') as HTMLElement;
 
 document.addEventListener('click', (e: MouseEvent) => {
   const settings = document.getElementById('settings');
@@ -78,16 +78,16 @@ toggleShortcuts.addEventListener('click', () => {
   localStorage.setItem('neutrabize_SHOULDSHOWSHORTCUTS', newState.toString());
 });
 
-toggleBattery.addEventListener('click', () => {
-  const toggle = document.getElementById('show-battery-toggle') as HTMLElement;
-  batteryContainer.classList.remove('hidden');
+// toggleBattery.addEventListener('click', () => {
+//   const toggle = document.getElementById('show-battery-toggle') as HTMLElement;
+//   batteryContainer.classList.remove('hidden');
 
-  const newState = toggle.dataset.on === 'false';
-  toggle.dataset.on = newState.toString();
-  batteryContainer.dataset.show = newState.toString();
+//   const newState = toggle.dataset.on === 'false';
+//   toggle.dataset.on = newState.toString();
+//   batteryContainer.dataset.show = newState.toString();
 
-  localStorage.setItem('neutrabize_SHOULDSHOWBATTERY', newState.toString());
-});
+//   localStorage.setItem('neutrabize_SHOULDSHOWBATTERY', newState.toString());
+// });
 
 function hideSettings(): void {
   settingsWrapper.style.height = '0';

@@ -1,3 +1,5 @@
+import { batteryContainer } from './globals';
+
 if ('getBattery' in navigator) {
   fetch('../imgs/icons/battery.svg')
     .then((r) => r.text())
@@ -36,4 +38,6 @@ if ('getBattery' in navigator) {
       });
     })
     .catch((error) => console.error(error));
+} else {
+  batteryContainer.dataset.batteryHaiENi = 'true';
 }

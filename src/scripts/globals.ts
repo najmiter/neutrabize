@@ -22,11 +22,18 @@ interface Theme {
     date: string[];
     time: string[];
   };
+  name: string;
 }
 
 export function updateTheme(theme: Theme): void {
   date.setAttribute('class', theme.classes.date.join(' '));
   time.setAttribute('class', theme.classes.time.join(' '));
+
+  if (theme?.name == 'beach') {
+    video.style.transform = 'scaleX(-1)';
+  } else {
+    video.style.transform = 'scaleX(1)';
+  }
 
   if (theme.bg.includes('.mp4')) {
     wallpaper.style.display = 'none';

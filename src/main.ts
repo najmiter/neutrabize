@@ -3,7 +3,7 @@ import {
   time,
   quote,
   shortcuts,
-  batteryContainer,
+  // batteryContainer,
   updateTheme,
 } from './scripts/globals';
 import { update_weather } from './scripts/weather';
@@ -19,7 +19,7 @@ const shouldShowShortcuts = localStorage.getItem(
   'neutrabize_SHOULDSHOWSHORTCUTS'
 );
 const activeTheme = localStorage.getItem('neutrabize_THEMEDATA');
-const shouldShowBattery = localStorage.getItem('neutrabize_SHOULDSHOWBATTERY');
+// const shouldShowBattery = localStorage.getItem('neutrabize_SHOULDSHOWBATTERY');
 
 if (activeTheme) {
   try {
@@ -54,16 +54,17 @@ if (shouldShowShortcuts === 'false') {
   shortcutsBar.dataset.show = 'false';
 } else shortcuts.classList.remove('animate-away');
 
-if (shouldShowBattery === 'true') {
-  const toggle = document.getElementById('show-battery-toggle') as HTMLElement;
+// if (shouldShowBattery === 'true') {
+//   const toggle = document.getElementById('show-battery-toggle') as HTMLElement;
 
-  toggle.dataset.on = 'true';
-  batteryContainer.dataset.show = 'true';
-} else batteryContainer.classList.add('hidden');
+//   toggle.dataset.on = 'true';
+//   batteryContainer.dataset.show = 'true';
+// } else {
+//   batteryContainer.classList.add('hidden');
+// }
 
 date.textContent = new Date().toLocaleDateString('en-us', {
-  weekday: 'long',
-  month: 'long',
+  month: 'numeric',
   day: '2-digit',
   year: 'numeric',
 });
