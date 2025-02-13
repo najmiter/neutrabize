@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp public/manifest.json dist/ && cp -r imgs dist/ && cp public/neutrabize-128.png dist/",
+    "build": "tsc && vite build && cp public/manifest.json dist/ && cp public/neutrabize-128.png dist/",
     "preview": "vite preview"
   },
   "devDependencies": {

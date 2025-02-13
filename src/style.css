@@ -207,10 +207,6 @@
     }
   }
 
-  .data-\[show\=false\]\:animate-disappear[data-show=false] {
-    animation: disappear 250ms ease forwards;
-  }
-
   @keyframes pulse {
     50% {
       opacity: .5;
