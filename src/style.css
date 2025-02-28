@@ -167,6 +167,22 @@
     background: linear-gradient(to bottom, rgb(88, 166, 226), rgba(40, 134, 250, 0.897));
   }
 
+  .theme__jungle-time {
+    background: linear-gradient(to bottom, rgb(162, 169, 64), rgba(103, 136, 52, 0.897));
+  }
+
+  .theme__lake-time {
+    background: linear-gradient(to bottom, rgb(145, 88, 226), rgba(40, 85, 250, 0.897));
+  }
+
+  .theme__sky-time {
+    background: linear-gradient(to bottom, rgb(88, 196, 226), rgba(40, 152, 250, 0.897));
+  }
+
+  .theme__spaceBeach-time {
+    background: linear-gradient(to bottom, rgb(163, 96, 170), rgba(119, 43, 194, 0.897));
+  }
+
   .theme__date {
     background-clip: text;
     color: transparent;
