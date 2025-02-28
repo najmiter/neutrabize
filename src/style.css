@@ -117,51 +117,25 @@
     animation: in 250ms ease-in forwards;
   }
 
-  /* .theme__city-date {
-    background: linear-gradient(to bottom, #6ee7b7, rgb(167 243 208 / 0.6));
-  } */
-
   .theme__city-time {
     background: linear-gradient(to bottom, #34d399, rgb(209 250 229 / 0.4));
   }
-
-  /* 
-  .theme__alienet-date {
-    background: linear-gradient(to bottom, #c4b5fd, rgb(221 214 254 / 0.6));
-  } */
 
   .theme__alienet-time {
     background: linear-gradient(to bottom, #a78bfa, rgb(237 233 254 / 0.4));
   }
 
-  /* .theme__jant-date {
-    background: linear-gradient(to bottom, rgb(251 191 36), rgb(251 191 36 / 0.6));
-  } */
-
   .theme__jant-time {
     background: linear-gradient(to bottom, rgb(180 83 9), rgb(251 191 36 / 0.4));
   }
-
-  /* 
-  .theme__dusk-date {
-    background: linear-gradient(to bottom, rgb(236 129 129), rgb(236 129 129 / 0.8));
-  } */
 
   .theme__dusk-time {
     background: linear-gradient(to bottom, rgb(236 129 129), rgb(7 89 133 / 0.7));
   }
 
-  /* .theme__expoPlanet-date {
-    background: linear-gradient(to bottom, rgb(208, 101, 101), rgba(198, 168, 69, 0.8));
-  } */
-
   .theme__expoPlanet-time {
-    background: linear-gradient(to bottom, rgb(252, 118, 118), rgba(244, 80, 47, 0.7));
+    background: linear-gradient(to bottom, rgb(222, 119, 119), rgba(202, 75, 49, 0.7));
   }
-
-  /* .theme__beach-date {
-    background: linear-gradient(to bottom, rgb(131, 199, 255), rgb(92, 152, 255));
-  } */
 
   .theme__beach-time {
     background: linear-gradient(to bottom, rgb(88, 166, 226), rgba(40, 134, 250, 0.897));
