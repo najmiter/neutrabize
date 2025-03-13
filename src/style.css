@@ -117,6 +117,18 @@
     animation: in 250ms ease-in forwards;
   }
 
+  .theme__planets-time {
+    background: linear-gradient(to bottom, #f43f5e, rgb(254 243 199 / 0.4));
+  }
+
+  .theme__galaxy-time {
+    background: linear-gradient(to bottom, #4b5563, rgb(209 250 229 / 0.4));
+  }
+
+  .theme__spaceDude-time {
+    background: linear-gradient(to bottom, #fbbf24, rgb(254 243 199 / 0.4));
+  }
+
   .theme__city-time {
     background: linear-gradient(to bottom, #34d399, rgb(209 250 229 / 0.4));
   }

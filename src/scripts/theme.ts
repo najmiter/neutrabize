@@ -14,6 +14,30 @@ interface ThemesData {
 }
 
 const themesData: ThemesData = {
+  planets: {
+    name: 'planets',
+    classes: {
+      date: ['theme__planets-date', 'theme__date'],
+      time: ['theme__planets-time', 'theme__time'],
+    },
+    bg: './imgs/bg/planets.png',
+  },
+  galaxy: {
+    name: 'galaxy',
+    classes: {
+      date: ['theme__galaxy-date', 'theme__date'],
+      time: ['theme__galaxy-time', 'theme__time'],
+    },
+    bg: './imgs/bg/galaxy.jpg',
+  },
+  spaceDude: {
+    name: 'spaceDude',
+    classes: {
+      date: ['theme__spaceDude-date', 'theme__date'],
+      time: ['theme__spaceDude-time', 'theme__time'],
+    },
+    bg: './imgs/bg/space-dude.jpg',
+  },
   city: {
     name: 'city',
     classes: {
@@ -100,7 +124,7 @@ const themesData: ThemesData = {
 if (!localStorage.getItem('neutrabize_THEMEDATA'))
   localStorage.setItem(
     'neutrabize_THEMEDATA',
-    JSON.stringify(themesData.exoPlanet)
+    JSON.stringify(themesData.galaxy)
   );
 
 const themes = document.querySelectorAll<HTMLElement>('.theme');
