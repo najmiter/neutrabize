@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
   .download-item {
     animation: slide-in-left 0.3s ease-out forwards;
     animation-delay: var(--item-delay, 0.1s);
@@ -11,10 +15,6 @@
 
   .download-item[data-status='deleted'] .download-status {
     color: rgb(239, 68, 68);
-  }
-
-  *::-webkit-scrollbar {
-    display: none;
   }
 
   .animate-disappear {
