@@ -37,7 +37,7 @@ if ('getBattery' in navigator) {
           (isChargingIcon.dataset.charging = battery.charging.toString());
       });
     })
-    .catch((error) => console.error(error));
+    .catch(() => void 0);
 } else {
   batteryContainer.dataset.batteryHaiENi = 'true';
 }

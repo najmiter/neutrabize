@@ -3,26 +3,19 @@
 @tailwind utilities;
 
 @layer utilities {
-  @keyframes pulse {
-    50% {
-      opacity: .5;
-    }
+  .download-item {
+    animation: slide-in-left 0.3s ease-out forwards;
+    animation-delay: var(--item-delay, 0.1s);
+    opacity: 0;
   }
 
-  @keyframes disappear {
-    0% {
-      opacity: 0.5;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
+  .download-item[data-status='deleted'] .download-status {
+    color: rgb(239, 68, 68);
   }
 
+  *::-webkit-scrollbar {
+    display: none;
+  }
 
   .animate-disappear {
     animation: disappear 250ms ease forwards;
@@ -32,89 +25,32 @@
     animation: pulse 250ms ease;
   }
 
-  @keyframes away {
-    to {
-      top: 40%;
-      opacity: 0;
-    }
-  }
-
-  .animate-away {
-    animation: away 400ms forwards;
-  }
-
-  @keyframes enter {
-    from {
-      scale: 0;
-    }
-
-    to {
-      scale: 1;
-    }
-  }
-
   .animate-enter {
     animation: enter 400ms forwards;
-  }
-
-  @keyframes enter2 {
-    from {
-      transform: translateY(-75px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
   }
 
   .animate-enter2 {
     animation: enter2 400ms forwards;
   }
 
-  @keyframes enter3 {
-    from {
-      transform: translateY(35px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
-  }
-
   .animate-enter3 {
     animation: enter3 400ms forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
   }
 
   .animate-fade-in {
     animation: fadeIn 300ms forwards;
   }
 
-  @keyframes in {
-    from {
-      opacity: 0;
-      margin-bottom: 100px;
-      rotate: 180deg;
-    }
-
-    to {
-      opacity: 1;
-      margin-bottom: 0;
-      rotate: 0;
-    }
-  }
-
   .animate-in {
     animation: in 250ms ease-in forwards;
+  }
+
+  .animate-come-in {
+    animation: come-in 350ms forwards;
+  }
+
+  .animate-come-out {
+    animation: come-out 350ms forwards;
   }
 
   .theme__planets-time {
@@ -188,6 +124,93 @@
     text-align: center;
   }
 
+  @keyframes pulse {
+    50% {
+      opacity: .5;
+    }
+  }
+
+  @keyframes disappear {
+    0% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes away {
+    to {
+      top: 40%;
+      opacity: 0;
+    }
+  }
+
+  .animate-away {
+    animation: away 400ms forwards;
+  }
+
+  @keyframes enter {
+    from {
+      scale: 0;
+    }
+
+    to {
+      scale: 1;
+    }
+  }
+
+  @keyframes enter2 {
+    from {
+      transform: translateY(-75px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes enter3 {
+    from {
+      transform: translateY(35px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes in {
+    from {
+      opacity: 0;
+      margin-bottom: 100px;
+      rotate: 180deg;
+    }
+
+    to {
+      opacity: 1;
+      margin-bottom: 0;
+      rotate: 0;
+    }
+  }
+
+
+
   @keyframes come-in {
     from {
       opacity: 0;
@@ -207,14 +230,6 @@
     }
   }
 
-  .animate-come-in {
-    animation: come-in 350ms forwards;
-  }
-
-  .animate-come-out {
-    animation: come-out 350ms forwards;
-  }
-
   @keyframes disappear {
     0% {
       opacity: 0.5;
@@ -232,6 +247,18 @@
   @keyframes pulse {
     50% {
       opacity: .5;
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(35px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 }

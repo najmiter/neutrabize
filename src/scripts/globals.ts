@@ -15,6 +15,9 @@ export const video = document.getElementById(
 export const source = document.getElementById(
   'live-wallpaper-src'
 ) as HTMLSourceElement;
+export const downloadsPanel = document.getElementById(
+  'downloads-panel'
+) as HTMLElement;
 
 interface Theme {
   bg: string;

@@ -7,6 +7,7 @@ import {
   updateTheme,
 } from './scripts/globals';
 import { update_weather } from './scripts/weather';
+import { initDownloads, toggleDownloads } from './scripts/downloads';
 import './scripts/quote';
 import './scripts/settings';
 import './scripts/theme';
@@ -17,6 +18,9 @@ import './style.css';
 const shouldShowQuote = localStorage.getItem('neutrabize_SHOULDSHOWQUOTE');
 const shouldShowShortcuts = localStorage.getItem(
   'neutrabize_SHOULDSHOWSHORTCUTS'
+);
+const shouldShowDownloads = localStorage.getItem(
+  'neutrabize_SHOULDSHOWDOWNLOADS'
 );
 const activeTheme = localStorage.getItem('neutrabize_THEMEDATA');
 // const shouldShowBattery = localStorage.getItem('neutrabize_SHOULDSHOWBATTERY');
@@ -62,6 +66,17 @@ if (shouldShowShortcuts === 'false') {
 // } else {
 //   batteryContainer.classList.add('hidden');
 // }
+
+// Initialize downloads functionality
+initDownloads();
+
+if (shouldShowDownloads === 'true') {
+  const toggle = document.getElementById(
+    'show-downloads-toggle'
+  ) as HTMLElement;
+  toggle.dataset.on = 'true';
+  toggleDownloads(true);
+}
 
 date.textContent = new Date().toLocaleDateString('en-us', {
   month: 'numeric',

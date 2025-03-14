@@ -82,7 +82,6 @@ function do_da_weather_thing(): void {
     }, reset_weather_to_previous_or_empty);
   } else {
     temperature.textContent = '';
-    console.error('temperature data could not be displayed');
   }
 }
 

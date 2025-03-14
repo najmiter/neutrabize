@@ -1,4 +1,5 @@
 import { quote, shortcuts } from './globals';
+import { toggleDownloads } from './downloads';
 
 const settingsBtn = document.getElementById(
   'settings-btn'
@@ -12,6 +13,9 @@ const settingsContent = document.getElementById(
 const toggleQuote = document.getElementById('toggle-quote') as HTMLElement;
 const toggleShortcuts = document.getElementById(
   'toggle-shortcuts'
+) as HTMLElement;
+const toggleDownloadsBtn = document.getElementById(
+  'toggle-downloads'
 ) as HTMLElement;
 // const toggleBattery = document.getElementById('toggle-battery') as HTMLElement;
 
@@ -76,6 +80,18 @@ toggleShortcuts.addEventListener('click', () => {
   );
 
   localStorage.setItem('neutrabize_SHOULDSHOWSHORTCUTS', newState.toString());
+});
+
+toggleDownloadsBtn.addEventListener('click', () => {
+  const toggle = document.getElementById(
+    'show-downloads-toggle'
+  ) as HTMLElement;
+  const newState = toggle.dataset.on === 'false';
+  toggle.dataset.on = newState.toString();
+
+  toggleDownloads(newState);
+
+  localStorage.setItem('neutrabize_SHOULDSHOWDOWNLOADS', newState.toString());
 });
 
 // toggleBattery.addEventListener('click', () => {
