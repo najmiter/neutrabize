@@ -41,7 +41,7 @@ settingsBtn.addEventListener('click', () => {
       theme.style.opacity = '0';
       setTimeout(() => theme.classList.add('animate-come-in'), 130);
     });
-    settingsWrapper.style.height = '431px';
+    settingsWrapper.style.height = '461px';
     settingsWrapper.style.padding = '16px';
     settingsContent.style.display = 'grid';
   }
