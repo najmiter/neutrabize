@@ -70,12 +70,15 @@ if (shouldShowShortcuts === 'false') {
 // Initialize downloads functionality
 initDownloads();
 
+const downloadToggle = document.getElementById(
+  'show-downloads-toggle'
+) as HTMLElement;
 if (shouldShowDownloads === 'true') {
-  const toggle = document.getElementById(
-    'show-downloads-toggle'
-  ) as HTMLElement;
-  toggle.dataset.on = 'true';
+  downloadToggle.dataset.on = 'true';
   toggleDownloads(true);
+} else {
+  downloadToggle.dataset.on = 'false';
+  toggleDownloads(false);
 }
 
 date.textContent = new Date().toLocaleDateString('en-us', {

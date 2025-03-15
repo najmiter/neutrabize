@@ -35,6 +35,7 @@ function loadRecentDownloads(): void {
       orderBy: ['-startTime'],
     },
     (downloads) => {
+      console.log(downloads);
       displayDownloads(downloads);
     }
   );
@@ -90,7 +91,7 @@ function createDownloadElement(
 
   item.innerHTML = `
     <div class="min-w-[40px] h-10 flex items-center justify-center bg-slate-800/50 rounded">
-      <span class="uppercase text-xs font-semibold">${fileExt || 'file'}</span>
+      <span class="uppercase text-xs font-semibold">${fileExt.slice(0, 3) || '📁'}</span>
     </div>
     <div class="flex flex-col overflow-hidden flex-1">
       <p class="text-sm text-violet-100 truncate" title="${fileName}">${fileName}</p>
