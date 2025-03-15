@@ -35,7 +35,6 @@ function loadRecentDownloads(): void {
       orderBy: ['-startTime'],
     },
     (downloads) => {
-      console.log(downloads);
       displayDownloads(downloads);
     }
   );
