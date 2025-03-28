@@ -107,8 +107,12 @@ function createDownloadElement(
         chrome.downloads.open(download.id);
       }
     });
+    item.ariaDisabled = 'false';
     item.style.cursor = 'pointer';
     item.title = 'Click to open file';
+  } else {
+    item.ariaDisabled = 'true';
+    item.style.cursor = 'not-allowed';
   }
 
   return item;
