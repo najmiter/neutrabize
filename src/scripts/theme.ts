@@ -14,6 +14,14 @@ interface ThemesData {
 }
 
 const themesData: ThemesData = {
+  exoplanets: {
+    name: 'exoplanets',
+    classes: {
+      date: ['theme__exoplanets-date', 'theme__date'],
+      time: ['theme__exoplanets-time', 'theme__time'],
+    },
+    bg: './imgs/bg/exoplanets.jpeg',
+  },
   cityDusk: {
     name: 'cityDusk',
     classes: {
@@ -140,7 +148,7 @@ const themesData: ThemesData = {
 if (!localStorage.getItem('neutrabize_THEMEDATA'))
   localStorage.setItem(
     'neutrabize_THEMEDATA',
-    JSON.stringify(themesData.kaiju)
+    JSON.stringify(themesData.exoplanets)
   );
 
 const themes = document.querySelectorAll<HTMLElement>('.theme');

@@ -53,6 +53,10 @@
     animation: come-out 350ms forwards;
   }
 
+  .theme__exoplanets-time {
+    background: linear-gradient(to bottom, #7d48d8, rgba(98, 98, 255, 0.636));
+  }
+
   .theme__cityDusk-time {
     background: linear-gradient(to bottom, #fb2452, rgba(255, 161, 188, 0.4));
   }
