@@ -53,6 +53,14 @@
     animation: come-out 350ms forwards;
   }
 
+  .theme__cityDusk-time {
+    background: linear-gradient(to bottom, #fb2452, rgba(255, 161, 188, 0.4));
+  }
+
+  .theme__kaiju-time {
+    background: linear-gradient(to bottom, #6ec3ff, rgba(46, 97, 158, 0.552));
+  }
+
   .theme__planets-time {
     background: linear-gradient(to bottom, #f43f5e, rgb(254 243 199 / 0.4));
   }

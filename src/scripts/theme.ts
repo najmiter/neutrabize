@@ -14,6 +14,22 @@ interface ThemesData {
 }
 
 const themesData: ThemesData = {
+  cityDusk: {
+    name: 'cityDusk',
+    classes: {
+      date: ['theme__cityDusk-date', 'theme__date'],
+      time: ['theme__cityDusk-time', 'theme__time'],
+    },
+    bg: './imgs/bg/city.jpg',
+  },
+  kaiju: {
+    name: 'kaiju',
+    classes: {
+      date: ['theme__kaiju-date', 'theme__date'],
+      time: ['theme__kaiju-time', 'theme__time'],
+    },
+    bg: './imgs/bg/kaiju.jpg',
+  },
   planets: {
     name: 'planets',
     classes: {
@@ -124,7 +140,7 @@ const themesData: ThemesData = {
 if (!localStorage.getItem('neutrabize_THEMEDATA'))
   localStorage.setItem(
     'neutrabize_THEMEDATA',
-    JSON.stringify(themesData.galaxy)
+    JSON.stringify(themesData.kaiju)
   );
 
 const themes = document.querySelectorAll<HTMLElement>('.theme');
