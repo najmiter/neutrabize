@@ -21,7 +21,7 @@ settingsBtn.addEventListener('click', () => {
   const activeTheme = document.querySelector('div[data-active=true]');
 
   if (activeTheme) {
-    setTimeout(() => activeTheme.scrollIntoView({ behavior: 'smooth' }), 400);
+    setTimeout(() => activeTheme.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }), 400);
   }
 
   if (window.getComputedStyle(settingsWrapper).height !== '0px') {
