@@ -1,0 +1,274 @@
+import { ThemesData } from '../types';
+
+export const themesData: ThemesData = {
+  exoplanets: {
+    name: 'exoplanets',
+    classes: {
+      date: ['theme__exoplanets-date', 'theme__date'],
+      time: ['theme__exoplanets-time', 'theme__time'],
+    },
+    bg: './imgs/bg/exoplanets.jpeg',
+    kind: 'img',
+    displayName: 'Exoplanets',
+  },
+  cityDusk: {
+    name: 'cityDusk',
+    classes: {
+      date: ['theme__cityDusk-date', 'theme__date'],
+      time: ['theme__cityDusk-time', 'theme__time'],
+    },
+    bg: './imgs/bg/city.jpg',
+    kind: 'img',
+    displayName: 'City Dusk',
+  },
+  kaiju: {
+    name: 'kaiju',
+    classes: {
+      date: ['theme__kaiju-date', 'theme__date'],
+      time: ['theme__kaiju-time', 'theme__time'],
+    },
+    bg: './imgs/bg/kaiju.jpg',
+    kind: 'img',
+    displayName: 'Kaiju',
+  },
+  planets: {
+    name: 'planets',
+    classes: {
+      date: ['theme__planets-date', 'theme__date'],
+      time: ['theme__planets-time', 'theme__time'],
+    },
+    bg: './imgs/bg/planets.png',
+    kind: 'img',
+    displayName: 'Planets',
+  },
+  galaxy: {
+    name: 'galaxy',
+    classes: {
+      date: ['theme__galaxy-date', 'theme__date'],
+      time: ['theme__galaxy-time', 'theme__time'],
+    },
+    bg: './imgs/bg/galaxy.jpg',
+    kind: 'img',
+    displayName: 'Galaxy',
+  },
+  spaceDude: {
+    name: 'spaceDude',
+    classes: {
+      date: ['theme__spaceDude-date', 'theme__date'],
+      time: ['theme__spaceDude-time', 'theme__time'],
+    },
+    bg: './imgs/bg/space-dude.jpg',
+    kind: 'img',
+    displayName: 'Space Dude',
+  },
+  city: {
+    name: 'city',
+    classes: {
+      date: ['theme__city-date', 'theme__date'],
+      time: ['theme__city-time', 'theme__time'],
+    },
+    bg: './imgs/bg/night2.jpg',
+    kind: 'img',
+    displayName: 'City',
+  },
+  alienet: {
+    name: 'alienet',
+    classes: {
+      date: ['theme__alienet-date', 'theme__date'],
+      time: ['theme__alienet-time', 'theme__time'],
+    },
+    bg: './imgs/bg/ai-mountain.jpg',
+    kind: 'img',
+    displayName: 'Alienet',
+  },
+  jant: {
+    name: 'jant',
+    classes: {
+      date: ['theme__jant-date', 'theme__date'],
+      time: ['theme__jant-time', 'theme__time'],
+    },
+    bg: './imgs/bg/jant.jpg',
+    kind: 'img',
+    displayName: 'Jant',
+  },
+  dusk: {
+    name: 'dusk',
+    classes: {
+      date: ['theme__dusk-date', 'theme__date'],
+      time: ['theme__dusk-time', 'theme__time'],
+    },
+    bg: './imgs/bg/dusk.jpg',
+    kind: 'img',
+    displayName: 'Dusk',
+  },
+  beach: {
+    name: 'beach',
+    classes: {
+      date: ['theme__beach-date', 'theme__date'],
+      time: ['theme__beach-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/day.mp4',
+    kind: 'vid',
+    displayName: 'Beach',
+  },
+  exoPlanet: {
+    name: 'exoPlanet',
+    classes: {
+      date: ['theme__expoPlanet-date', 'theme__date'],
+      time: ['theme__expoPlanet-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/night.mp4',
+    kind: 'vid',
+    displayName: 'Exo Planet',
+  },
+  jungle: {
+    name: 'jungle',
+    classes: {
+      date: ['theme__jungle-date', 'theme__date'],
+      time: ['theme__jungle-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/jungle.mp4',
+    kind: 'vid',
+    displayName: 'Jungle',
+  },
+  lake: {
+    name: 'lake',
+    classes: {
+      date: ['theme__lake-date', 'theme__date'],
+      time: ['theme__lake-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/lake.mp4',
+    kind: 'vid',
+    displayName: 'Lake',
+  },
+  sky: {
+    name: 'sky',
+    classes: {
+      date: ['theme__sky-date', 'theme__date'],
+      time: ['theme__sky-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/sky.mp4',
+    kind: 'vid',
+    displayName: 'Sky',
+  },
+  spaceBeach: {
+    name: 'spaceBeach',
+    classes: {
+      date: ['theme__spaceBeach-date', 'theme__date'],
+      time: ['theme__spaceBeach-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/space-beach.mp4',
+    kind: 'vid',
+    displayName: 'Space Beach',
+  },
+  bike: {
+    name: 'bike',
+    classes: {
+      date: ['theme__bike-date', 'theme__date'],
+      time: ['theme__bike-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/bike.mp4',
+    kind: 'vid',
+    displayName: 'Bike',
+  },
+  cat: {
+    name: 'cat',
+    classes: {
+      date: ['theme__cat-date', 'theme__date'],
+      time: ['theme__cat-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/cat.mp4',
+    kind: 'vid',
+    displayName: 'Cat',
+  },
+  clouds: {
+    name: 'clouds',
+    classes: {
+      date: ['theme__clouds-date', 'theme__date'],
+      time: ['theme__clouds-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/clouds.mp4',
+    kind: 'vid',
+    displayName: 'Clouds',
+  },
+  field: {
+    name: 'field',
+    classes: {
+      date: ['theme__field-date', 'theme__date'],
+      time: ['theme__field-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/field.mp4',
+    kind: 'vid',
+    displayName: 'Field',
+  },
+  island: {
+    name: 'island',
+    classes: {
+      date: ['theme__island-date', 'theme__date'],
+      time: ['theme__island-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/island.mp4',
+    kind: 'vid',
+    displayName: 'Island',
+  },
+  mountains: {
+    name: 'mountains',
+    classes: {
+      date: ['theme__mountains-date', 'theme__date'],
+      time: ['theme__mountains-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/mountains.mp4',
+    kind: 'vid',
+    displayName: 'Mountains',
+  },
+  porsche: {
+    name: 'porsche',
+    classes: {
+      date: ['theme__porsche-date', 'theme__date'],
+      time: ['theme__porsche-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/porsche.mp4',
+    kind: 'vid',
+    displayName: 'Porsche',
+  },
+  sunset: {
+    name: 'sunset',
+    classes: {
+      date: ['theme__sunset-date', 'theme__date'],
+      time: ['theme__sunset-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/sunset.mp4',
+    kind: 'vid',
+    displayName: 'Sunset',
+  },
+  floatingIsland: {
+    name: 'floatingIsland',
+    classes: {
+      date: ['theme__floatingIsland-date', 'theme__date'],
+      time: ['theme__floatingIsland-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/floating-island.mp4',
+    kind: 'vid',
+    displayName: 'Floating Island',
+  },
+  lakeHouse: {
+    name: 'lakeHouse',
+    classes: {
+      date: ['theme__lakeHouse-date', 'theme__date'],
+      time: ['theme__lakeHouse-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/lake-house.mp4',
+    kind: 'vid',
+    displayName: 'Lake House',
+  },
+  someDude: {
+    name: 'someDude',
+    classes: {
+      date: ['theme__someDude-date', 'theme__date'],
+      time: ['theme__someDude-time', 'theme__time'],
+    },
+    bg: './imgs/bg/video/some-dude.mp4',
+    kind: 'vid',
+    displayName: 'Some Dude',
+  },
+};

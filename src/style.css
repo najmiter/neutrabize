@@ -117,6 +117,50 @@
     background: linear-gradient(to bottom, rgb(163, 96, 170), rgba(119, 43, 194, 0.897));
   }
 
+  .theme__bike-time {
+    background: linear-gradient(to bottom, rgb(170, 138, 96), rgba(194, 119, 43, 0.897));
+  }
+
+  .theme__cat-time {
+    background: linear-gradient(to bottom, rgb(96, 144, 170), rgba(74, 99, 120, 0.897));
+  }
+
+  .theme__clouds-time {
+    background: linear-gradient(to bottom, rgb(255, 140, 234), rgb(164, 66, 157));
+  }
+
+  .theme__field-time {
+    background: linear-gradient(to bottom, rgb(96, 170, 113), rgba(74, 120, 79, 0.897));
+  }
+
+  .theme__island-time {
+    background: linear-gradient(to bottom, rgb(96, 147, 170), rgba(74, 96, 120, 0.897));
+  }
+
+  .theme__mountains-time {
+    background: linear-gradient(to bottom, rgb(169, 170, 96), rgba(120, 104, 74, 0.897));
+  }
+
+  .theme__porsche-time {
+    background: linear-gradient(to bottom, rgb(124, 96, 170), rgba(98, 98, 161, 0.897));
+  }
+
+  .theme__sunset-time {
+    background: linear-gradient(to bottom, rgb(170, 123, 96), rgba(161, 148, 98, 0.897));
+  }
+
+  .theme__floatingIsland-time {
+    background: linear-gradient(to bottom, rgb(196, 136, 255), rgba(153, 111, 249, 0.897));
+  }
+
+  .theme__lakeHouse-time {
+    background: linear-gradient(to bottom, rgb(170, 96, 96), rgba(161, 98, 132, 0.897));
+  }
+
+  .theme__someDude-time {
+    background: linear-gradient(to bottom, rgb(170, 96, 96), rgb(205, 142, 112));
+  }
+
   .theme__date {
     background-clip: text;
     color: transparent;

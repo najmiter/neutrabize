@@ -1,23 +1,14 @@
 export const date = document.getElementById('date') as HTMLElement;
 export const time = document.getElementById('time') as HTMLElement;
-export const wallpaper = document.getElementById(
-  'wallpaper'
-) as HTMLImageElement;
+export const wallpaper = document.getElementById('wallpaper') as HTMLImageElement;
 export const quote = document.getElementById('quote') as HTMLElement;
 export const shortcuts = document.getElementById('shortcuts') as HTMLElement;
 export const themes = document.querySelectorAll('.theme');
-export const batteryContainer = document.getElementById(
-  'battery-container'
-) as HTMLElement;
-export const video = document.getElementById(
-  'live-wallpaper-vid'
-) as HTMLVideoElement;
-export const source = document.getElementById(
-  'live-wallpaper-src'
-) as HTMLSourceElement;
-export const downloadsPanel = document.getElementById(
-  'downloads-panel'
-) as HTMLElement;
+export const batteryContainer = document.getElementById('battery-container') as HTMLElement;
+export const video = document.getElementById('live-wallpaper-vid') as HTMLVideoElement;
+export const source = document.getElementById('live-wallpaper-src') as HTMLSourceElement;
+export const downloadsPanel = document.getElementById('downloads-panel') as HTMLElement;
+export const themeContainer = document.getElementById('themes') as HTMLDivElement;
 
 interface Theme {
   bg: string;

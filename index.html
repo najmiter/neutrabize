@@ -7,9 +7,7 @@
     <title>New Tab</title>
     <script type="module" src="./src/main.ts" defer></script>
   </head>
-  <body
-    class="max-h-full w-[100vw] overflow-hidden selection:bg-blue-600 selection:text-white"
-  >
+  <body class="max-h-full w-[100vw] overflow-hidden selection:bg-blue-600 selection:text-white">
     <main>
       <div class="relative pointer-events-none -z-10">
         <img
@@ -30,12 +28,8 @@
         <div class="fixed inset-0 bg-black/30"></div>
       </div>
 
-      <div
-        class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default"
-      >
-        <div
-          class="bg-black/20 backdrop-blur-3xl space-y-6 py-5 px-10 rounded-2xl border border-slate-700"
-        >
+      <div class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default">
+        <div class="bg-black/20 backdrop-blur-3xl space-y-6 py-5 px-10 rounded-2xl border border-slate-700">
           <div class="relative">
             <h1 id="time" class="theme__time"></h1>
           </div>
@@ -69,9 +63,7 @@
                 alt="weather icon"
                 data-good="false"
               />
-              <h2 id="temperature" class="text-sm animate-appear font-light">
-                Weathering...
-              </h2>
+              <h2 id="temperature" class="text-sm animate-appear font-light">Weathering...</h2>
             </div>
           </div>
         </div>
@@ -81,10 +73,7 @@
         id="quote"
         class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300"
       >
-        <h1
-          id="quote-quote"
-          class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]"
-        >
+        <h1 id="quote-quote" class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]">
           &ldquo;You have to keep breaking your heart until it opens.&rdquo;
         </h1>
         <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
@@ -102,10 +91,7 @@
       </div>
     </main>
 
-    <div
-      id="settings"
-      class="fixed z-50 right-10 top-10 flex flex-col items-end"
-    >
+    <div id="settings" class="fixed z-50 right-10 top-10 flex flex-col items-end">
       <button id="settings-btn">
         <img src="./imgs/icons/setting.svg" alt="settings icon" />
       </button>
@@ -177,287 +163,7 @@
 
           <div class="max-w-full space-y-8">
             <h1 class="px-2">Themes</h1>
-            <div id="themes" class="flex gap-3 overflow-x-scroll w-[360px]">
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="spaceBeach"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="pointer-events: none"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                >
-                  <source
-                    src="./imgs/bg/video/space-beach.mp4"
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Space Beach</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="sky"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="pointer-events: none"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                >
-                  <source src="./imgs/bg/video/sky.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Sky</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="lake"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="pointer-events: none"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                >
-                  <source src="./imgs/bg/video/lake.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Lake</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="jungle"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="pointer-events: none"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                >
-                  <source src="./imgs/bg/video/jungle.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Jungle</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="exoPlanet"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="pointer-events: none"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                >
-                  <source src="./imgs/bg/video/night.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Exo Planet</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="beach"
-                ></div>
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  style="pointer-events: none"
-                >
-                  <source src="./imgs/bg/video/day.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 class="text-lg">Beach</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="dusk"
-                ></div>
-                <img
-                  src="./imgs/bg/dusk.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Dusk</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="city"
-                ></div>
-                <img
-                  src="./imgs/bg/night2.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">City</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="galaxy"
-                ></div>
-                <img
-                  src="./imgs/bg/galaxy.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Galaxy</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="planets"
-                ></div>
-                <img
-                  src="./imgs/bg/planets.png"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Planets</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="spaceDude"
-                ></div>
-                <img
-                  src="./imgs/bg/space-dude.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Space Dude</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="alienet"
-                ></div>
-                <img
-                  src="./imgs/bg/ai-mountain.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Alienet</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="jant"
-                ></div>
-                <img
-                  src="./imgs/bg/jant.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Jant</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="kaiju"
-                ></div>
-                <img
-                  src="./imgs/bg/kaiju.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Kaiju</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="cityDusk"
-                ></div>
-                <img
-                  src="./imgs/bg/city.jpg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">City</h3>
-              </div>
-              <div
-                class="relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30"
-              >
-                <div
-                  role="presentation"
-                  class="theme absolute top-0 left-0 w-full h-full bg-transparent"
-                  data-name="exoplanets"
-                ></div>
-                <img
-                  src="./imgs/bg/exoplanets.jpeg"
-                  class="max-w-32 aspect-square object-cover rounded-md"
-                  alt=""
-                />
-                <h3 class="text-lg">Exoplanets</h3>
-              </div>
-            </div>
+            <div id="themes" class="flex gap-3 overflow-x-scroll w-[360px]"></div>
           </div>
         </div>
       </div>
@@ -470,10 +176,7 @@
       <div class="flex justify-between items-center">
         <h2 class="text-gray-300 text-base">Recent Downloads</h2>
       </div>
-      <div
-        id="downloads-list"
-        class="flex flex-col gap-2 overflow-y-auto max-h-[calc(70vh-4rem)]"
-      ></div>
+      <div id="downloads-list" class="flex flex-col gap-2 overflow-y-auto max-h-[calc(70vh-4rem)]"></div>
     </div>
   </body>
 </html>

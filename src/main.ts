@@ -14,14 +14,13 @@ import './scripts/theme';
 import './scripts/battery';
 import './scripts/top-sites';
 import './style.css';
+import { renderThemes } from './scripts/dom';
+
+renderThemes();
 
 const shouldShowQuote = localStorage.getItem('neutrabize_SHOULDSHOWQUOTE');
-const shouldShowShortcuts = localStorage.getItem(
-  'neutrabize_SHOULDSHOWSHORTCUTS'
-);
-const shouldShowDownloads = localStorage.getItem(
-  'neutrabize_SHOULDSHOWDOWNLOADS'
-);
+const shouldShowShortcuts = localStorage.getItem('neutrabize_SHOULDSHOWSHORTCUTS');
+const shouldShowDownloads = localStorage.getItem('neutrabize_SHOULDSHOWDOWNLOADS');
 const activeTheme = localStorage.getItem('neutrabize_THEMEDATA');
 // const shouldShowBattery = localStorage.getItem('neutrabize_SHOULDSHOWBATTERY');
 
@@ -29,14 +28,6 @@ if (activeTheme) {
   try {
     const theme = JSON.parse(activeTheme);
     updateTheme(theme);
-
-    const themes = document.querySelectorAll<HTMLElement>('.theme');
-    themes.forEach(
-      (_theme) =>
-        (_theme.dataset.active = (
-          _theme.dataset.name === theme.name
-        ).toString())
-    );
   } catch {}
 }
 
@@ -49,9 +40,7 @@ if (shouldShowQuote === 'true') {
 }
 
 if (shouldShowShortcuts === 'false') {
-  const toggle = document.getElementById(
-    'show-shortcuts-toggle'
-  ) as HTMLElement;
+  const toggle = document.getElementById('show-shortcuts-toggle') as HTMLElement;
   const shortcutsBar = document.getElementById('shortcuts-bar') as HTMLElement;
 
   toggle.dataset.on = 'false';
@@ -70,9 +59,7 @@ if (shouldShowShortcuts === 'false') {
 // Initialize downloads functionality
 initDownloads();
 
-const downloadToggle = document.getElementById(
-  'show-downloads-toggle'
-) as HTMLElement;
+const downloadToggle = document.getElementById('show-downloads-toggle') as HTMLElement;
 if (shouldShowDownloads === 'true') {
   downloadToggle.dataset.on = 'true';
   toggleDownloads(true);
