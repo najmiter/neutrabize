@@ -6,9 +6,9 @@
   "permissions": ["geolocation", "topSites", "favicon", "downloads", "downloads.open"],
 
   "icons": {
-    "32": "./imgs/neutrabize-128.png",
-    "64": "./imgs/neutrabize-128.png",
-    "128": "./imgs/neutrabize-128.png"
+    "32": "/imgs/neutrabize-128.png",
+    "64": "/imgs/neutrabize-128.png",
+    "128": "/imgs/neutrabize-128.png"
   },
 
   "chrome_url_overrides": {
