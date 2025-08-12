@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" style="color-scheme: dark">
+<html lang="en" style="color-scheme: dark" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="./neutrabize-128.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./imgs/neutrabize-128.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Tab</title>
     <script type="module" src="./src/main.ts" defer></script>
   </head>
-  <body class="max-h-full w-[100vw] overflow-hidden selection:bg-blue-600 selection:text-white">
+  <body class="max-h-full w-screen overflow-hidden selection:bg-blue-600 selection:text-white">
     <main>
-      <div class="relative pointer-events-none -z-10">
+      <div class="relative pointer-events-none -z-10" id="wallpaper-container">
         <img
           id="wallpaper"
           alt="wallpaper"
@@ -25,7 +25,7 @@
           <source id="live-wallpaper-src" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div class="fixed inset-0 bg-black/30"></div>
+        <div id="wallpaper-fade" class="fixed inset-0 bg-black/30"></div>
       </div>
 
       <div class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default">

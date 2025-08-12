@@ -2,22 +2,40 @@ import { themesData } from '../data/themes';
 import { ThemeData } from '../types';
 import { themeContainer, updateTheme } from './globals';
 
+const themeNodes: HTMLDivElement[] = [];
+
 export const renderThemes = () => {
-  // this is gonna be bad 😭 (but we'll deliver it as a feature - not a bug. until it's been fixed 😋)
+  // should only do it the first time
+  if (themeNodes.length > 0) return;
+
   themeContainer.innerHTML = '';
   const themes = Object.values(themesData);
   // must be there at this point
   const activeTheme = JSON.parse(localStorage.getItem('neutrabize_THEMEDATA') ?? '{}');
 
-  const themeNodes = themes.map((theme) => {
-    const container = makeContainer();
-    const overlay = makeOverlay(theme.name, activeTheme?.name === theme.name);
-    container.innerHTML = getElement(theme);
-    container.append(overlay);
-    return container;
-  });
+  themeNodes.push(
+    ...themes.map((theme) => {
+      const container = makeContainer();
+      const overlay = makeOverlay(theme.name, activeTheme?.name === theme.name);
+      container.innerHTML = getElement(theme);
+      container.append(overlay);
+      return container;
+    })
+  );
 
   themeContainer.append(...themeNodes);
+};
+
+const updateThemes = (activeThemeName: string) => {
+  themeNodes.forEach((node) => {
+    const overlay = node.querySelector('div[data-name]') as HTMLDivElement | null;
+    if (!overlay) return;
+
+    const name = overlay.dataset.name;
+    if (!name) return;
+
+    overlay.dataset.active = name === activeThemeName ? 'true' : 'false';
+  });
 };
 
 const makeContainer = (): HTMLDivElement => {
@@ -46,10 +64,9 @@ const makeOverlay = (themeName: string, isActive = false) => {
     if (!name || !themesData[name]) return;
 
     updateTheme(themesData[name]);
-
     localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
 
-    renderThemes();
+    updateThemes(name);
   });
   return overlayDiv;
 };

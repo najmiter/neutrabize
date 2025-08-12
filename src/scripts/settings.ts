@@ -1,22 +1,12 @@
 import { quote, shortcuts } from './globals';
 import { toggleDownloads } from './downloads';
 
-const settingsBtn = document.getElementById(
-  'settings-btn'
-) as HTMLButtonElement;
-const settingsWrapper = document.getElementById(
-  'settings-wrapper'
-) as HTMLElement;
-const settingsContent = document.getElementById(
-  'settings-content'
-) as HTMLElement;
+const settingsBtn = document.getElementById('settings-btn') as HTMLButtonElement;
+const settingsWrapper = document.getElementById('settings-wrapper') as HTMLElement;
+const settingsContent = document.getElementById('settings-content') as HTMLElement;
 const toggleQuote = document.getElementById('toggle-quote') as HTMLElement;
-const toggleShortcuts = document.getElementById(
-  'toggle-shortcuts'
-) as HTMLElement;
-const toggleDownloadsBtn = document.getElementById(
-  'toggle-downloads'
-) as HTMLElement;
+const toggleShortcuts = document.getElementById('toggle-shortcuts') as HTMLElement;
+const toggleDownloadsBtn = document.getElementById('toggle-downloads') as HTMLElement;
 // const toggleBattery = document.getElementById('toggle-battery') as HTMLElement;
 
 document.addEventListener('click', (e: MouseEvent) => {
@@ -28,6 +18,11 @@ document.addEventListener('click', (e: MouseEvent) => {
 
 settingsBtn.addEventListener('click', () => {
   const themes = document.querySelectorAll<HTMLElement>('#themes>div');
+  const activeTheme = document.querySelector('div[data-active=true]');
+
+  if (activeTheme) {
+    setTimeout(() => activeTheme.scrollIntoView({ behavior: 'smooth' }), 400);
+  }
 
   if (window.getComputedStyle(settingsWrapper).height !== '0px') {
     themes.forEach((theme) => {
@@ -64,9 +59,7 @@ toggleQuote.addEventListener('click', () => {
 });
 
 toggleShortcuts.addEventListener('click', () => {
-  const toggle = document.getElementById(
-    'show-shortcuts-toggle'
-  ) as HTMLElement;
+  const toggle = document.getElementById('show-shortcuts-toggle') as HTMLElement;
   const shortcutsBar = document.getElementById('shortcuts-bar') as HTMLElement;
   const newState = toggle.dataset.on === 'false';
   toggle.dataset.on = newState.toString();
@@ -83,9 +76,7 @@ toggleShortcuts.addEventListener('click', () => {
 });
 
 toggleDownloadsBtn.addEventListener('click', () => {
-  const toggle = document.getElementById(
-    'show-downloads-toggle'
-  ) as HTMLElement;
+  const toggle = document.getElementById('show-downloads-toggle') as HTMLElement;
   const newState = toggle.dataset.on === 'false';
   toggle.dataset.on = newState.toString();
 
