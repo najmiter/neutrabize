@@ -16,8 +16,8 @@ export const wallpaperFade = document.getElementById('wallpaper-fade') as HTMLDi
 let wallpaperFadeTimeout: NodeJS.Timeout | null = null;
 
 export function updateTheme(theme: ThemeData): void {
-  date.classList.add(...theme.classes.date);
-  time.classList.add(...theme.classes.time);
+  date.setAttribute('class', theme.classes.date.join(' '));
+  time.setAttribute('class', theme.classes.time.join(' '));
 
   wallpaperFade.classList.add('animate-wallpaper-fade');
 
