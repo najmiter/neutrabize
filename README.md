@@ -30,7 +30,7 @@ Thanks **open-meteo** for their free weather api:
 
 #### Classic
 
-##### August 10, 2025
+##### June 29, 2025
 
 ![Home page preview](https://lh3.googleusercontent.com/vNZldmLIt082vw1GXHZGVTwn0HMCEzfkJgPly-kw8nNpZnJElk5sFkcLxiS-kreqp44PCP7pEedJOMfDwJ7TdeDe=w1280-h800)
 
