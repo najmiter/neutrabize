@@ -84,7 +84,13 @@ function updateTime(): void {
     .split(' ')
     .at(0);
 
-  if (now) time.textContent = now;
+  if (now && time.textContent !== now) {
+    time.textContent = now;
+    time.classList.add('animate-time-update');
+    setTimeout(() => {
+      time.classList.remove('animate-time-update');
+    }, 300);
+  }
 }
 
 updateTime();

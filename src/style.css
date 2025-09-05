@@ -57,8 +57,8 @@
     animation: come-out 350ms forwards;
   }
 
-  .animate-wallpaper-fade {
-    animation: wallpaper-fade 300ms forwards;
+  .animate-time-update {
+    animation: time-update 0.3s ease-out;
   }
 
   /* CLOCK */
@@ -170,16 +170,6 @@
     background: linear-gradient(to bottom, rgb(170, 96, 96), rgb(205, 142, 112));
   }
 
-  .theme__date {
-    background-clip: text;
-    color: transparent;
-    font-weight: 200;
-    font-size: 16px;
-    line-height: 1.75rem;
-    text-align: center;
-    color: inherit;
-  }
-
   .theme__time {
     background-clip: text;
     color: transparent;
@@ -187,11 +177,111 @@
     font-size: 8rem;
     line-height: 1;
     text-align: center;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    letter-spacing: -0.02em;
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(255, 255, 255, 0.05),
+      0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: clock-glow 4s ease-in-out infinite;
+  }
+
+  .clock-container {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme__date {
+    background-clip: text;
+    color: transparent;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4;
+    text-align: center;
+    color: inherit;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    opacity: 0.85;
+  }
+
+  .clock-bottom-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    margin-top: 1rem;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .clock-separator {
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0.6;
+  }
+
+  .clock-battery {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+  }
+
+  .clock-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+  }
+
+  .clock-weather img {
+    filter: brightness(0.8);
   }
 
   @keyframes pulse {
     50% {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
@@ -284,8 +374,6 @@
     }
   }
 
-
-
   @keyframes come-in {
     from {
       opacity: 0;
@@ -321,7 +409,7 @@
 
   @keyframes pulse {
     50% {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
@@ -344,6 +432,34 @@
 
     100% {
       background-color: rgb(0 0 0 / 0.3);
+    }
+  }
+
+  @keyframes clock-glow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.08),
+        0 0 30px rgba(255, 255, 255, 0.04),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.12),
+        0 0 40px rgba(255, 255, 255, 0.06),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @keyframes time-update {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
