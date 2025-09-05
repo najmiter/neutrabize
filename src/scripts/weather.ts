@@ -1,8 +1,11 @@
+import { WMO_CODES } from '../data/weather';
+
 interface WeatherData {
   current: {
     temperature_2m: number;
     rain: boolean;
     is_day: number;
+    weather_code: number;
   };
   current_units: {
     temperature_2m: string;
@@ -14,6 +17,7 @@ interface StoredWeather {
   temperature: {
     temp: string;
     icon: string;
+    description?: string;
   };
 }
 
@@ -23,15 +27,13 @@ const weatherIcon = document.getElementById('weather-icon') as HTMLImageElement;
 
 export function update_weather(): void {
   if (weather_previously_fetched) {
-    const { temperature: old, at } = JSON.parse(
-      weather_previously_fetched
-    ) as StoredWeather;
+    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
 
     if (Date.now() > at + 1000 * 60 * 60) {
       do_da_weather_thing();
     } else {
       temperature.textContent = `${old.temp}`;
-      weatherIcon.src = `./imgs/icons/${old.icon}.svg`;
+      weatherIcon.src = old.icon;
       weatherIcon.dataset.good = 'true';
     }
   } else {
@@ -46,20 +48,25 @@ function do_da_weather_thing(): void {
       const lati = position.coords.latitude;
       const long = position.coords.longitude;
 
-      const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day`;
+      const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day,weather_code`;
 
       try {
         const choosni = await fetch(WEATHER_API);
 
         if (choosni.ok) {
           const khbr = (await choosni.json()) as WeatherData;
-          const icon = khbr.current.rain
-            ? 'rainy'
-            : khbr.current.is_day
-              ? 'sunny'
-              : 'night';
+          const weatherCode = khbr.current.weather_code.toString() as `${number}`;
+          const isDay = khbr.current.is_day === 1;
+          const iconData = WMO_CODES[weatherCode];
 
-          weatherIcon.src = `./imgs/icons/${icon}.svg`;
+          let iconPath = './imgs/icons/sun.svg';
+          if (iconData) {
+            iconPath = isDay ? iconData.day.image : iconData.night.image;
+          }
+
+          weatherIcon.src = iconPath;
+          weatherIcon.alt = iconData ? (isDay ? iconData.day.description : iconData.night.description) : 'Weather Icon';
+          weatherIcon.title = iconData ? (isDay ? iconData.day.description : iconData.night.description) : '';
           weatherIcon.dataset.good = 'true';
           temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
 
@@ -69,7 +76,8 @@ function do_da_weather_thing(): void {
               at: Date.now(),
               temperature: {
                 temp: temperature.textContent,
-                icon,
+                icon: iconPath,
+                description: iconData ? (isDay ? iconData.day.description : iconData.night.description) : '',
               },
             })
           );
@@ -87,9 +95,7 @@ function do_da_weather_thing(): void {
 
 function reset_weather_to_previous_or_empty(): void {
   if (weather_previously_fetched) {
-    const { temperature: old } = JSON.parse(
-      weather_previously_fetched
-    ) as StoredWeather;
+    const { temperature: old } = JSON.parse(weather_previously_fetched) as StoredWeather;
     temperature.textContent = old.temp;
     weatherIcon.src = `./imgs/icons/${old.icon}.svg`;
     weatherIcon.dataset.good = 'true';
