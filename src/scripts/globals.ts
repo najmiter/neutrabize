@@ -17,6 +17,7 @@ let wallpaperFadeTimeout: NodeJS.Timeout | null = null;
 
 export function updateTheme(theme: ThemeData): void {
   date.setAttribute('class', theme.classes.date.join(' '));
+  date.classList.toggle('animate-bottom-item-1', true);
   time.setAttribute('class', theme.classes.time.join(' '));
 
   wallpaperFade.classList.add('animate-wallpaper-fade');

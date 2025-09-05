@@ -57,8 +57,40 @@
     animation: come-out 350ms forwards;
   }
 
-  .animate-time-update {
-    animation: time-update 0.3s ease-out;
+  .theme__date.animate-bottom-item-1,
+  .clock-separator.animate-bottom-item-1 {
+    animation: bottom-item-in 0.6s ease-out 0.5s both;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .clock-battery.animate-bottom-item-2 {
+    animation: bottom-item-in 0.6s ease-out 0.8s both;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .clock-battery.animate-bottom-item-2[data-show='true'] {
+    animation:
+      bottom-item-in 0.6s ease-out 0.8s both,
+      appear 250ms ease;
+  }
+
+  .clock-battery.animate-bottom-item-2[data-show='false'] {
+    animation: disappear 250ms ease forwards;
+  }
+
+  .clock-separator.animate-bottom-item-2,
+  .clock-weather.animate-bottom-item-3 {
+    animation: bottom-item-in 0.6s ease-out 0.8s both;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .clock-weather.animate-bottom-item-3 {
+    animation: bottom-item-in 0.6s ease-out 1.1s both;
+    opacity: 0;
+    transform: translateY(30px);
   }
 
   /* CLOCK */
@@ -207,7 +239,7 @@
     background-clip: text;
     color: transparent;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.4;
     text-align: center;
     color: inherit;
@@ -220,7 +252,14 @@
       sans-serif;
     letter-spacing: 0.02em;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .theme__date:not(.animate-bottom-item-1) {
     opacity: 0.85;
+  }
+
+  .clock-battery:not(.animate-bottom-item-2) {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .clock-bottom-content {
@@ -234,6 +273,7 @@
     margin-top: 1rem;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .clock-separator {
@@ -247,7 +287,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
     font-weight: 500;
     font-family:
@@ -259,11 +298,14 @@
       sans-serif;
   }
 
+  .clock-battery:not(.animate-bottom-item-2) {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
   .clock-weather {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
     font-weight: 500;
     font-family:
@@ -273,6 +315,10 @@
       'Segoe UI',
       Roboto,
       sans-serif;
+  }
+
+  .clock-weather:not(.animate-bottom-item-3) {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .clock-weather img {
@@ -460,6 +506,17 @@
     }
     100% {
       transform: scale(1);
+    }
+  }
+
+  @keyframes bottom-item-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

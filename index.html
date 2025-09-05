@@ -30,17 +30,17 @@
       </div>
 
       <div class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default">
-        <div class="clock-container space-y-4 py-8 px-12 rounded-2xl border border-slate-700">
+        <div class="clock-container space-y-4 py-8 px-8 rounded-2xl border border-slate-700">
           <div class="relative">
             <h1 id="time" class="theme__time"></h1>
           </div>
           <div class="clock-bottom-content">
-            <h3 id="date" class="theme__date"></h3>
-            <div class="clock-separator"></div>
+            <h3 id="date" class="theme__date animate-bottom-item-1"></h3>
+            <div class="clock-separator animate-bottom-item-1"></div>
             <div
               data-show="true"
               id="battery-container"
-              class="clock-battery data-[battery-hai-e-ni='true']:hidden data-[show=true]:animate-appear data-[show=false]:animate-disappear">
+              class="clock-battery animate-bottom-item-2 data-[battery-hai-e-ni='true']:hidden data-[show=true]:animate-appear data-[show=false]:animate-disappear">
               <div id="battery-progress"></div>
               <div class="relative">
                 <div id="battery-icon"></div>
@@ -52,16 +52,16 @@
                 </div>
               </div>
             </div>
-            <div class="clock-separator"></div>
-            <div class="clock-weather">
+            <div class="clock-separator animate-bottom-item-2"></div>
+            <div class="clock-weather animate-bottom-item-3">
               <img
                 id="weather-icon"
-                class="animate-in transition-all data-[good=false]:hidden"
+                class="transition-all data-[good=false]:hidden"
                 alt="weather icon"
                 width="20"
                 height="20"
                 data-good="false" />
-              <h2 id="temperature" class="animate-appear">Weathering...</h2>
+              <h2 id="temperature">Weathering...</h2>
             </div>
           </div>
         </div>

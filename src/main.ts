@@ -69,9 +69,10 @@ if (shouldShowDownloads === 'true') {
 }
 
 date.textContent = new Date().toLocaleDateString('en-us', {
-  month: 'numeric',
+  month: 'short',
   day: '2-digit',
   year: 'numeric',
+  weekday: 'short',
 });
 
 function updateTime(): void {
