@@ -29,6 +29,11 @@ export function update_weather(): void {
   if (weather_previously_fetched) {
     const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
 
+    // stupid ass legacy - shouldn't be an issue
+    if (at < 1757344622452) {
+      localStorage.clear();
+    }
+
     if (Date.now() > at + 1000 * 60 * 60) {
       do_da_weather_thing();
     } else {

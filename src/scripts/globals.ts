@@ -30,12 +30,6 @@ export function updateTheme(theme: ThemeData): void {
     wallpaperFade.classList.remove('animate-wallpaper-fade');
   }, 300);
 
-  if (theme?.name == 'beach') {
-    video.style.transform = 'scaleX(-1)';
-  } else {
-    video.style.transform = 'scaleX(1)';
-  }
-
   if (theme.kind === 'vid') {
     wallpaper.style.display = 'none';
     video.style.display = 'block';

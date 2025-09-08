@@ -77,11 +77,7 @@ date.textContent = new Date().toLocaleDateString('en-us', {
 
 function updateTime(): void {
   const now = new Date()
-    .toLocaleTimeString('en-us', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    })
+    .toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true })
     .split(' ')
     .at(0);
 
