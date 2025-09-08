@@ -1,522 +1,506 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer utilities {
-  *::-webkit-scrollbar {
-    display: none;
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.download-item {
+  animation: slide-in-left 0.3s ease-out forwards;
+  animation-delay: var(--item-delay, 0.1s);
+  opacity: 0;
+}
+
+.download-item[data-status='deleted'] .download-status {
+  color: rgb(239, 68, 68);
+}
+
+.animate-disappear {
+  animation: disappear 250ms ease forwards;
+}
+
+.animate-appear {
+  animation: pulse 250ms ease;
+}
+
+.animate-enter {
+  animation: enter 400ms forwards;
+}
+
+.animate-enter2 {
+  animation: enter2 400ms forwards;
+}
+
+.animate-enter3 {
+  animation: enter3 400ms forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 300ms forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 300ms forwards;
+}
+
+.animate-in {
+  animation: in 250ms ease-in forwards;
+}
+
+.animate-come-in {
+  animation: come-in 350ms forwards;
+}
+
+.animate-come-out {
+  animation: come-out 350ms forwards;
+}
+
+.theme__date.animate-bottom-item-1,
+.clock-separator.animate-bottom-item-1 {
+  animation: bottom-item-in 0.6s ease-out 0.5s both;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.clock-battery.animate-bottom-item-2 {
+  animation: bottom-item-in 0.6s ease-out 0.8s both;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.clock-battery.animate-bottom-item-2[data-show='true'] {
+  animation:
+    bottom-item-in 0.6s ease-out 0.8s both,
+    appear 250ms ease;
+}
+
+.clock-battery.animate-bottom-item-2[data-show='false'] {
+  animation: disappear 250ms ease forwards;
+}
+
+.clock-separator.animate-bottom-item-2,
+.clock-weather.animate-bottom-item-3 {
+  animation: bottom-item-in 0.6s ease-out 0.8s both;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.clock-weather.animate-bottom-item-3 {
+  animation: bottom-item-in 0.6s ease-out 1.1s both;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* CLOCK */
+.theme__exoplanets-time {
+  background: linear-gradient(to bottom, #7d48d8, rgba(98, 98, 255, 0.636));
+}
+
+.theme__cityDusk-time {
+  background: linear-gradient(to bottom, #fb2452, rgba(255, 161, 188, 0.4));
+}
+
+.theme__kaiju-time {
+  background: linear-gradient(to bottom, #6ec3ff, rgba(46, 97, 158, 0.552));
+}
+
+.theme__planets-time {
+  background: linear-gradient(to bottom, #f43f5e, rgb(254 243 199 / 0.4));
+}
+
+.theme__galaxy-time {
+  background: linear-gradient(to bottom, #4b5563, rgb(209 250 229 / 0.4));
+}
+
+.theme__spaceDude-time {
+  background: linear-gradient(to bottom, #fbbf24, rgb(254 243 199 / 0.4));
+}
+
+.theme__city-time {
+  background: linear-gradient(to bottom, #34d399, rgb(209 250 229 / 0.4));
+}
+
+.theme__alienet-time {
+  background: linear-gradient(to bottom, #a78bfa, rgb(237 233 254 / 0.4));
+}
+
+.theme__jant-time {
+  background: linear-gradient(to bottom, rgb(180 83 9), rgb(251 191 36 / 0.4));
+}
+
+.theme__dusk-time {
+  background: linear-gradient(to bottom, rgb(236 129 129), rgb(7 89 133 / 0.7));
+}
+
+.theme__expoPlanet-time {
+  background: linear-gradient(to bottom, rgb(222, 119, 119), rgba(202, 75, 49, 0.7));
+}
+
+.theme__beach-time {
+  background: linear-gradient(to bottom, rgb(88, 166, 226), rgba(40, 134, 250, 0.897));
+}
+
+.theme__jungle-time {
+  background: linear-gradient(to bottom, rgb(162, 169, 64), rgba(103, 136, 52, 0.897));
+}
+
+.theme__lake-time {
+  background: linear-gradient(to bottom, rgb(145, 88, 226), rgba(40, 85, 250, 0.897));
+}
+
+.theme__sky-time {
+  background: linear-gradient(to bottom, rgb(88, 196, 226), rgba(40, 152, 250, 0.897));
+}
+
+.theme__spaceBeach-time {
+  background: linear-gradient(to bottom, rgb(163, 96, 170), rgba(119, 43, 194, 0.897));
+}
+
+.theme__bike-time {
+  background: linear-gradient(to bottom, rgb(170, 138, 96), rgba(194, 119, 43, 0.897));
+}
+
+.theme__cat-time {
+  background: linear-gradient(to bottom, rgb(96, 144, 170), rgba(74, 99, 120, 0.897));
+}
+
+.theme__clouds-time {
+  background: linear-gradient(to bottom, rgb(255, 140, 234), rgb(164, 66, 157));
+}
+
+.theme__field-time {
+  background: linear-gradient(to bottom, rgb(96, 170, 113), rgba(74, 120, 79, 0.897));
+}
+
+.theme__island-time {
+  background: linear-gradient(to bottom, rgb(96, 147, 170), rgba(74, 96, 120, 0.897));
+}
+
+.theme__mountains-time {
+  background: linear-gradient(to bottom, rgb(169, 170, 96), rgba(120, 104, 74, 0.897));
+}
+
+.theme__porsche-time {
+  background: linear-gradient(to bottom, rgb(124, 96, 170), rgba(98, 98, 161, 0.897));
+}
+
+.theme__sunset-time {
+  background: linear-gradient(to bottom, rgb(170, 123, 96), rgba(161, 148, 98, 0.897));
+}
+
+.theme__floatingIsland-time {
+  background: linear-gradient(to bottom, rgb(196, 136, 255), rgba(153, 111, 249, 0.897));
+}
+
+.theme__lakeHouse-time {
+  background: linear-gradient(to bottom, rgb(170, 96, 96), rgba(161, 98, 132, 0.897));
+}
+
+.theme__someDude-time {
+  background: linear-gradient(to bottom, rgb(170, 96, 96), rgb(205, 142, 112));
+}
+
+.theme__time {
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  font-size: 8rem;
+  line-height: 1;
+  text-align: center;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  letter-spacing: -0.02em;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(255, 255, 255, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: time-update 1s ease-in-out forwards;
+}
+
+.clock-container {
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme__date {
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  color: inherit;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.theme__date:not(.animate-bottom-item-1) {
+  opacity: 0.85;
+}
+
+.clock-battery:not(.animate-bottom-item-2) {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.clock-bottom-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  margin-top: 1rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.clock-separator {
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0.6;
+}
+
+.clock-battery {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+.clock-battery:not(.animate-bottom-item-2) {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.clock-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+.clock-weather:not(.animate-bottom-item-3) {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.clock-weather img {
+  filter: brightness(0.8);
+}
+
+.animate-wallpaper-fade {
+  animation: wallpaper-fade 300ms forwards;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 0.5;
   }
 
-  .download-item {
-    animation: slide-in-left 0.3s ease-out forwards;
-    animation-delay: var(--item-delay, 0.1s);
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes away {
+  to {
+    top: 40%;
+    opacity: 0;
+  }
+}
+
+.animate-away {
+  animation: away 400ms forwards;
+}
+
+@keyframes enter {
+  from {
+    scale: 0;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes enter2 {
+  from {
+    transform: translateY(-75px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes enter3 {
+  from {
+    transform: translateY(35px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
   }
 
-  .download-item[data-status='deleted'] .download-status {
-    color: rgb(239, 68, 68);
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
   }
 
-  .animate-disappear {
-    animation: disappear 250ms ease forwards;
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    margin-bottom: 100px;
+    rotate: 180deg;
   }
 
-  .animate-appear {
-    animation: pulse 250ms ease;
+  to {
+    opacity: 1;
+    margin-bottom: 0;
+    rotate: 0;
+  }
+}
+
+@keyframes come-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
   }
 
-  .animate-enter {
-    animation: enter 400ms forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes come-out {
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 0.5;
   }
 
-  .animate-enter2 {
-    animation: enter2 400ms forwards;
+  50% {
+    opacity: 1;
   }
 
-  .animate-enter3 {
-    animation: enter3 400ms forwards;
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
   }
 
-  .animate-fade-in {
-    animation: fadeIn 300ms forwards;
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes wallpaper-fade {
+  0% {
+    background-color: rgb(0 0 0);
   }
 
-  .animate-fade-out {
-    animation: fadeOut 300ms forwards;
+  100% {
+    background-color: rgb(0 0 0 / 0.3);
   }
+}
 
-  .animate-in {
-    animation: in 250ms ease-in forwards;
+@keyframes time-update {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
   }
-
-  .animate-come-in {
-    animation: come-in 350ms forwards;
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
   }
-
-  .animate-come-out {
-    animation: come-out 350ms forwards;
+  100% {
+    transform: scale(1);
   }
+}
 
-  .theme__date.animate-bottom-item-1,
-  .clock-separator.animate-bottom-item-1 {
-    animation: bottom-item-in 0.6s ease-out 0.5s both;
+@keyframes bottom-item-in {
+  0% {
     opacity: 0;
     transform: translateY(30px);
   }
-
-  .clock-battery.animate-bottom-item-2 {
-    animation: bottom-item-in 0.6s ease-out 0.8s both;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  .clock-battery.animate-bottom-item-2[data-show='true'] {
-    animation:
-      bottom-item-in 0.6s ease-out 0.8s both,
-      appear 250ms ease;
-  }
-
-  .clock-battery.animate-bottom-item-2[data-show='false'] {
-    animation: disappear 250ms ease forwards;
-  }
-
-  .clock-separator.animate-bottom-item-2,
-  .clock-weather.animate-bottom-item-3 {
-    animation: bottom-item-in 0.6s ease-out 0.8s both;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  .clock-weather.animate-bottom-item-3 {
-    animation: bottom-item-in 0.6s ease-out 1.1s both;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  /* CLOCK */
-  .theme__exoplanets-time {
-    background: linear-gradient(to bottom, #7d48d8, rgba(98, 98, 255, 0.636));
-  }
-
-  .theme__cityDusk-time {
-    background: linear-gradient(to bottom, #fb2452, rgba(255, 161, 188, 0.4));
-  }
-
-  .theme__kaiju-time {
-    background: linear-gradient(to bottom, #6ec3ff, rgba(46, 97, 158, 0.552));
-  }
-
-  .theme__planets-time {
-    background: linear-gradient(to bottom, #f43f5e, rgb(254 243 199 / 0.4));
-  }
-
-  .theme__galaxy-time {
-    background: linear-gradient(to bottom, #4b5563, rgb(209 250 229 / 0.4));
-  }
-
-  .theme__spaceDude-time {
-    background: linear-gradient(to bottom, #fbbf24, rgb(254 243 199 / 0.4));
-  }
-
-  .theme__city-time {
-    background: linear-gradient(to bottom, #34d399, rgb(209 250 229 / 0.4));
-  }
-
-  .theme__alienet-time {
-    background: linear-gradient(to bottom, #a78bfa, rgb(237 233 254 / 0.4));
-  }
-
-  .theme__jant-time {
-    background: linear-gradient(to bottom, rgb(180 83 9), rgb(251 191 36 / 0.4));
-  }
-
-  .theme__dusk-time {
-    background: linear-gradient(to bottom, rgb(236 129 129), rgb(7 89 133 / 0.7));
-  }
-
-  .theme__expoPlanet-time {
-    background: linear-gradient(to bottom, rgb(222, 119, 119), rgba(202, 75, 49, 0.7));
-  }
-
-  .theme__beach-time {
-    background: linear-gradient(to bottom, rgb(88, 166, 226), rgba(40, 134, 250, 0.897));
-  }
-
-  .theme__jungle-time {
-    background: linear-gradient(to bottom, rgb(162, 169, 64), rgba(103, 136, 52, 0.897));
-  }
-
-  .theme__lake-time {
-    background: linear-gradient(to bottom, rgb(145, 88, 226), rgba(40, 85, 250, 0.897));
-  }
-
-  .theme__sky-time {
-    background: linear-gradient(to bottom, rgb(88, 196, 226), rgba(40, 152, 250, 0.897));
-  }
-
-  .theme__spaceBeach-time {
-    background: linear-gradient(to bottom, rgb(163, 96, 170), rgba(119, 43, 194, 0.897));
-  }
-
-  .theme__bike-time {
-    background: linear-gradient(to bottom, rgb(170, 138, 96), rgba(194, 119, 43, 0.897));
-  }
-
-  .theme__cat-time {
-    background: linear-gradient(to bottom, rgb(96, 144, 170), rgba(74, 99, 120, 0.897));
-  }
-
-  .theme__clouds-time {
-    background: linear-gradient(to bottom, rgb(255, 140, 234), rgb(164, 66, 157));
-  }
-
-  .theme__field-time {
-    background: linear-gradient(to bottom, rgb(96, 170, 113), rgba(74, 120, 79, 0.897));
-  }
-
-  .theme__island-time {
-    background: linear-gradient(to bottom, rgb(96, 147, 170), rgba(74, 96, 120, 0.897));
-  }
-
-  .theme__mountains-time {
-    background: linear-gradient(to bottom, rgb(169, 170, 96), rgba(120, 104, 74, 0.897));
-  }
-
-  .theme__porsche-time {
-    background: linear-gradient(to bottom, rgb(124, 96, 170), rgba(98, 98, 161, 0.897));
-  }
-
-  .theme__sunset-time {
-    background: linear-gradient(to bottom, rgb(170, 123, 96), rgba(161, 148, 98, 0.897));
-  }
-
-  .theme__floatingIsland-time {
-    background: linear-gradient(to bottom, rgb(196, 136, 255), rgba(153, 111, 249, 0.897));
-  }
-
-  .theme__lakeHouse-time {
-    background: linear-gradient(to bottom, rgb(170, 96, 96), rgba(161, 98, 132, 0.897));
-  }
-
-  .theme__someDude-time {
-    background: linear-gradient(to bottom, rgb(170, 96, 96), rgb(205, 142, 112));
-  }
-
-  .theme__time {
-    background-clip: text;
-    color: transparent;
-    font-weight: 700;
-    font-size: 8rem;
-    line-height: 1;
-    text-align: center;
-    font-family:
-      'Inter',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      sans-serif;
-    letter-spacing: -0.02em;
-    text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.1),
-      0 0 40px rgba(255, 255, 255, 0.05),
-      0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    animation: clock-glow 4s ease-in-out infinite;
-  }
-
-  .clock-container {
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .theme__date {
-    background-clip: text;
-    color: transparent;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: center;
-    color: inherit;
-    font-family:
-      'Inter',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      sans-serif;
-    letter-spacing: 0.02em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  .theme__date:not(.animate-bottom-item-1) {
-    opacity: 0.85;
-  }
-
-  .clock-battery:not(.animate-bottom-item-2) {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .clock-bottom-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 12px;
-    margin-top: 1rem;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .clock-separator {
-    width: 1px;
-    height: 24px;
-    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
-    opacity: 0.6;
-  }
-
-  .clock-battery {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 14px;
-    font-weight: 500;
-    font-family:
-      'Inter',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      sans-serif;
-  }
-
-  .clock-battery:not(.animate-bottom-item-2) {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .clock-weather {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 14px;
-    font-weight: 500;
-    font-family:
-      'Inter',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      sans-serif;
-  }
-
-  .clock-weather:not(.animate-bottom-item-3) {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .clock-weather img {
-    filter: brightness(0.8);
-  }
-
-  @keyframes pulse {
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes disappear {
-    0% {
-      opacity: 0.5;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes away {
-    to {
-      top: 40%;
-      opacity: 0;
-    }
-  }
-
-  .animate-away {
-    animation: away 400ms forwards;
-  }
-
-  @keyframes enter {
-    from {
-      scale: 0;
-    }
-
-    to {
-      scale: 1;
-    }
-  }
-
-  @keyframes enter2 {
-    from {
-      transform: translateY(-75px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes enter3 {
-    from {
-      transform: translateY(35px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes in {
-    from {
-      opacity: 0;
-      margin-bottom: 100px;
-      rotate: 180deg;
-    }
-
-    to {
-      opacity: 1;
-      margin-bottom: 0;
-      rotate: 0;
-    }
-  }
-
-  @keyframes come-in {
-    from {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes come-out {
-    to {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-  }
-
-  @keyframes disappear {
-    0% {
-      opacity: 0.5;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes pulse {
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes slide-in-left {
-    from {
-      opacity: 0;
-      transform: translateX(35px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes wallpaper-fade {
-    0% {
-      background-color: rgb(0 0 0);
-    }
-
-    100% {
-      background-color: rgb(0 0 0 / 0.3);
-    }
-  }
-
-  @keyframes clock-glow {
-    0%,
-    100% {
-      text-shadow:
-        0 0 15px rgba(255, 255, 255, 0.08),
-        0 0 30px rgba(255, 255, 255, 0.04),
-        0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    50% {
-      text-shadow:
-        0 0 20px rgba(255, 255, 255, 0.12),
-        0 0 40px rgba(255, 255, 255, 0.06),
-        0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  @keyframes time-update {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes bottom-item-in {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
