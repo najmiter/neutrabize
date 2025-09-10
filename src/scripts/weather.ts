@@ -29,16 +29,14 @@ export function update_weather(): void {
   if (weather_previously_fetched) {
     const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
 
-    // stupid ass legacy - shouldn't be an issue
-    if (at < 1757344622452) {
-      localStorage.clear();
-    }
-
     if (Date.now() > at + 1000 * 60 * 60) {
       do_da_weather_thing();
     } else {
       temperature.textContent = `${old.temp}`;
       weatherIcon.src = old.icon;
+      weatherIcon.alt = old.description || 'Weather Icon';
+      weatherIcon.title = old.description || '';
+      set_title(old.description);
       weatherIcon.dataset.good = 'true';
     }
   } else {
@@ -48,63 +46,71 @@ export function update_weather(): void {
 }
 
 function do_da_weather_thing(): void {
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lati = position.coords.latitude;
-      const long = position.coords.longitude;
+  if (!('geolocation' in navigator)) return (temperature.textContent = ''), void 0;
 
-      const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day,weather_code`;
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const lati = position.coords.latitude;
+    const long = position.coords.longitude;
 
-      try {
-        const choosni = await fetch(WEATHER_API);
+    const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day,weather_code`;
 
-        if (choosni.ok) {
-          const khbr = (await choosni.json()) as WeatherData;
-          const weatherCode = khbr.current.weather_code.toString() as `${number}`;
-          const isDay = khbr.current.is_day === 1;
-          const iconData = WMO_CODES[weatherCode];
+    try {
+      const choosni = await fetch(WEATHER_API);
 
-          let iconPath = './imgs/icons/sun.svg';
-          if (iconData) {
-            iconPath = isDay ? iconData.day.image : iconData.night.image;
-          }
+      if (choosni.ok) {
+        const khbr = (await choosni.json()) as WeatherData;
+        const weatherCode = khbr.current.weather_code.toString() as `${number}`;
+        const isDay = khbr.current.is_day === 1;
+        const iconData = WMO_CODES[weatherCode];
 
-          weatherIcon.src = iconPath;
-          weatherIcon.alt = iconData ? (isDay ? iconData.day.description : iconData.night.description) : 'Weather Icon';
-          weatherIcon.title = iconData ? (isDay ? iconData.day.description : iconData.night.description) : '';
-          weatherIcon.dataset.good = 'true';
-          temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
-
-          localStorage.setItem(
-            'neutrabize_WEATHER',
-            JSON.stringify({
-              at: Date.now(),
-              temperature: {
-                temp: temperature.textContent,
-                icon: iconPath,
-                description: iconData ? (isDay ? iconData.day.description : iconData.night.description) : '',
-              },
-            })
-          );
-        } else {
-          throw new Error(`Couldn't get the temperature`);
+        let iconPath = './imgs/icons/clear_day.svg';
+        if (iconData) {
+          iconPath = isDay ? iconData.day.image : iconData.night.image;
         }
-      } catch (probably_the_network_thing) {
-        reset_weather_to_previous_or_empty();
+
+        weatherIcon.src = iconPath;
+        weatherIcon.alt = iconData ? (isDay ? iconData.day.description : iconData.night.description) : 'Weather Icon';
+        const description = iconData ? (isDay ? iconData.day.description : iconData.night.description) : '';
+        set_title(description);
+        weatherIcon.title = description;
+        weatherIcon.dataset.good = 'true';
+        temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
+
+        localStorage.setItem(
+          'neutrabize_WEATHER',
+          JSON.stringify({
+            at: Date.now(),
+            temperature: {
+              temp: temperature.textContent,
+              icon: iconPath,
+              description,
+            },
+          })
+        );
+      } else {
+        throw new Error(`Couldn't get the temperature`);
       }
-    }, reset_weather_to_previous_or_empty);
-  } else {
-    temperature.textContent = '';
-  }
+    } catch (probably_the_network_thing) {
+      reset_weather_to_previous_or_empty();
+    }
+  }, reset_weather_to_previous_or_empty);
 }
 
 function reset_weather_to_previous_or_empty(): void {
   if (weather_previously_fetched) {
     const { temperature: old } = JSON.parse(weather_previously_fetched) as StoredWeather;
     temperature.textContent = old.temp;
-    weatherIcon.src = `./imgs/icons/${old.icon}.svg`;
+    weatherIcon.src = old.icon;
+    set_title(old?.description);
     weatherIcon.dataset.good = 'true';
   } else {
     temperature.textContent = '';
+  }
+}
+
+function set_title(description?: string) {
+  const container = document.querySelector('.clock-weather') as HTMLDivElement;
+  if (container) {
+    container.title = description || '';
   }
 }
