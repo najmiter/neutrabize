@@ -1,10 +1,10 @@
 import { themesData } from '../data/themes';
 import { ThemeData } from '../types';
-import { themeContainer, updateTheme } from './globals';
+import { CONTEXT, themeContainer, update_theme } from './globals';
 
 const themeNodes: HTMLDivElement[] = [];
 
-export const renderThemes = () => {
+export const render_themes = () => {
   // should only do it the first time
   if (themeNodes.length > 0) return;
 
@@ -15,7 +15,7 @@ export const renderThemes = () => {
 
   themeNodes.push(
     ...themes.map((theme) => {
-      const container = makeContainer();
+      const container = makeContainer(theme.displayName);
       const overlay = makeOverlay(theme.name, activeTheme?.name === theme.name);
       container.innerHTML = getElement(theme);
       container.append(overlay);
@@ -38,8 +38,9 @@ const updateThemes = (activeThemeName: string) => {
   });
 };
 
-const makeContainer = (): HTMLDivElement => {
+const makeContainer = (name: string): HTMLDivElement => {
   const container = document.createElement('div');
+  container.title = name;
   container.classList.add(
     ...'relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30'.split(
       ' '
@@ -63,8 +64,9 @@ const makeOverlay = (themeName: string, isActive = false) => {
 
     if (!name || !themesData[name]) return;
 
-    updateTheme(themesData[name]);
+    CONTEXT.set('theme', themesData[name]);
     localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
+    update_theme();
 
     updateThemes(name);
   });
@@ -95,7 +97,7 @@ const makeImgElement = (theme: ThemeData): string => `
   <img
     src="${theme.bg}"
     class="max-w-32 aspect-square object-cover rounded-md"
-    alt=""
+    alt="${theme.displayName}"
   />
   <h3 class="text-lg">${theme.displayName}</h3>
 `;

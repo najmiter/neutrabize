@@ -1,5 +1,5 @@
 import { themesData } from '../data/themes';
-import { themeContainer, updateTheme } from './globals';
+import { CONTEXT, themeContainer, update_theme } from './globals';
 
 // default theme
 if (!localStorage.getItem('neutrabize_THEMEDATA'))
@@ -13,9 +13,9 @@ themes?.forEach((theme) => {
 
     if (!name || !themesData[name]) return;
 
-    updateTheme(themesData[name]);
-
+    CONTEXT.set('theme', themesData[name]);
     localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
+    update_theme();
 
     themes.forEach((theme) => (theme.dataset.active = (theme.dataset.name === name).toString()));
   });

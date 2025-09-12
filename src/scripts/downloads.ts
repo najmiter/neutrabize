@@ -3,6 +3,7 @@ import { downloadsPanel } from './globals';
 const downloadsList = document.getElementById('downloads-list') as HTMLElement;
 
 export function initDownloads(): void {
+  if (!chrome) return;
   loadRecentDownloads();
 
   if (chrome.downloads) {
@@ -46,8 +47,7 @@ function displayDownloads(downloads: chrome.downloads.DownloadItem[]): void {
   downloadsList.innerHTML = '';
 
   if (downloads.length === 0) {
-    downloadsList.innerHTML =
-      '<p class="text-gray-400">No recent downloads</p>';
+    downloadsList.innerHTML = '<p class="text-gray-400">No recent downloads</p>';
     return;
   }
 
@@ -57,13 +57,9 @@ function displayDownloads(downloads: chrome.downloads.DownloadItem[]): void {
   });
 }
 
-function createDownloadElement(
-  download: chrome.downloads.DownloadItem,
-  index: number
-): HTMLDivElement {
+function createDownloadElement(download: chrome.downloads.DownloadItem, index: number): HTMLDivElement {
   const item = document.createElement('div');
-  item.className =
-    'flex items-center gap-3 p-2 download-item rounded-md hover:bg-slate-700/30';
+  item.className = 'flex items-center gap-3 p-2 download-item rounded-md hover:bg-slate-700/30';
   item.style.setProperty('--item-delay', `${index * 50}ms`);
 
   const fileName = download.filename.split('/').pop() || 'Unknown file';
@@ -81,8 +77,7 @@ function createDownloadElement(
   } else if (download.state === 'complete') {
     statusHtml = `<span class="text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">Complete</span>`;
   } else if (download.state === 'in_progress') {
-    const progress =
-      Math.round((download.bytesReceived / download.totalBytes) * 100) || 0;
+    const progress = Math.round((download.bytesReceived / download.totalBytes) * 100) || 0;
     statusHtml = `<span class="text-xs bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded">${progress}%</span>`;
   } else {
     statusHtml = `<span class="text-xs bg-yellow-500/20 text-yellow-400 px-1.5 py-0.5 rounded">${download.state}</span>`;

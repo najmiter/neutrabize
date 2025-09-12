@@ -6,6 +6,7 @@ interface Site {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!chrome.topSites) return;
   chrome.topSites.get((topSites) => {
     displayTopSites(topSites);
   });

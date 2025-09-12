@@ -37,10 +37,7 @@ async function fetchNewQuote(): Promise<Quote> {
 
     if (quote.content.length > 75) continue;
 
-    localStorage.setItem(
-      'neutrabize_QUOTE',
-      JSON.stringify({ ...quote, fetchedAt })
-    );
+    localStorage.setItem('neutrabize_QUOTE', JSON.stringify({ ...quote, fetchedAt }));
     return quote;
   }
 }

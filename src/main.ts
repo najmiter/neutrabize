@@ -1,10 +1,10 @@
 import {
   date,
-  time,
   quote,
   shortcuts,
   // batteryContainer,
-  updateTheme,
+  update_theme,
+  CONTEXT,
 } from './scripts/globals';
 import { update_weather } from './scripts/weather';
 import { initDownloads, toggleDownloads } from './scripts/downloads';
@@ -14,9 +14,10 @@ import './scripts/theme';
 import './scripts/battery';
 import './scripts/top-sites';
 import './style.css';
-import { renderThemes } from './scripts/dom';
+import { render_themes } from './scripts/dom';
+import { generate_clock, update_time } from './scripts/clock';
 
-renderThemes();
+render_themes();
 
 const shouldShowQuote = localStorage.getItem('neutrabize_SHOULDSHOWQUOTE');
 const shouldShowShortcuts = localStorage.getItem('neutrabize_SHOULDSHOWSHORTCUTS');
@@ -27,7 +28,8 @@ const activeTheme = localStorage.getItem('neutrabize_THEMEDATA');
 if (activeTheme) {
   try {
     const theme = JSON.parse(activeTheme);
-    updateTheme(theme);
+    CONTEXT.set('theme', theme);
+    update_theme();
   } catch {}
 }
 
@@ -75,22 +77,8 @@ date.textContent = new Date().toLocaleDateString('en-us', {
   weekday: 'short',
 });
 
-function updateTime(): void {
-  const now = new Date()
-    .toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true })
-    .split(' ')
-    .at(0);
-
-  if (now && time.textContent !== now) {
-    time.textContent = now;
-    time.classList.add('animate-time-update');
-    setTimeout(() => {
-      time.classList.remove('animate-time-update');
-    }, 300);
-  }
-}
-
-updateTime();
+generate_clock();
+update_time();
 update_weather();
 
-setInterval(updateTime, 1000);
+setInterval(update_time, 1000);

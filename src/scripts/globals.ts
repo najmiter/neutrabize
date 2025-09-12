@@ -1,5 +1,3 @@
-import { ThemeData } from '../types';
-
 export const date = document.getElementById('date') as HTMLElement;
 export const time = document.getElementById('time') as HTMLElement;
 export const wallpaper = document.getElementById('wallpaper') as HTMLImageElement;
@@ -12,13 +10,22 @@ export const source = document.getElementById('live-wallpaper-src') as HTMLSourc
 export const downloadsPanel = document.getElementById('downloads-panel') as HTMLElement;
 export const themeContainer = document.getElementById('themes') as HTMLDivElement;
 export const wallpaperFade = document.getElementById('wallpaper-fade') as HTMLDivElement;
+export const CONTEXT = new Map<string, any>();
 
 let wallpaperFadeTimeout: NodeJS.Timeout | null = null;
 
-export function updateTheme(theme: ThemeData): void {
+export function update_theme(): void {
+  if (!CONTEXT.has('theme')) {
+    console.assert(false, 'Theme not in the context for whatever reason!');
+    return;
+  }
+  const theme = CONTEXT.get('theme');
+  const time = document.getElementById('time') as HTMLElement;
   date.setAttribute('class', theme.classes.date.join(' '));
   date.classList.toggle('animate-bottom-item-1', true);
   time.setAttribute('class', theme.classes.time.join(' '));
+  const digits = document.querySelectorAll('.digits-container div');
+  digits.forEach((deez) => deez.setAttribute('class', theme.classes.time.join(' ')));
 
   wallpaperFade.classList.add('animate-wallpaper-fade');
 
