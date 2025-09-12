@@ -342,6 +342,10 @@
     text-align: center;
   }
 
+  .digits-container[data-current='1'] {
+    width: 3.5rem;
+  }
+
   .time-container {
     @apply flex items-center justify-center;
   }

@@ -51,7 +51,7 @@ export const update_time = (): void => {
       deez.style.display = 'flex';
     }
     const deezDigit = deez.querySelector(`[data-n="${digits[i]}"]`) as HTMLDivElement;
-    deezDigit?.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+    deezDigit?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 };
 
