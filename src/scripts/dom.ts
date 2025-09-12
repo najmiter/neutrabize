@@ -42,7 +42,7 @@ const makeContainer = (name: string): HTMLDivElement => {
   const container = document.createElement('div');
   container.title = name;
   container.classList.add(
-    ...'relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-900/70 has-[div[data-active=true]]:bg-stone-400/30'.split(
+    ...'relative grid gap-2 cursor-pointer justify-items-center max-w-36 rounded-md p-2 hover:bg-stone-500/20 has-[div[data-active=true]]:bg-stone-400/30'.split(
       ' '
     )
   );
@@ -90,7 +90,7 @@ const makeVidElement = (theme: ThemeData): string => `
     />
     Your browser does not support the video tag.
   </video>
-  <h3 class="text-lg">${theme.displayName}</h3>
+  <h3 class="text-sm">${theme.displayName}</h3>
 `;
 
 const makeImgElement = (theme: ThemeData): string => `
@@ -99,5 +99,5 @@ const makeImgElement = (theme: ThemeData): string => `
     class="max-w-32 aspect-square object-cover rounded-md"
     alt="${theme.displayName}"
   />
-  <h3 class="text-lg">${theme.displayName}</h3>
+  <h3 class="text-sm">${theme.displayName}</h3>
 `;

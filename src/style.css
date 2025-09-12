@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/font/Geist-VariableFont_wght.ttf') format('truetype');
+}
+
 @layer utilities {
   *::-webkit-scrollbar {
     display: none;
@@ -208,19 +216,19 @@
     line-height: 1;
     text-align: center;
     font-family:
-      'Inter',
+      'Geist',
       -apple-system,
       BlinkMacSystemFont,
       'Segoe UI',
       Roboto,
       sans-serif;
-    letter-spacing: -0.02em;
+    font-weight: 900;
     text-shadow:
       0 0 20px rgba(255, 255, 255, 0.1),
       0 0 40px rgba(255, 255, 255, 0.05),
-      0 4px 8px rgba(0, 0, 0, 0.3);
+      0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    /* animation: time-update 1.5s ease-in-out forwards; */
+    animation: time-update 1.5s ease-in-out forwards;
   }
 
   .clock-container {
@@ -240,7 +248,7 @@
     text-align: center;
     color: inherit;
     font-family:
-      'Inter',
+      'Geist',
       -apple-system,
       BlinkMacSystemFont,
       'Segoe UI',
@@ -286,7 +294,7 @@
     font-size: 14px;
     font-weight: 500;
     font-family:
-      'Inter',
+      'Geist',
       -apple-system,
       BlinkMacSystemFont,
       'Segoe UI',
@@ -305,7 +313,7 @@
     font-size: 14px;
     font-weight: 500;
     font-family:
-      'Inter',
+      'Geist',
       -apple-system,
       BlinkMacSystemFont,
       'Segoe UI',
@@ -326,12 +334,13 @@
   }
 
   .digits-container {
-    @apply flex flex-col overflow-hidden h-32;
+    display: flex;
+    flex-direction: column;
+    max-height: 8rem;
+    overflow: hidden;
+    gap: 0;
+    text-align: center;
   }
-
-  /* .digits-container[data-current='-1'] {
-  display: none;
-} */
 
   .time-container {
     @apply flex items-center justify-center;
