@@ -36,7 +36,7 @@ export function update_weather(): void {
       weatherIcon.src = old.icon;
       weatherIcon.alt = old.description || 'Weather Icon';
       weatherIcon.title = old.description || '';
-      set_title(old.description);
+      set_title(old.description, at);
       weatherIcon.dataset.good = 'true';
     }
   } else {
@@ -71,7 +71,8 @@ function do_da_weather_thing(): void {
         weatherIcon.src = iconPath;
         weatherIcon.alt = iconData ? (isDay ? iconData.day.description : iconData.night.description) : 'Weather Icon';
         const description = iconData ? (isDay ? iconData.day.description : iconData.night.description) : '';
-        set_title(description);
+        const at = Date.now();
+        set_title(description, at);
         weatherIcon.title = description;
         weatherIcon.dataset.good = 'true';
         temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
@@ -79,7 +80,7 @@ function do_da_weather_thing(): void {
         localStorage.setItem(
           'neutrabize_WEATHER',
           JSON.stringify({
-            at: Date.now(),
+            at,
             temperature: {
               temp: temperature.textContent,
               icon: iconPath,
@@ -98,19 +99,28 @@ function do_da_weather_thing(): void {
 
 function reset_weather_to_previous_or_empty(): void {
   if (weather_previously_fetched) {
-    const { temperature: old } = JSON.parse(weather_previously_fetched) as StoredWeather;
+    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
     temperature.textContent = old.temp;
     weatherIcon.src = old.icon;
-    set_title(old?.description);
+    set_title(old?.description, at);
     weatherIcon.dataset.good = 'true';
   } else {
     temperature.textContent = '';
   }
 }
 
-function set_title(description?: string) {
+function set_title(description?: string, at?: number): void {
+  if (!description) return;
   const container = document.querySelector('.clock-weather') as HTMLDivElement;
   if (container) {
-    container.title = description || '';
+    function get_msg() {
+      const dist = Date.now() - (at || 0);
+      if (dist < 60000) return 'Just now';
+      if (dist < 3600000) return `${Math.floor(dist / 60000)} minute${Math.floor(dist / 60000) === 1 ? '' : 's'} ago`;
+      if (dist < 86400000)
+        return `${Math.floor(dist / 3600000)} hour${Math.floor(dist / 3600000) === 1 ? '' : 's'} ago`;
+      return `${Math.floor(dist / 86400000)} day${Math.floor(dist / 86400000) === 1 ? '' : 's'} ago`;
+    }
+    container.title = `${description || ''}${at ? ` – Updated ${get_msg()}` : ''}`;
   }
 }
