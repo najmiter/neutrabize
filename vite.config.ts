@@ -19,4 +19,9 @@ export default defineConfig({
   },
   publicDir: 'public',
   plugins: [tailwindcss()],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
 });

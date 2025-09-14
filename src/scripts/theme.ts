@@ -1,5 +1,5 @@
-import { themesData } from '../data/themes';
-import { CONTEXT, themeContainer, update_theme } from './globals';
+import { themesData } from '@/data/themes';
+import { CONTEXT, themeContainer, update_theme } from '@/scripts/globals';
 
 // default theme
 if (!localStorage.getItem('neutrabize_THEMEDATA'))

@@ -1,6 +1,6 @@
-import { themesData } from '../data/themes';
-import { ThemeData } from '../types';
-import { CONTEXT, themeContainer, update_theme } from './globals';
+import { themesData } from '@/data/themes';
+import { ThemeData } from '@/types';
+import { CONTEXT, themeContainer, update_theme } from '@/scripts/globals';
 
 const themeNodes: HTMLDivElement[] = [];
 

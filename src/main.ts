@@ -5,17 +5,17 @@ import {
   // batteryContainer,
   update_theme,
   CONTEXT,
-} from './scripts/globals';
-import { update_weather } from './scripts/weather';
-import { initDownloads, toggleDownloads } from './scripts/downloads';
-import './scripts/quote';
-import './scripts/settings';
-import './scripts/theme';
-import './scripts/battery';
-import './scripts/top-sites';
-import './style.css';
-import { render_themes } from './scripts/dom';
-import { generate_clock, update_time } from './scripts/clock';
+} from '@/scripts/globals';
+import { update_weather } from '@/scripts/weather';
+import { initDownloads, toggleDownloads } from '@/scripts/downloads';
+import '@/scripts/quote';
+import '@/scripts/settings';
+import '@/scripts/theme';
+import '@/scripts/battery';
+import '@/scripts/top-sites';
+import '@/style.css';
+import { render_themes } from '@/scripts/dom';
+import { generate_clock, update_time } from '@/scripts/clock';
 
 render_themes();
 

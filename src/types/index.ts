@@ -12,3 +12,24 @@ export interface ThemeData {
 export interface ThemesData {
   [key: string]: ThemeData;
 }
+
+export interface IWeatherData {
+  current: {
+    temperature_2m: number;
+    rain: boolean;
+    is_day: number;
+    weather_code: number;
+  };
+  current_units: {
+    temperature_2m: string;
+  };
+}
+
+export interface IStoredWeather {
+  at: number;
+  temperature: {
+    temp: string;
+    icon: string;
+    description?: string;
+  };
+}

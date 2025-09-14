@@ -1,4 +1,4 @@
-import { CONTEXT, time } from './globals';
+import { CONTEXT, time } from '@/scripts/globals';
 
 export const generate_clock = (): void => {
   const timeNow = new Date().toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true });

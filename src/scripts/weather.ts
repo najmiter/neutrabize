@@ -1,25 +1,5 @@
-import { WMO_CODES } from '../data/weather';
-
-interface WeatherData {
-  current: {
-    temperature_2m: number;
-    rain: boolean;
-    is_day: number;
-    weather_code: number;
-  };
-  current_units: {
-    temperature_2m: string;
-  };
-}
-
-interface StoredWeather {
-  at: number;
-  temperature: {
-    temp: string;
-    icon: string;
-    description?: string;
-  };
-}
+import { WMO_CODES } from '@/data/weather';
+import type { IStoredWeather, IWeatherData } from '@/types';
 
 const temperature = document.getElementById('temperature') as HTMLElement;
 const weather_previously_fetched = localStorage.getItem('neutrabize_WEATHER');
@@ -27,7 +7,7 @@ const weatherIcon = document.getElementById('weather-icon') as HTMLImageElement;
 
 export function update_weather(): void {
   if (weather_previously_fetched) {
-    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
+    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as IStoredWeather;
 
     if (Date.now() > at + 1000 * 60 * 60) {
       do_da_weather_thing();
@@ -58,7 +38,7 @@ function do_da_weather_thing(): void {
       const choosni = await fetch(WEATHER_API);
 
       if (choosni.ok) {
-        const khbr = (await choosni.json()) as WeatherData;
+        const khbr = (await choosni.json()) as IWeatherData;
         const weatherCode = khbr.current.weather_code.toString() as `${number}`;
         const isDay = khbr.current.is_day === 1;
         const iconData = WMO_CODES[weatherCode];
@@ -99,7 +79,7 @@ function do_da_weather_thing(): void {
 
 function reset_weather_to_previous_or_empty(): void {
   if (weather_previously_fetched) {
-    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as StoredWeather;
+    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as IStoredWeather;
     temperature.textContent = old.temp;
     weatherIcon.src = old.icon;
     set_title(old?.description, at);
