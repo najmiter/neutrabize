@@ -1,17 +1,21 @@
 import { CONTEXT, time } from './globals';
 
 export const generate_clock = (): void => {
-  const now = new Date()
-    .toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true })
-    .split(' ')
-    .at(0)
-    ?.split('');
+  const timeNow = new Date().toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true });
+  const now = timeNow.split(' ').at(0)?.split('');
   if (!now) return;
 
   const container = document.createElement('div');
   container.classList.add('time-container');
-  const waj_k = document.createElement('span');
+
+  const waj_k = document.createElement('div');
   waj_k.textContent = ':';
+  waj_k.style.marginInline = '0.1em';
+
+  const realTime = document.createElement('div');
+  realTime.className = 'sr-only real-time';
+
+  container.append(realTime);
   container.append(get_digits(), get_digits(), waj_k, get_digits(), get_digits());
   time.append(container);
 };
@@ -24,6 +28,13 @@ export const update_time = (): void => {
   // now = `${Math.trunc(Math.random() * 100) % 10}${Math.trunc(Math.random() * 100) % 10}:${Math.trunc(Math.random() * 100) % 10}${Math.trunc(Math.random() * 100) % 10}`;
 
   const timeContainer = document.querySelector('.time-container');
+  const realTime = timeContainer?.querySelector('.real-time') as HTMLDivElement;
+  if (realTime && realTime.textContent === now) {
+    return;
+  }
+  if (realTime) {
+    realTime.textContent = now || '';
+  }
   const digits = now
     ?.split('')
     .map(Number)
@@ -62,11 +73,13 @@ const get_digits = () => {
     digit.textContent = n.toString();
     digit.dataset.n = n.toString();
     digit.setAttribute('class', 'theme__time ' + theme?.classes?.time?.join(' '));
+    digit.setAttribute('aria-hidden', 'true');
     return digit;
   });
 
   const container = document.createElement('div');
   container.classList.add('digits-container');
+  container.setAttribute('aria-hidden', 'true');
   container.dataset.current = '-1';
   container.append(...digits);
 
