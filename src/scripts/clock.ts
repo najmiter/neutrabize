@@ -10,7 +10,7 @@ export const generate_clock = (): void => {
 
   const waj_k = document.createElement('div');
   waj_k.textContent = ':';
-  waj_k.style.marginInline = '0.1em';
+  waj_k.style.marginInline = '0.02em';
 
   const realTime = document.createElement('div');
   realTime.className = 'sr-only real-time';
@@ -72,7 +72,7 @@ const get_digits = () => {
     const digit = document.createElement('div');
     digit.textContent = n.toString();
     digit.dataset.n = n.toString();
-    digit.setAttribute('class', 'theme__time ' + theme?.classes?.time?.join(' '));
+    digit.classList.add(...theme?.classes?.time);
     digit.setAttribute('aria-hidden', 'true');
     return digit;
   });

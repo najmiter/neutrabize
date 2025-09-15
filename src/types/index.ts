@@ -4,7 +4,9 @@ export interface ThemeData {
     date: string[];
     time: string[];
   };
-  bg: string;
+  bg?: string;
+  thumbnailUrl?: string;
+  fullUrl?: string;
   kind: 'img' | 'vid';
   displayName: string;
 }

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   build: {
@@ -15,10 +16,44 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[ext]',
       },
     },
-    copyPublicDir: true,
+    copyPublicDir: false,
   },
   publicDir: 'public',
-  plugins: [tailwindcss()],
+  plugins: [
+    tailwindcss(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'public/manifest.json',
+          dest: '.',
+        },
+        {
+          src: 'public/font/**/*',
+          dest: 'font/',
+        },
+        {
+          src: 'public/imgs/neutrabize-128.png',
+          dest: 'imgs/',
+        },
+        {
+          src: 'public/imgs/bg/exoplanets.jpeg',
+          dest: 'imgs/bg/',
+        },
+        {
+          src: 'public/imgs/icons/**/*',
+          dest: 'imgs/icons/',
+        },
+        {
+          src: 'public/imgs/preview/**/*',
+          dest: 'imgs/preview/',
+        },
+        {
+          src: 'public/imgs/thumbnails/**/*',
+          dest: 'imgs/thumbnails/',
+        },
+      ],
+    }),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
