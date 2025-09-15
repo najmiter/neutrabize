@@ -197,7 +197,7 @@ const makeImgElement = async (theme: ThemeData, src: string, isCached: boolean =
 
   if (src.startsWith('./') || src.startsWith('/')) {
     img.src = src;
-    img.classList.add('blur');
+    if (!src.includes('exoplanets')) img.classList.add('blur');
   } else if (isCached) {
     img.src = src;
     img.classList.remove('blur');

@@ -44,10 +44,6 @@ export default defineConfig({
           dest: 'imgs/icons/',
         },
         {
-          src: 'public/imgs/preview/**/*',
-          dest: 'imgs/preview/',
-        },
-        {
           src: 'public/imgs/thumbnails/**/*',
           dest: 'imgs/thumbnails/',
         },
