@@ -89,6 +89,7 @@ export const updateThemeThumbnail = async (themeName: string) => {
 
 const makeContainer = (name: string): HTMLDivElement => {
   const container = document.createElement('div');
+  container.tabIndex = 0;
   container.title = name;
   container.classList.add(
     ...'relative grid gap-2 cursor-pointer justify-items-center min-w-36 rounded-md p-2 hover:bg-stone-500/20 has-[div[data-active=true]]:bg-stone-400/30'.split(

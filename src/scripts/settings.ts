@@ -16,6 +16,12 @@ document.addEventListener('click', (e: MouseEvent) => {
   }
 });
 
+document.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    hideSettings();
+  }
+});
+
 settingsBtn.addEventListener('click', () => {
   const themes = document.querySelectorAll<HTMLElement>('#themes>div');
   const activeTheme = document.querySelector('div[data-active=true]');

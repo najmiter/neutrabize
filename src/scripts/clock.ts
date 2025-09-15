@@ -21,13 +21,10 @@ export const generate_clock = (): void => {
 };
 
 export const update_time = (): void => {
-  let now = new Date()
-    .toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true })
-    .split(' ')
-    .at(0);
+  const now = new Date().toLocaleTimeString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true });
   // now = `${Math.trunc(Math.random() * 100) % 10}${Math.trunc(Math.random() * 100) % 10}:${Math.trunc(Math.random() * 100) % 10}${Math.trunc(Math.random() * 100) % 10}`;
 
-  const timeContainer = document.querySelector('.time-container');
+  const timeContainer = document.querySelector('.time-container') as HTMLDivElement;
   const realTime = timeContainer?.querySelector('.real-time') as HTMLDivElement;
   if (realTime && realTime.textContent === now) {
     return;
@@ -36,11 +33,14 @@ export const update_time = (): void => {
     realTime.textContent = now || '';
   }
   const digits = now
+    .split(' ')
+    .at(0)
     ?.split('')
     .map(Number)
     .filter((s) => !Number.isNaN(s));
 
   if (!timeContainer || !digits) return;
+  timeContainer.title = now;
 
   const digitsContainers: NodeListOf<HTMLSpanElement> = timeContainer.querySelectorAll('.digits-container');
   if (!digitsContainers) return;

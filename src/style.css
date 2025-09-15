@@ -145,7 +145,7 @@
   }
 
   .theme__beach-time {
-    background: linear-gradient(to bottom, rgb(88, 166, 226), rgba(40, 134, 250, 0.897));
+    background: linear-gradient(to bottom right, rgb(96, 178, 241), rgba(29, 143, 128, 0.897));
   }
 
   .theme__jungle-time {
@@ -197,11 +197,11 @@
   }
 
   .theme__floatingIsland-time {
-    background: linear-gradient(to bottom, rgb(196, 136, 255), rgba(153, 111, 249, 0.897));
+    background: linear-gradient(to bottom, rgb(189, 135, 244), rgb(147, 100, 255));
   }
 
   .theme__lakeHouse-time {
-    background: linear-gradient(to bottom, rgb(170, 96, 96), rgba(161, 98, 132, 0.897));
+    background: linear-gradient(to bottom, rgb(252, 142, 142), rgba(160, 64, 115, 0.897));
   }
 
   .theme__someDude-time {
@@ -223,10 +223,6 @@
       Roboto,
       sans-serif;
     font-weight: 900;
-    text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.1),
-      0 0 40px rgba(255, 255, 255, 0.05),
-      0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: time-update 1.5s ease-in-out forwards;
   }
@@ -511,10 +507,12 @@
       transform: scale(0.5);
       opacity: 0;
     }
+
     50% {
       transform: scale(1.02);
       opacity: 1;
     }
+
     100% {
       transform: scale(1);
       opacity: 1;
@@ -526,6 +524,7 @@
       opacity: 0;
       transform: translateY(30px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
