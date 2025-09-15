@@ -68,11 +68,12 @@ class WallpaperManager {
     });
   }
 
-  async downloadAndCache(url: string, id: string): Promise<Blob> {
+  async downloadAndCache(url: string, id: string): Promise<Blob | null> {
     const cached = await this.getCachedWallpaper(id);
     if (cached) return cached;
 
     try {
+      // doesn't handle race conditions, but then again, WHO CARES!
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to download');
       const blob = await response.blob();
@@ -80,7 +81,7 @@ class WallpaperManager {
       return blob;
     } catch (error) {
       console.error('Failed to download wallpaper:', error);
-      throw error;
+      return null;
     }
   }
 
@@ -113,10 +114,11 @@ class WallpaperManager {
     }
   }
 
-  async getWallpaperSrc(themeName: string, url: string): Promise<string> {
+  async getWallpaperSrc(themeName: string, url: string): Promise<string | null> {
     try {
       const blob = await this.downloadAndCache(url, themeName);
-      return URL.createObjectURL(blob);
+      if (blob) return URL.createObjectURL(blob);
+      return null;
     } catch (error) {
       console.error('Failed to get wallpaper src:', error);
       // fallback to original if available

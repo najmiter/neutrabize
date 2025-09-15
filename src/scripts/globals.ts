@@ -60,38 +60,40 @@ export function update_theme(): void {
   }, 300);
 
   if (theme.kind === 'vid') {
-    const src = theme.bg || theme.fullUrl;
-    if (src) {
-      if (src.startsWith('./') || src.startsWith('/')) {
-        source.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
-        video.load();
-        video.play();
-      } else {
-        wallpaperLoading.style.opacity = '1';
-        wallpaperLoading.style.pointerEvents = 'auto';
-        wallpaperManager
-          .getWallpaperSrc(theme.name, src)
-          .then((blobUrl: string) => {
-            source.src = blobUrl;
-            video.load();
-            video.play();
-            wallpaperLoading.style.opacity = '0';
-            wallpaperLoading.style.pointerEvents = 'none';
-            wallpaper.style.display = 'none';
-            video.style.display = 'block';
-            updateThemeThumbnail(theme.name);
-          })
-          .catch(() => {
-            source.src = src;
-            video.load();
-            video.play();
-            wallpaper.style.display = 'none';
-            video.style.display = 'block';
-            wallpaperLoading.style.opacity = '0';
-            wallpaperLoading.style.pointerEvents = 'none';
-          });
+    try {
+      const src = theme.bg || theme.fullUrl;
+      if (src) {
+        if (src.startsWith('./') || src.startsWith('/')) {
+          source.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
+          video.load();
+          video.play();
+        } else {
+          wallpaperLoading.style.opacity = '1';
+          wallpaperLoading.style.pointerEvents = 'auto';
+          wallpaperManager
+            .getWallpaperSrc(theme.name, src)
+            .then((blobUrl: string | null) => {
+              source.src = blobUrl || src;
+              video.load();
+              video.play();
+              wallpaperLoading.style.opacity = '0';
+              wallpaperLoading.style.pointerEvents = 'none';
+              wallpaper.style.display = 'none';
+              video.style.display = 'block';
+              updateThemeThumbnail(theme.name);
+            })
+            .catch(() => {
+              source.src = src;
+              video.load();
+              video.play();
+              wallpaper.style.display = 'none';
+              video.style.display = 'block';
+              wallpaperLoading.style.opacity = '0';
+              wallpaperLoading.style.pointerEvents = 'none';
+            });
+        }
       }
-    }
+    } catch {}
   } else {
     const src = theme.bg || theme.fullUrl;
     if (src) {
@@ -102,8 +104,8 @@ export function update_theme(): void {
         wallpaperLoading.style.pointerEvents = 'auto';
         wallpaperManager
           .getWallpaperSrc(theme.name, src)
-          .then((blobUrl: string) => {
-            wallpaper.src = blobUrl;
+          .then((blobUrl: string | null) => {
+            wallpaper.src = blobUrl || src;
             wallpaperLoading.style.opacity = '0';
             wallpaperLoading.style.pointerEvents = 'none';
             updateThemeThumbnail(theme.name);
