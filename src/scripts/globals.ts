@@ -14,6 +14,7 @@ export const wallpaperContainer = document.getElementById('wallpaper-container')
 
 import { themesData } from '@/data/themes';
 import { wallpaperManager } from '@/scripts/wallpaper-manager';
+import { updateThemeThumbnail } from '@/scripts/dom';
 
 export const CONTEXT = new Map<string, any>();
 
@@ -59,8 +60,6 @@ export function update_theme(): void {
   }, 300);
 
   if (theme.kind === 'vid') {
-    wallpaper.style.display = 'none';
-    video.style.display = 'block';
     const src = theme.bg || theme.fullUrl;
     if (src) {
       if (src.startsWith('./') || src.startsWith('/')) {
@@ -78,11 +77,16 @@ export function update_theme(): void {
             video.play();
             wallpaperLoading.style.opacity = '0';
             wallpaperLoading.style.pointerEvents = 'none';
+            wallpaper.style.display = 'none';
+            video.style.display = 'block';
+            updateThemeThumbnail(theme.name);
           })
           .catch(() => {
             source.src = src;
             video.load();
             video.play();
+            wallpaper.style.display = 'none';
+            video.style.display = 'block';
             wallpaperLoading.style.opacity = '0';
             wallpaperLoading.style.pointerEvents = 'none';
           });
@@ -102,6 +106,7 @@ export function update_theme(): void {
             wallpaper.src = blobUrl;
             wallpaperLoading.style.opacity = '0';
             wallpaperLoading.style.pointerEvents = 'none';
+            updateThemeThumbnail(theme.name);
           })
           .catch(() => {
             wallpaper.src = src;

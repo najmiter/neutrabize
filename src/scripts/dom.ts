@@ -55,6 +55,38 @@ const updateThemes = (activeThemeName: string) => {
   });
 };
 
+export const updateThemeThumbnail = async (themeName: string) => {
+  const node = themeNodes.find((node) => {
+    const overlay = node.querySelector('div[data-name]') as HTMLDivElement | null;
+    return overlay?.dataset.name === themeName;
+  });
+  if (!node) return;
+
+  const isCached = await wallpaperManager.isWallpaperCached(themeName);
+  if (!isCached) return;
+
+  const src = await wallpaperManager.getCachedWallpaperUrl(themeName);
+  if (!src) return;
+
+  const img = node.querySelector('[data-kind="img"] img') as HTMLImageElement | null;
+  if (img) {
+    img.src = src;
+    img.classList.remove('blur');
+  }
+
+  const vidSrc = node.querySelector('[data-kind="vid"] video') as HTMLVideoElement | null;
+  if (vidSrc) {
+    vidSrc.querySelector('source')!.src = src;
+    vidSrc.load();
+    vidSrc.play();
+    const thumbnail = vidSrc.previousElementSibling as HTMLImageElement | null;
+    if (thumbnail && thumbnail.tagName === 'IMG') {
+      thumbnail.remove();
+      vidSrc.style.display = 'block';
+    }
+  }
+};
+
 const makeContainer = (name: string): HTMLDivElement => {
   const container = document.createElement('div');
   container.title = name;
