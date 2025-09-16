@@ -17,9 +17,10 @@ export const render_themes = async () => {
   for (const theme of themes) {
     const container = makeContainer(theme.displayName);
     const overlay = makeOverlay(theme.name, activeTheme?.name === theme.name);
-    const element = await getElement(theme);
-    container.appendChild(element);
+    const { element, isCached } = await getElement(theme);
+    container.append(element);
     container.append(overlay);
+    container.dataset.isAvailable = isCached.toString();
     themeNodes.push(container);
   }
 
@@ -28,7 +29,7 @@ export const render_themes = async () => {
 
 const updateThemes = (activeThemeName: string) => {
   themeNodes.forEach(async (node) => {
-    const overlay = node.querySelector('div[data-name]') as HTMLDivElement | null;
+    const overlay = node.querySelector<HTMLDivElement>('div[data-name]');
     if (!overlay) return;
 
     const name = overlay.dataset.name;
@@ -38,13 +39,11 @@ const updateThemes = (activeThemeName: string) => {
     if (name === activeThemeName) {
       const src = await wallpaperManager.getCachedWallpaperUrl(name);
       if (src) {
-        const img = node.querySelector('[data-kind="img"] img') as HTMLImageElement | null;
-        console.log('img', img);
+        const img = node.querySelector<HTMLImageElement>('[data-kind="img"] img');
         if (img) {
           img.src = src;
         }
-        const vidSrc = node.querySelector('[data-kind="vid"] video') as HTMLVideoElement | null;
-        console.log('vidSrc', vidSrc);
+        const vidSrc = node.querySelector<HTMLVideoElement>('[data-kind="vid"] video');
         if (vidSrc) {
           vidSrc.querySelector('source')!.src = src;
           vidSrc.load();
@@ -57,7 +56,7 @@ const updateThemes = (activeThemeName: string) => {
 
 export const updateThemeThumbnail = async (themeName: string) => {
   const node = themeNodes.find((node) => {
-    const overlay = node.querySelector('div[data-name]') as HTMLDivElement | null;
+    const overlay = node.querySelector<HTMLDivElement>('div[data-name]');
     return overlay?.dataset.name === themeName;
   });
   if (!node) return;
@@ -68,13 +67,15 @@ export const updateThemeThumbnail = async (themeName: string) => {
   const src = await wallpaperManager.getCachedWallpaperUrl(themeName);
   if (!src) return;
 
-  const img = node.querySelector('[data-kind="img"] img') as HTMLImageElement | null;
+  node.querySelector('#download-icon')?.remove();
+  node.dataset.isAvailable = 'true';
+  const img = node.querySelector<HTMLImageElement>('[data-kind="img"] img');
   if (img) {
     img.src = src;
     img.classList.remove('blur');
   }
 
-  const vidSrc = node.querySelector('[data-kind="vid"] video') as HTMLVideoElement | null;
+  const vidSrc = node.querySelector<HTMLVideoElement>('[data-kind="vid"] video');
   if (vidSrc) {
     vidSrc.querySelector('source')!.src = src;
     vidSrc.load();
@@ -122,17 +123,21 @@ const makeOverlay = (themeName: string, isActive = false) => {
   return overlayDiv;
 };
 
-const getElement = async (theme: ThemeData): Promise<HTMLElement> => {
+const getElement = async (theme: ThemeData): Promise<{ element: HTMLElement; isCached: boolean }> => {
   const isCached = await wallpaperManager.isWallpaperCached(theme.name);
   const cachedUrl = isCached ? await wallpaperManager.getCachedWallpaperUrl(theme.name) : null;
 
   const src = cachedUrl || theme.bg || theme.thumbnailUrl || '';
 
-  if (theme.kind === 'img') {
-    return await makeImgElement(theme, src, isCached);
-  } else {
-    return await makeVidElement(theme, src, isCached);
+  const element =
+    theme.kind === 'img' ? await makeImgElement(theme, src, isCached) : await makeVidElement(theme, src, isCached);
+  if (!isCached) {
+    element.appendChild(downloadIcon());
+    element.title = 'Click to download';
+    element.className = 'pointer-events-none hover:brightness-75';
   }
+
+  return { element, isCached };
 };
 
 const makeVidElement = async (theme: ThemeData, src: string, isCached: boolean = false): Promise<HTMLElement> => {
@@ -221,4 +226,38 @@ const getLiveChip = (): HTMLDivElement => {
   );
   chip.textContent = 'Live';
   return chip;
+};
+
+const downloadIcon = () => {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.classList.add('w-4', 'h-4');
+
+  const path1 = document.createElementNS(svgNS, 'path');
+  path1.setAttribute('d', 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4');
+
+  const path2 = document.createElementNS(svgNS, 'path');
+  path2.setAttribute('d', 'M7 10l5 5 5-5');
+
+  const path3 = document.createElementNS(svgNS, 'path');
+  path3.setAttribute('d', 'M12 15V3');
+
+  svg.appendChild(path1);
+  svg.appendChild(path2);
+  svg.appendChild(path3);
+
+  svg.setAttribute('id', 'download-icon');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute(
+    'class',
+    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-white opacity-75 pointer-events-none'
+  );
+
+  return svg;
 };
