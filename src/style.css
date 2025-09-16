@@ -330,7 +330,7 @@
   }
 
   .time-container {
-    @apply flex items-center gap-1 justify-center;
+    @apply flex items-center gap-2 justify-center;
   }
 
   .digits-container {
@@ -347,6 +347,7 @@
   /* will my future gens forgive me for this? idts */
   .digits-container[data-current='1'] {
     width: 3.1rem;
+    margin-right: -0.4rem;
   }
 
   .digits-container[data-current='2'] {
