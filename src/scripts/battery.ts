@@ -19,7 +19,7 @@ if ('getBattery' in navigator) {
         batteryProgress.textContent = `${Math.trunc(level * 100)}%`;
         fill.setAttribute('width', (level * fullWidth).toString());
         const color =
-          level <= 0.2 ? 'var(--color-red-300)' : level <= 0.5 ? 'var(--color-orange-300)' : 'var(--color-green-300)';
+          level <= 0.2 ? 'var(--color-red-300)' : level <= 0.8 ? 'var(--color-orange-300)' : 'var(--color-green-300)';
         fill.setAttribute('fill', color);
         fill.setAttribute('stroke', color);
         batteryIconContainer.innerHTML = '';
