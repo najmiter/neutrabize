@@ -18,6 +18,7 @@ export const render_themes = async () => {
     const container = makeContainer(theme.displayName);
     const overlay = makeOverlay(theme.name, activeTheme?.name === theme.name);
     const { element, isCached } = await getElement(theme);
+    if (!isCached) container.title = 'Click to download';
     container.append(element);
     container.append(overlay);
     container.dataset.isAvailable = isCached.toString();
@@ -131,13 +132,11 @@ const getElement = async (theme: ThemeData): Promise<{ element: HTMLElement; isC
 
   const element =
     theme.kind === 'img' ? await makeImgElement(theme, src, isCached) : await makeVidElement(theme, src, isCached);
-  if (!isCached) {
+  if (!isCached && !theme.bg) {
     element.appendChild(downloadIcon());
-    element.title = 'Click to download';
-    element.className = 'pointer-events-none hover:brightness-75';
   }
 
-  return { element, isCached };
+  return { element, isCached: isCached || !!theme.bg };
 };
 
 const makeVidElement = async (theme: ThemeData, src: string, isCached: boolean = false): Promise<HTMLElement> => {
