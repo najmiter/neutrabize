@@ -13,6 +13,17 @@ export const themesData: ThemesData = {
     kind: 'img',
     displayName: 'Exoplanets',
   },
+  camping: {
+    name: 'camping',
+    classes: {
+      date: ['theme__camping-date', 'theme__date'],
+      time: ['theme__camping-time', 'theme__time'],
+    },
+    thumbnailUrl: './imgs/thumbnails/camping.jpg',
+    fullUrl: 'https://raw.githubusercontent.com/najmiter/neutrabize/main/public/imgs/bg/camping.jpg',
+    kind: 'img',
+    displayName: 'Camping',
+  },
   cityDusk: {
     name: 'cityDusk',
     classes: {

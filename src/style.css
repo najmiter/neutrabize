@@ -208,6 +208,10 @@
     background: linear-gradient(to bottom, rgb(170, 96, 96), rgb(205, 142, 112));
   }
 
+  .theme__camping-time {
+    background: linear-gradient(to top right, rgb(213, 93, 139), rgb(201, 65, 34));
+  }
+
   .theme__time {
     background-clip: text;
     color: transparent;
