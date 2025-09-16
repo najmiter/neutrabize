@@ -23,8 +23,8 @@ let wallpaperFadeTimeout: NodeJS.Timeout | null = null;
 const wallpaperLoading = document.createElement('div');
 wallpaperLoading.className =
   'fixed pointer-events-none inset-0 flex items-center justify-center bg-black/70 z-10 opacity-0 transition-opacity pointer-events-none';
-wallpaperLoading.innerHTML =
-  '<div class="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>';
+// wallpaperLoading.innerHTML =
+//   '<div class="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>';
 wallpaperContainer.appendChild(wallpaperLoading);
 wallpaperContainer.style.position = 'relative';
 

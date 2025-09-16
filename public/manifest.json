@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "neutrabize",
-  "version": "4.65",
+  "version": "4.66",
   "description": "Your own customisable Chrome new tab and home page",
   "permissions": ["geolocation", "topSites", "favicon", "downloads", "downloads.open"],
 

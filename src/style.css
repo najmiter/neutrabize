@@ -329,6 +329,10 @@
     animation: wallpaper-fade 300ms forwards;
   }
 
+  .time-container {
+    @apply flex items-center gap-1 justify-center;
+  }
+
   .digits-container {
     display: flex;
     flex-direction: column;
@@ -336,15 +340,51 @@
     overflow: hidden;
     gap: 0;
     text-align: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
   }
 
+  /* will my future gens forgive me for this? idts */
   .digits-container[data-current='1'] {
-    width: 3.5rem;
+    width: 3.1rem;
   }
 
-  .time-container {
-    @apply flex items-center justify-center;
+  .digits-container[data-current='2'] {
+    width: 4.5rem;
   }
+
+  .digits-container[data-current='3'] {
+    width: 4.75rem;
+  }
+
+  .digits-container[data-current='4'] {
+    width: 4.9rem;
+  }
+
+  .digits-container[data-current='5'] {
+    width: 4.8rem;
+  }
+
+  .digits-container[data-current='6'] {
+    width: 4.7rem;
+  }
+
+  .digits-container[data-current='7'] {
+    width: 4.5rem;
+  }
+
+  .digits-container[data-current='8'] {
+    width: 5.2rem;
+  }
+
+  .digits-container[data-current='9'] {
+    width: 4.8rem;
+  }
+
+  .digits-container[data-current='0'] {
+    width: 5.1rem;
+  }
+
 
   @keyframes pulse {
     50% {
