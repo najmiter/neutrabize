@@ -28,27 +28,33 @@ wallpaperLoading.className =
 wallpaperContainer.appendChild(wallpaperLoading);
 wallpaperContainer.style.position = 'relative';
 
-export function update_theme(): void {
-  if (!CONTEXT.has('theme')) {
+export function update_theme({ theme, onSuccess }: { theme?: any; onSuccess?: () => void } = {}): void {
+  const currentTheme = theme || CONTEXT.get('theme');
+
+  if (!currentTheme) {
     console.assert(false, 'Theme not in the context for whatever reason!');
     return;
   }
 
-  const theme = CONTEXT.get('theme');
+  const themeToUse = currentTheme;
   // legacy
-  if (theme?.bg?.startsWith('./') && !theme.bg.includes('exoplanets')) {
-    CONTEXT.set('theme', themesData.exoplanets);
-    localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData.exoplanets));
-    return update_theme();
+  if (themeToUse?.bg?.startsWith('./') && !themeToUse.bg.includes('exoplanets')) {
+    const onSuccessLegacy = () => {
+      CONTEXT.set('theme', themesData.exoplanets);
+      localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData.exoplanets));
+      onSuccess?.();
+    };
+    return update_theme({ theme: themesData.exoplanets, onSuccess: onSuccessLegacy });
   }
 
-  const time = document.getElementById('time') as HTMLElement;
-  date.setAttribute('class', theme.classes.date.join(' '));
-  date.classList.toggle('animate-bottom-item-1', true);
-  time.setAttribute('class', theme.classes.time.join(' '));
-  const digits = document.querySelectorAll('.digits-container div');
-  digits.forEach((deez) => deez.setAttribute('class', theme.classes.time.join(' ')));
-
+  const afterEffect = () => {
+    const time = document.getElementById('time') as HTMLElement;
+    date.setAttribute('class', themeToUse.classes.date.join(' '));
+    date.classList.toggle('animate-bottom-item-1', true);
+    time.setAttribute('class', themeToUse.classes.time.join(' '));
+    const digits = document.querySelectorAll('.digits-container div');
+    digits.forEach((deez) => deez.setAttribute('class', themeToUse.classes.time.join(' ')));
+  };
   wallpaperFade.classList.add('animate-wallpaper-fade');
 
   if (wallpaperFadeTimeout) {
@@ -59,28 +65,38 @@ export function update_theme(): void {
     wallpaperFade.classList.remove('animate-wallpaper-fade');
   }, 300);
 
-  if (theme.kind === 'vid') {
+  if (themeToUse.kind === 'vid') {
     try {
-      const src = theme.bg || theme.fullUrl;
+      const src = themeToUse.bg || themeToUse.fullUrl;
       if (src) {
         if (src.startsWith('./') || src.startsWith('/')) {
           source.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
           video.load();
           video.play();
+          updateThemeThumbnail(themeToUse.name);
+          onSuccess?.();
+          afterEffect();
         } else {
           wallpaperLoading.style.opacity = '1';
           wallpaperLoading.style.pointerEvents = 'auto';
           wallpaperManager
-            .getWallpaperSrc(theme.name, src)
+            .getWallpaperSrc(themeToUse.name, src)
             .then((blobUrl: string | null) => {
-              source.src = blobUrl || src;
-              video.load();
-              video.play();
-              wallpaperLoading.style.opacity = '0';
-              wallpaperLoading.style.pointerEvents = 'none';
-              wallpaper.style.display = 'none';
-              video.style.display = 'block';
-              updateThemeThumbnail(theme.name);
+              if (blobUrl) {
+                source.src = blobUrl;
+                video.load();
+                video.play();
+                wallpaperLoading.style.opacity = '0';
+                wallpaperLoading.style.pointerEvents = 'none';
+                wallpaper.style.display = 'none';
+                video.style.display = 'block';
+                updateThemeThumbnail(themeToUse.name);
+                onSuccess?.();
+                afterEffect();
+              } else {
+                wallpaperLoading.style.opacity = '0';
+                wallpaperLoading.style.pointerEvents = 'none';
+              }
             })
             .catch(() => {
               source.src = src;
@@ -95,20 +111,30 @@ export function update_theme(): void {
       }
     } catch {}
   } else {
-    const src = theme.bg || theme.fullUrl;
+    const src = themeToUse.bg || themeToUse.fullUrl;
     if (src) {
       if (src.startsWith('./') || src.startsWith('/')) {
         wallpaper.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
+        updateThemeThumbnail(themeToUse.name);
+        onSuccess?.();
+        afterEffect();
       } else {
         wallpaperLoading.style.opacity = '1';
         wallpaperLoading.style.pointerEvents = 'auto';
         wallpaperManager
-          .getWallpaperSrc(theme.name, src)
+          .getWallpaperSrc(themeToUse.name, src)
           .then((blobUrl: string | null) => {
-            wallpaper.src = blobUrl || src;
-            wallpaperLoading.style.opacity = '0';
-            wallpaperLoading.style.pointerEvents = 'none';
-            updateThemeThumbnail(theme.name);
+            if (blobUrl) {
+              wallpaper.src = blobUrl;
+              wallpaperLoading.style.opacity = '0';
+              wallpaperLoading.style.pointerEvents = 'none';
+              updateThemeThumbnail(themeToUse.name);
+              onSuccess?.();
+              afterEffect();
+            } else {
+              wallpaperLoading.style.opacity = '0';
+              wallpaperLoading.style.pointerEvents = 'none';
+            }
           })
           .catch(() => {
             wallpaper.src = src;

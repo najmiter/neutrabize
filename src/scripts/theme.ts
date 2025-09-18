@@ -13,10 +13,13 @@ themes?.forEach((theme) => {
 
     if (!name || !themesData[name]) return;
 
-    CONTEXT.set('theme', themesData[name]);
-    localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
-    update_theme();
+    const onSuccess = () => {
+      CONTEXT.set('theme', themesData[name]);
+      localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
+    };
+    update_theme({ theme: themesData[name], onSuccess });
 
+    // bro is optimistic
     themes.forEach((theme) => (theme.dataset.active = (theme.dataset.name === name).toString()));
   });
 });

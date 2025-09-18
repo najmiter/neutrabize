@@ -80,7 +80,7 @@ class WallpaperManager {
       await this.cacheWallpaper(id, blob);
       return blob;
     } catch (error) {
-      console.error('Failed to download wallpaper:', error);
+      // console.error('Failed to download wallpaper:', error);
       return null;
     }
   }
@@ -109,7 +109,7 @@ class WallpaperManager {
         reader.readAsDataURL(blob);
       });
     } catch (error) {
-      console.error('Failed to cache thumbnail:', error);
+      // console.error('Failed to cache thumbnail:', error);
       throw error;
     }
   }
@@ -120,9 +120,8 @@ class WallpaperManager {
       if (blob) return URL.createObjectURL(blob);
       return null;
     } catch (error) {
-      console.error('Failed to get wallpaper src:', error);
-      // fallback to original if available
-      return url;
+      // console.error('Failed to get wallpaper src:', error);
+      return null;
     }
   }
 
@@ -134,7 +133,7 @@ class WallpaperManager {
       }
       return null;
     } catch (error) {
-      console.error('Failed to get cached wallpaper URL:', error);
+      // console.error('Failed to get cached wallpaper URL:', error);
       return null;
     }
   }
@@ -143,7 +142,7 @@ class WallpaperManager {
     try {
       return await this.cacheThumbnail(url);
     } catch (error) {
-      console.error('Failed to get thumbnail src:', error);
+      // console.error('Failed to get thumbnail src:', error);
       return url;
     }
   }

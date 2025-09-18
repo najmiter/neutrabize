@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "neutrabize – New Tab Page Extension",
-  "version": "4.68",
+  "version": "4.69",
   "description": "Customised Chrome new tab and home page with cool live wallpapers, weather, bookmarks and more.",
   "permissions": ["geolocation", "topSites", "favicon", "downloads", "downloads.open"],
 

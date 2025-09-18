@@ -115,9 +115,11 @@ const makeOverlay = (themeName: string, isActive = false) => {
 
     if (!name || !themesData[name]) return;
 
-    CONTEXT.set('theme', themesData[name]);
-    localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
-    update_theme();
+    const onSuccess = () => {
+      CONTEXT.set('theme', themesData[name]);
+      localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData[name]));
+    };
+    update_theme({ theme: themesData[name], onSuccess });
 
     updateThemes(name);
   });
