@@ -69,10 +69,9 @@ class WallpaperManager {
   }
 
   async downloadAndCache(url: string, id: string): Promise<Blob | null> {
-    const cached = await this.getCachedWallpaper(id);
-    if (cached) return cached;
-
     try {
+      const cached = await this.getCachedWallpaper(id);
+      if (cached) return cached;
       // doesn't handle race conditions, but then again, WHO CARES!
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to download');
@@ -91,10 +90,9 @@ class WallpaperManager {
   }
 
   async cacheThumbnail(url: string): Promise<string> {
-    const cached = this.getCachedThumbnailSrc(url);
-    if (cached) return cached;
-
     try {
+      const cached = this.getCachedThumbnailSrc(url);
+      if (cached) return cached;
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to download thumbnail');
       const blob = await response.blob();
