@@ -1,0 +1,38 @@
+#date-time {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+#date {
+  font-size: 1.2rem;
+
+}
+
+#time {
+  margin-top: -20px;
+  pointer-events: none;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+#welcome {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+#welcome h1 {
+  display: flex;
+  font-size: 2.5rem;
+}
+
+.welcome-text {
+  display: inline-block;
+}

@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@source './scripts/3d/styles.css';
+
 @font-face {
   font-family: Geist;
   font-style: normal;

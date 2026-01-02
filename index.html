@@ -1,161 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" style="color-scheme: dark" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="/imgs/neutrabize-128.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Tab</title>
-    <script type="module" src="./src/main.ts" defer></script>
+    <script type="module" src="./src/scripts/3d/main.ts" defer></script>
   </head>
   <body class="max-h-full w-screen overflow-hidden selection:bg-indigo-600 selection:text-white">
-    <main>
-      <div class="relative pointer-events-none -z-10" id="wallpaper-container">
-        <img
-          id="wallpaper"
-          alt="wallpaper"
-          class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black" />
-        <video
-          id="live-wallpaper-vid"
-          autoplay
-          loop
-          muted
-          class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black">
-          <source id="live-wallpaper-src" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div id="wallpaper-fade" class="fixed inset-0 bg-black/30"></div>
+    <div data-slot="3d">
+      <div id="app"></div>
+      <div id="date-time">
+        <div id="date"></div>
+        <div id="time"></div>
       </div>
-
-      <div class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default">
-        <div
-          class="clock-container min-w-125 backdrop-blur-2xl space-y-4 py-8 px-8 rounded-2xl border border-slate-700">
-          <div class="relative">
-            <h1 id="time" class="theme__time"></h1>
-          </div>
-          <div class="clock-bottom-content">
-            <h3 id="date" class="theme__date animate-bottom-item-1"></h3>
-            <div class="clock-separator animate-bottom-item-1"></div>
-            <div
-              data-show="true"
-              id="battery-container"
-              class="clock-battery animate-bottom-item-2 data-[battery-hai-e-ni='true']:hidden data-[show=true]:animate-appear data-[show=false]:animate-disappear">
-              <div id="battery-progress"></div>
-              <div class="relative">
-                <div id="battery-icon"></div>
-                <div
-                  data-charging="false"
-                  id="battery-charging"
-                  class="data-[charging=false]:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
-                </div>
-              </div>
-            </div>
-            <div class="clock-separator animate-bottom-item-2"></div>
-            <div class="clock-weather animate-bottom-item-3">
-              <img
-                id="weather-icon"
-                class="transition-all data-[good=false]:hidden"
-                alt="weather icon"
-                width="20"
-                height="20"
-                data-good="false" />
-              <h2 id="temperature">Loading...</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        id="quote"
-        class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300">
-        <h1 id="quote-quote" class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]">
-          &ldquo;You have to keep breaking your heart until it opens.&rdquo;
-        </h1>
-        <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
-      </div>
-
-      <div
-        id="shortcuts-bar"
-        data-show="true"
-        class="w-full fixed left-10 bottom-[clamp(2px,10%,130px)] py-2 data-[show=false]:hidden">
-        <ul
-          id="shortcuts"
-          class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-start w-fit gap-3 max-w-[900px] flex-wrap"></ul>
-      </div>
-    </main>
-
-    <div id="settings" class="fixed z-50 right-10 top-10 flex flex-col items-end">
-      <button id="settings-btn">
-        <img src="./imgs/icons/setting.svg" alt="settings icon" />
-      </button>
-
-      <div
-        id="settings-wrapper"
-        class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base">
-        <div id="settings-content" class="grid gap-5">
-          <div
-            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-            <div
-              role="presentation"
-              id="toggle-quote"
-              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-            <button>Show quotes</button>
-            <div
-              id="show-quote-toggle"
-              data-on="false"
-              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-              <div
-                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-            </div>
-          </div>
-
-          <div
-            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-            <div
-              role="presentation"
-              id="toggle-shortcuts"
-              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-            <button>Show shortcuts</button>
-            <div
-              id="show-shortcuts-toggle"
-              data-on="true"
-              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-              <div
-                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-            </div>
-          </div>
-
-          <div
-            class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-            <div
-              role="presentation"
-              id="toggle-downloads"
-              class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-            <button>Show downloads</button>
-            <div
-              data-on="true"
-              id="show-downloads-toggle"
-              class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-              <div
-                class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-            </div>
-          </div>
-
-          <div class="max-w-full space-y-8">
-            <h1 class="px-2">Themes</h1>
-            <div id="themes" class="flex gap-3 overflow-y-hidden overflow-x-scroll w-[360px]"></div>
-          </div>
-        </div>
+      <div id="shortcuts"></div>
+      <div id="welcome">
+        <h1></h1>
       </div>
     </div>
-
-    <div
-      id="downloads-panel"
-      class="fixed right-10 top-36 w-[350px] max-h-[70vh] bg-slate-700/10 backdrop-blur-3xl p-4 rounded-xl border border-slate-600/60 data-[on=true]:flex flex-col gap-3 hidden">
-      <div class="flex justify-between items-center">
-        <h2 class="text-gray-300 text-base">Recent Downloads</h2>
+    <div data-slot="not-3d" hidden>
+      <main>
+        <div class="relative pointer-events-none -z-10" id="wallpaper-container">
+          <img
+            id="wallpaper"
+            alt="wallpaper"
+            class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black" />
+          <video
+            id="live-wallpaper-vid"
+            autoplay
+            loop
+            muted
+            class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black">
+            <source id="live-wallpaper-src" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div id="wallpaper-fade" class="fixed inset-0 bg-black/30"></div>
+        </div>
+        <div class="grid select-none p-10 place-content-start w-fit text-left space-y-2 cursor-default">
+          <div
+            class="clock-container min-w-125 backdrop-blur-2xl space-y-4 py-8 px-8 rounded-2xl border border-slate-700">
+            <div class="relative">
+              <h1 id="time" class="theme__time"></h1>
+            </div>
+            <div class="clock-bottom-content">
+              <h3 id="date" class="theme__date animate-bottom-item-1"></h3>
+              <div class="clock-separator animate-bottom-item-1"></div>
+              <div
+                data-show="true"
+                id="battery-container"
+                class="clock-battery animate-bottom-item-2 data-[battery-hai-e-ni='true']:hidden data-[show=true]:animate-appear data-[show=false]:animate-disappear">
+                <div id="battery-progress"></div>
+                <div class="relative">
+                  <div id="battery-icon"></div>
+                  <div
+                    data-charging="false"
+                    id="battery-charging"
+                    class="data-[charging=false]:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
+                  </div>
+                </div>
+              </div>
+              <div class="clock-separator animate-bottom-item-2"></div>
+              <div class="clock-weather animate-bottom-item-3">
+                <img
+                  id="weather-icon"
+                  class="transition-all data-[good=false]:hidden"
+                  alt="weather icon"
+                  width="20"
+                  height="20"
+                  data-good="false" />
+                <h2 id="temperature">Loading...</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="quote"
+          class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300">
+          <h1 id="quote-quote" class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]">
+            &ldquo;You have to keep breaking your heart until it opens.&rdquo;
+          </h1>
+          <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
+        </div>
+        <div
+          id="shortcuts-bar"
+          data-show="true"
+          class="w-full fixed left-10 bottom-[clamp(2px,10%,130px)] py-2 data-[show=false]:hidden">
+          <ul
+            id="shortcuts"
+            class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-start w-fit gap-3 max-w-[900px] flex-wrap"></ul>
+        </div>
+      </main>
+      <div id="settings" class="fixed z-50 right-10 top-10 flex flex-col items-end">
+        <button id="settings-btn">
+          <img src="./imgs/icons/setting.svg" alt="settings icon" />
+        </button>
+        <div
+          id="settings-wrapper"
+          class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base">
+          <div id="settings-content" class="grid gap-5">
+            <div
+              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
+              <div
+                role="presentation"
+                id="toggle-quote"
+                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
+              <button>Show quotes</button>
+              <div
+                id="show-quote-toggle"
+                data-on="false"
+                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
+                <div
+                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
+              </div>
+            </div>
+            <div
+              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
+              <div
+                role="presentation"
+                id="toggle-shortcuts"
+                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
+              <button>Show shortcuts</button>
+              <div
+                id="show-shortcuts-toggle"
+                data-on="true"
+                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
+                <div
+                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
+              </div>
+            </div>
+            <div
+              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
+              <div
+                role="presentation"
+                id="toggle-downloads"
+                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
+              <button>Show downloads</button>
+              <div
+                data-on="true"
+                id="show-downloads-toggle"
+                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
+                <div
+                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
+              </div>
+            </div>
+            <div class="max-w-full space-y-8">
+              <h1 class="px-2">Themes</h1>
+              <div id="themes" class="flex gap-3 overflow-y-hidden overflow-x-scroll w-[360px]"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="downloads-list" class="flex flex-col gap-2 overflow-y-auto max-h-[calc(70vh-4rem)]"></div>
+      <div
+        id="downloads-panel"
+        class="fixed right-10 top-36 w-[350px] max-h-[70vh] bg-slate-700/10 backdrop-blur-3xl p-4 rounded-xl border border-slate-600/60 data-[on=true]:flex flex-col gap-3 hidden">
+        <div class="flex justify-between items-center">
+          <h2 class="text-gray-300 text-base">Recent Downloads</h2>
+        </div>
+        <div id="downloads-list" class="flex flex-col gap-2 overflow-y-auto max-h-[calc(70vh-4rem)]"></div>
+      </div>
     </div>
   </body>
 </html>
