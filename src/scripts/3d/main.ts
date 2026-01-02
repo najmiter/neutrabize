@@ -172,6 +172,8 @@ setInterval(updateDateTime, 1000);
 animate();
 
 try {
-  setWelcomeText();
-  getShortcuts();
+  setTimeout(() => {
+    setWelcomeText();
+    getShortcuts();
+  }, 100);
 } catch {}

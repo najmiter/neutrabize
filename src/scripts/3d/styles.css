@@ -92,4 +92,5 @@ li {
 
 .welcome-text {
   display: inline-block;
+  color: rgba(255, 255, 255, 0.653);
 }

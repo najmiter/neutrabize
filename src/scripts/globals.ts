@@ -2,7 +2,7 @@ export const date = document.querySelector('div[data-slot="not-3d"] #date') as H
 export const time = document.querySelector('div[data-slot="not-3d"] #time') as HTMLElement;
 export const wallpaper = document.getElementById('wallpaper') as HTMLImageElement;
 export const quote = document.getElementById('quote') as HTMLElement;
-export const shortcuts = document.getElementById('shortcuts') as HTMLElement;
+export const shortcuts = document.querySelector('div[data-slot="not-3d"] #shortcuts') as HTMLElement;
 export const themes = document.querySelectorAll('.theme');
 export const batteryContainer = document.getElementById('battery-container') as HTMLElement;
 export const video = document.getElementById('live-wallpaper-vid') as HTMLVideoElement;
