@@ -4,12 +4,12 @@ const dateTime = document.getElementById('date-time') as HTMLDivElement;
 const date = document.getElementById('date') as HTMLDivElement;
 const time = document.getElementById('time') as HTMLDivElement;
 
-export function updateDateTime() {
+export const updateDateTime = () => {
   date.textContent = `${new Date().toLocaleString('en-us', { weekday: 'long', month: 'short', day: 'numeric' })}`;
   time.textContent = `${
     new Date().toLocaleString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true }).split(' ')[0]
   }`;
-}
+};
 
 export const setDateTime = () => {
   updateDateTime();

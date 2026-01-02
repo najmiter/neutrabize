@@ -1,5 +1,5 @@
-export const date = document.getElementById('date') as HTMLElement;
-export const time = document.getElementById('time') as HTMLElement;
+export const date = document.querySelector('div[data-slot="not-3d"] #date') as HTMLElement;
+export const time = document.querySelector('div[data-slot="not-3d"] #time') as HTMLElement;
 export const wallpaper = document.getElementById('wallpaper') as HTMLImageElement;
 export const quote = document.getElementById('quote') as HTMLElement;
 export const shortcuts = document.getElementById('shortcuts') as HTMLElement;
@@ -48,7 +48,7 @@ export function update_theme({ theme, onSuccess }: { theme?: any; onSuccess?: ()
   }
 
   const afterEffect = () => {
-    const time = document.getElementById('time') as HTMLElement;
+    const time = document.querySelector('div[data-slot="not-3d"] #time') as HTMLElement;
     date.setAttribute('class', themeToUse.classes.date.join(' '));
     date.classList.toggle('animate-bottom-item-1', true);
     time.setAttribute('class', themeToUse.classes.time.join(' '));

@@ -8,6 +8,7 @@ import { getFresnelMat } from './getFresnelMat.js';
 import './styles.css';
 import { setDateTime, updateDateTime } from './setDateTime';
 import { setWelcomeText } from './setWelcomeText';
+import { getShortcuts } from './getShortcuts';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -166,10 +167,11 @@ gsap.to(moonMaterial, {
   ease: 'power2.inOut',
 });
 
-window.onload = () => {
-  setDateTime();
-  setInterval(updateDateTime, 1000);
-};
-
+setDateTime();
+setInterval(updateDateTime, 1000);
 animate();
-setWelcomeText();
+
+try {
+  setWelcomeText();
+  getShortcuts();
+} catch {}

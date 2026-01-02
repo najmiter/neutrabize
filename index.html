@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" style="color-scheme: dark" dir="ltr">
+<html lang="en" style="color-scheme: dark" dir="ltr" class="">
   <head>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="/imgs/neutrabize-128.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Tab</title>
-    <script type="module" src="./src/scripts/3d/main.ts" defer></script>
+    <script type="module" src="./src/entry.ts" defer></script>
   </head>
   <body class="max-h-full w-screen overflow-hidden selection:bg-indigo-600 selection:text-white">
+    <!-- Settings -->
+    <div
+      class="fixed w-dvw hover:bg-black/70 z-10000 group border-stone-900 hover:border-l hover:backdrop-blur-2xl p-5 h-1/4 -bottom-[20%] hover:bottom-0 left-0 transition-all">
+      <div class="grid gap-2 translate-y-40 group-hover:translate-y-0">
+        <div class="text-indigo-50 font-medium text-xl">Active Theme</div>
+        <div class="flex items-center gap-2" data-slot="theme-selector">
+          <button
+            data-kind="theme-selector"
+            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all data-[active=false]:bg-transparent border-stone-800 data-[active=false]:border px-6 text-base backdrop-blur-2xl rounded-2xl p-4 text-indigo-50"
+            data-name="3d">
+            3D
+          </button>
+          <button
+            data-kind="theme-selector"
+            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all px-6 text-base data-[active=false]:bg-transparent data-[active=false]:border border-stone-800 backdrop-blur-2xl rounded-2xl p-4 text-indigo-50"
+            data-name="not_3d">
+            Not 3D
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div data-slot="3d">
       <div id="app"></div>
+
       <div id="date-time">
         <div id="date"></div>
         <div id="time"></div>
@@ -19,7 +42,7 @@
         <h1></h1>
       </div>
     </div>
-    <div data-slot="not-3d" hidden>
+    <div data-slot="not-3d">
       <main>
         <div class="relative pointer-events-none -z-10" id="wallpaper-container">
           <img
@@ -78,7 +101,7 @@
         <div
           id="quote"
           class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300">
-          <h1 id="quote-quote" class="max-w-[50rem] mx-auto animate-enter2 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)]">
+          <h1 id="quote-quote" class="max-w-200 mx-auto animate-enter2 [text-shadow:0_1px_2px_rgb(0_0_0/60%)]">
             &ldquo;You have to keep breaking your heart until it opens.&rdquo;
           </h1>
           <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
