@@ -5,11 +5,8 @@ interface Site {
   title: string;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (!chrome.topSites) return;
-  chrome.topSites.get((topSites) => {
-    displayTopSites(topSites);
-  });
+chrome?.topSites?.get((topSites) => {
+  displayTopSites(topSites);
 });
 
 function displayTopSites(sites: chrome.topSites.MostVisitedURL[]): void {
@@ -31,9 +28,9 @@ function createSiteElement(site: Site): HTMLAnchorElement {
   link.href = site.url;
 
   link.innerHTML = `
-    <li class="max-w-[40px]">
+    <li class="max-w-10">
       <img
-        class="hover:bg-slate-800/50 hover:backdrop-blur-sm rounded-md p-2 min-w-[40px]"
+        class="hover:bg-slate-800/50 hover:backdrop-blur-sm rounded-md p-2 min-w-10"
         src=${yoChromeGiveMeSomeOfThatShit(site.url)}
         alt="favicon"
       />

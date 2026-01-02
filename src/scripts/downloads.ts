@@ -84,7 +84,7 @@ function createDownloadElement(download: chrome.downloads.DownloadItem, index: n
   }
 
   item.innerHTML = `
-    <div class="min-w-[40px] h-10 flex items-center justify-center bg-slate-800/50 rounded">
+    <div class="min-w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded">
       <span class="uppercase text-xs font-semibold">${fileExt.slice(0, 3) || '📁'}</span>
     </div>
     <div class="flex flex-col overflow-hidden flex-1">
