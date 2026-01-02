@@ -5,13 +5,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import getStarfield from './getStarfield.js';
 import { getFresnelMat } from './getFresnelMat.js';
 
-import '../../style.css';
 import './styles.css';
-import { setDateTime } from './setDateTime';
+import { setDateTime, updateDateTime } from './setDateTime';
 import { setWelcomeText } from './setWelcomeText';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
+const FADE_IN_DURATION = 1.5;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 200);
@@ -43,6 +43,8 @@ const material = new THREE.MeshPhongMaterial({
   specularMap: loader.load('/imgs/textures/02_earthspec1k.jpg'),
   bumpMap: loader.load('/imgs/textures/01_earthbump1k.jpg'),
   bumpScale: 0.04,
+  transparent: true,
+  opacity: 0,
 });
 
 const earthMesh = new THREE.Mesh(geometry, material);
@@ -51,6 +53,8 @@ earthGroup.add(earthMesh);
 const lightsMat = new THREE.MeshBasicMaterial({
   map: loader.load('/imgs/textures/03_earthlights1k.jpg'),
   blending: THREE.AdditiveBlending,
+  transparent: true,
+  opacity: 0,
 });
 
 const lightsMesh = new THREE.Mesh(geometry, lightsMat);
@@ -59,7 +63,7 @@ earthGroup.add(lightsMesh);
 const cloudsMat = new THREE.MeshStandardMaterial({
   map: loader.load('/imgs/textures/04_earthcloudmap.jpg'),
   transparent: true,
-  opacity: 0.8,
+  opacity: 0,
   blending: THREE.AdditiveBlending,
   alphaMap: loader.load('/imgs/textures/05_earthcloudmaptrans.jpg'),
 });
@@ -77,8 +81,8 @@ const stars = getStarfield({ numStars: 2000 });
 scene.add(stars);
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
-const now = new Date();
-const day = now.getHours() > 6 && now.getHours() < 18;
+// const now = new Date();
+const day = true; //now.getHours() >= 6 && now.getHours() < 18;
 sunLight.position.set(day ? -1 : -35, day ? 0.5 : -30, day ? 1.5 : -35);
 scene.add(sunLight);
 
@@ -86,6 +90,8 @@ const moonMaterial = new THREE.MeshPhongMaterial({
   map: loader.load('/imgs/textures/moonmap1k.jpg'),
   bumpMap: loader.load('/imgs/textures/moonbump1k.jpg'),
   bumpScale: 0.04,
+  transparent: true,
+  opacity: 0,
 });
 
 const moonMesh = new THREE.Mesh(geometry, moonMaterial);
@@ -130,8 +136,39 @@ gsap.to(camera.position, {
   },
 });
 
+gsap.to(stars.material, {
+  opacity: 1,
+  duration: FADE_IN_DURATION,
+  ease: 'power2.inOut',
+});
+
+gsap.to(material, {
+  opacity: 1,
+  duration: FADE_IN_DURATION,
+  ease: 'power2.inOut',
+});
+
+gsap.to(lightsMat, {
+  opacity: 1,
+  duration: FADE_IN_DURATION,
+  ease: 'power2.inOut',
+});
+
+gsap.to(cloudsMat, {
+  opacity: 0.8,
+  duration: FADE_IN_DURATION,
+  ease: 'power2.inOut',
+});
+
+gsap.to(moonMaterial, {
+  opacity: 1,
+  duration: FADE_IN_DURATION,
+  ease: 'power2.inOut',
+});
+
 window.onload = () => {
   setDateTime();
+  setInterval(updateDateTime, 1000);
 };
 
 animate();

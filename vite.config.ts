@@ -47,6 +47,10 @@ export default defineConfig({
           src: 'public/imgs/thumbnails/**/*',
           dest: 'imgs/thumbnails/',
         },
+        {
+          src: 'public/imgs/textures/**/*',
+          dest: 'imgs/textures/',
+        },
       ],
     }),
   ],
