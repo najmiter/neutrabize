@@ -214,6 +214,14 @@
     background: linear-gradient(to top right, rgb(213, 93, 139), rgb(201, 65, 34));
   }
 
+  .theme__redGiant-time {
+    background: linear-gradient(to top right, rgb(213, 97, 93), rgb(227, 110, 83));
+  }
+
+  .theme__hiyah-time {
+    background: linear-gradient(to top right, rgb(213, 145, 93), rgb(215, 97, 78));
+  }
+
   .theme__time {
     background-clip: text;
     color: transparent;

@@ -336,4 +336,28 @@ export const themesData: ThemesData = {
     kind: 'vid',
     displayName: 'Some Dude',
   },
+  redGiant: {
+    name: 'redGiant',
+    classes: {
+      date: ['theme__redGiant-date', 'theme__date'],
+      time: ['theme__redGiant-time', 'theme__time'],
+    },
+    //bg: './imgs/bg/video/red-giant.mp4',
+    thumbnailUrl: './imgs/thumbnails/video/red-giant.png',
+    fullUrl: 'https://raw.githubusercontent.com/najmiter/neutrabize/main/public/imgs/bg/video/red-giant.mp4',
+    kind: 'vid',
+    displayName: 'Red Giant',
+  },
+  hiyah: {
+    name: 'hiyah',
+    classes: {
+      date: ['theme__hiyah-date', 'theme__date'],
+      time: ['theme__hiyah-time', 'theme__time'],
+    },
+    //bg: './imgs/bg/video/hiyah.mp4',
+    thumbnailUrl: './imgs/thumbnails/video/hiyah.png',
+    fullUrl: 'https://raw.githubusercontent.com/najmiter/neutrabize/main/public/imgs/bg/video/hiyah.mp4',
+    kind: 'vid',
+    displayName: 'Hiyah',
+  },
 };
