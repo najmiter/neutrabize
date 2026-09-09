@@ -8,21 +8,27 @@
     <script type="module" src="./src/entry.ts" defer></script>
   </head>
   <body class="max-h-full w-screen overflow-hidden selection:bg-indigo-600 selection:text-white">
-    <!-- Settings -->
     <div
-      class="fixed w-dvw hover:bg-black/70 z-10000 group border-stone-900 hover:border-t hover:backdrop-blur-2xl p-5 h-1/4 -bottom-[22%] hover:bottom-0 left-0 transition-all">
-      <div class="grid gap-2 translate-y-[calc(20%+20px)] group-hover:translate-y-0">
-        <div class="text-indigo-50 font-medium text-xl">Active Theme</div>
-        <div class="flex items-center gap-2" data-slot="theme-selector">
+      id="layout-switcher"
+      class="fixed w-dvw hover:bg-black/70 focus-within:bg-black/70 z-10000 group border-stone-900 hover:border-t focus-within:border-t hover:backdrop-blur-2xl focus-within:backdrop-blur-2xl px-5 pb-5 pt-8 h-1/4 -bottom-[22%] hover:bottom-0 focus-within:bottom-0 left-0 transition-all">
+      <div
+        aria-hidden="true"
+        class="absolute top-2 left-1/2 -translate-x-1/2 h-1 w-16 rounded-full bg-white/25 group-hover:bg-white/40 transition-colors"></div>
+      <div
+        class="grid gap-2 translate-y-[calc(20%+20px)] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform">
+        <h2 class="text-indigo-50 font-medium text-xl" id="layout-switcher-label">Active Theme</h2>
+        <div class="flex items-center gap-2" role="group" aria-labelledby="layout-switcher-label" data-slot="theme-selector">
           <button
+            type="button"
             data-kind="theme-selector"
-            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all data-[active=false]:bg-transparent border-stone-800 data-[active=false]:border px-6 text-base backdrop-blur-2xl rounded-2xl p-4 text-indigo-50"
+            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all data-[active=false]:bg-transparent border-stone-800 data-[active=false]:border px-6 text-base backdrop-blur-2xl rounded-2xl p-4 text-indigo-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             data-name="3d">
             3D
           </button>
           <button
+            type="button"
             data-kind="theme-selector"
-            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all px-6 text-base data-[active=false]:bg-transparent data-[active=false]:border border-stone-800 backdrop-blur-2xl rounded-2xl p-4 text-indigo-50"
+            class="bg-indigo-400/30 hover:bg-indigo-400/40 cursor-pointer data-[active=false]:hover:bg-stone-400/10 transition-all px-6 text-base data-[active=false]:bg-transparent data-[active=false]:border border-stone-800 backdrop-blur-2xl rounded-2xl p-4 text-indigo-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             data-name="not_3d">
             Not 3D
           </button>
@@ -34,10 +40,13 @@
       <div id="app"></div>
 
       <div id="date-time">
-        <div id="date"></div>
-        <div id="time"></div>
+        <div id="threed-date"></div>
+        <div id="threed-time"></div>
       </div>
-      <div id="shortcuts" class="fixed left-1/2 -translate-x-1/2 border-stone-800 border"></div>
+      <ul
+        id="threed-shortcuts"
+        aria-label="Most visited sites"
+        class="fixed left-1/2 -translate-x-1/2 border-stone-800 border"></ul>
       <div id="welcome">
         <h1></h1>
       </div>
@@ -47,16 +56,18 @@
         <div class="relative pointer-events-none -z-10" id="wallpaper-container">
           <img
             id="wallpaper"
-            alt="wallpaper"
+            alt=""
+            aria-hidden="true"
             class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black" />
           <video
             id="live-wallpaper-vid"
             autoplay
             loop
             muted
+            playsinline
+            aria-hidden="true"
             class="absolute pointer-events-none animate-fade-in top-0 left-0 min-h-screen min-w-full object-cover bg-black">
             <source id="live-wallpaper-src" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
           <div id="wallpaper-fade" class="fixed inset-0 bg-black/30"></div>
         </div>
@@ -68,32 +79,32 @@
             </div>
             <div class="clock-bottom-content">
               <h3 id="date" class="theme__date animate-bottom-item-1"></h3>
-              <div class="clock-separator animate-bottom-item-1"></div>
+              <div class="clock-separator animate-bottom-item-1" aria-hidden="true"></div>
               <div
                 data-show="true"
                 id="battery-container"
                 class="clock-battery animate-bottom-item-2 data-[battery-hai-e-ni='true']:hidden data-[show=true]:animate-appear data-[show=false]:animate-disappear">
                 <div id="battery-progress"></div>
                 <div class="relative">
-                  <div id="battery-icon"></div>
+                  <div id="battery-icon" aria-hidden="true"></div>
                   <div
                     data-charging="false"
                     id="battery-charging"
                     class="data-[charging=false]:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <img src="./imgs/icons/lightning.svg" alt="lightning icon" />
+                    <img src="./imgs/icons/lightning.svg" alt="Charging" width="12" height="12" />
                   </div>
                 </div>
               </div>
-              <div class="clock-separator animate-bottom-item-2"></div>
+              <div class="clock-separator animate-bottom-item-2" aria-hidden="true"></div>
               <div class="clock-weather animate-bottom-item-3">
                 <img
                   id="weather-icon"
                   class="transition-all data-[good=false]:hidden"
-                  alt="weather icon"
+                  alt=""
                   width="20"
                   height="20"
                   data-good="false" />
-                <h2 id="temperature">Loading...</h2>
+                <h2 id="temperature">Loading…</h2>
               </div>
             </div>
           </div>
@@ -101,88 +112,116 @@
         <div
           id="quote"
           class="text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-away font-serif hidden text-3xl space-y-3 h-fit overflow-hidden mx-auto text-gray-300">
-          <h1 id="quote-quote" class="max-w-200 mx-auto animate-enter2 [text-shadow:0_1px_2px_rgb(0_0_0/60%)]">
-            &ldquo;You have to keep breaking your heart until it opens.&rdquo;
-          </h1>
-          <p id="quote-by" class="animate-enter3 text-base">&mdash; Rumi</p>
+          <blockquote>
+            <p id="quote-quote" class="max-w-200 mx-auto animate-enter2 [text-shadow:0_1px_2px_rgb(0_0_0/60%)]">
+              &ldquo;You have to keep breaking your heart until it opens.&rdquo;
+            </p>
+            <footer id="quote-by" class="animate-enter3 text-base mt-3">&mdash;&nbsp;Rumi</footer>
+          </blockquote>
         </div>
-        <div
+        <nav
           id="shortcuts-bar"
+          aria-label="Most visited sites"
           data-show="true"
           class="w-full fixed left-10 bottom-[clamp(2px,10%,130px)] py-2 data-[show=false]:hidden">
           <ul
             id="shortcuts"
             class="animate-away bg-slate-700/10 backdrop-blur p-1 rounded-md border border-slate-600/60 flex justify-start w-fit gap-3 max-w-[900px] flex-wrap"></ul>
-        </div>
+        </nav>
       </main>
       <div id="settings" class="fixed z-50 right-10 top-10 flex flex-col items-end">
-        <button id="settings-btn">
-          <img src="./imgs/icons/setting.svg" alt="settings icon" />
+        <button
+          id="settings-btn"
+          type="button"
+          aria-label="Settings"
+          aria-expanded="false"
+          aria-controls="settings-wrapper"
+          title="Settings (press S)"
+          class="cursor-pointer rounded-full p-1 transition-transform hover:rotate-45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
+          <img src="./imgs/icons/setting.svg" alt="" aria-hidden="true" />
         </button>
         <div
           id="settings-wrapper"
           class="w-[400px] transition-all overflow-hidden mt-3 h-0 rounded-md bg-stone-800/60 backdrop-blur-lg text-gray-300 text-base">
           <div id="settings-content" class="grid gap-5">
-            <div
-              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-              <div
-                role="presentation"
-                id="toggle-quote"
-                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-              <button>Show quotes</button>
-              <div
+            <div class="flex justify-between items-center w-full border-b border-stone-600 rounded-sm">
+              <button
+                type="button"
+                role="switch"
                 id="show-quote-toggle"
+                aria-checked="false"
+                data-setting="quote"
                 data-on="false"
-                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-                <div
-                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-              </div>
+                class="setting-switch">
+                <span>Show quotes</span>
+                <span aria-hidden="true" class="setting-switch-track">
+                  <span class="setting-switch-thumb"></span>
+                </span>
+              </button>
             </div>
-            <div
-              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-              <div
-                role="presentation"
-                id="toggle-shortcuts"
-                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-              <button>Show shortcuts</button>
-              <div
+            <div class="flex justify-between items-center w-full border-b border-stone-600 rounded-sm">
+              <button
+                type="button"
+                role="switch"
                 id="show-shortcuts-toggle"
+                aria-checked="true"
+                data-setting="shortcuts"
                 data-on="true"
-                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-                <div
-                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-              </div>
+                class="setting-switch">
+                <span>Show shortcuts</span>
+                <span aria-hidden="true" class="setting-switch-track">
+                  <span class="setting-switch-thumb"></span>
+                </span>
+              </button>
             </div>
-            <div
-              class="flex justify-between items-center cursor-pointer w-full relative border-b border-stone-600 rounded-sm p-2">
-              <div
-                role="presentation"
-                id="toggle-downloads"
-                class="absolute top-0 left-0 w-full h-full bg-transparent z-10"></div>
-              <button>Show downloads</button>
-              <div
-                data-on="true"
+            <div class="flex justify-between items-center w-full border-b border-stone-600 rounded-sm">
+              <button
+                type="button"
+                role="switch"
                 id="show-downloads-toggle"
-                class="rounded-full group w-14 h-7 transition-all bg-slate-400 px-1 flex items-center data-[on=true]:bg-indigo-400 relative">
-                <div
-                  class="absolute left-1 w-6 aspect-square rounded-full bg-stone-800 transition-all group-data-[on=true]:left-[calc(95%-24px)]"></div>
-              </div>
+                aria-checked="true"
+                data-setting="downloads"
+                data-on="true"
+                class="setting-switch">
+                <span>Show downloads</span>
+                <span aria-hidden="true" class="setting-switch-track">
+                  <span class="setting-switch-thumb"></span>
+                </span>
+              </button>
             </div>
-            <div class="max-w-full space-y-8">
-              <h1 class="px-2">Themes</h1>
-              <div id="themes" class="flex gap-3 overflow-y-hidden overflow-x-scroll w-[360px]"></div>
+            <div class="max-w-full space-y-4">
+              <div class="flex items-baseline justify-between px-2">
+                <h2 id="themes-label">Themes</h2>
+                <p class="text-xs text-gray-400" id="themes-hint">scroll or use &larr; &rarr;</p>
+              </div>
+              <div
+                id="themes"
+                role="listbox"
+                aria-labelledby="themes-label"
+                aria-describedby="themes-hint"
+                tabindex="-1"
+                class="themes-strip flex gap-3 overflow-y-hidden overflow-x-auto w-[360px] pb-2"></div>
             </div>
           </div>
         </div>
       </div>
-      <div
+      <aside
         id="downloads-panel"
-        class="fixed right-10 top-36 w-[350px] max-h-[70vh] bg-slate-700/10 backdrop-blur-3xl p-4 rounded-xl border border-slate-600/60 data-[on=true]:flex flex-col gap-3 hidden">
+        aria-label="Recent downloads"
+        class="fixed right-10 top-36 w-[350px] max-h-[70vh] bg-slate-700/10 backdrop-blur-3xl p-4 rounded-xl border border-slate-600/60 data-[on=true]:flex flex-col gap-3 hidden transition-transform">
         <div class="flex justify-between items-center">
           <h2 class="text-gray-300 text-base">Recent Downloads</h2>
+          <button
+            id="downloads-refresh"
+            type="button"
+            aria-label="Refresh downloads"
+            title="Refresh"
+            class="cursor-pointer text-gray-400 hover:text-gray-100 text-xs px-2 py-1 rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
+            Refresh
+          </button>
         </div>
         <div id="downloads-list" class="flex flex-col gap-2 overflow-y-auto max-h-[calc(70vh-4rem)]"></div>
-      </div>
+      </aside>
     </div>
   </body>
 </html>

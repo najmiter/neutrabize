@@ -1,20 +1,33 @@
 import { downloadsPanel } from './globals';
 
 const downloadsList = document.getElementById('downloads-list') as HTMLElement;
+const refreshBtn = document.getElementById('downloads-refresh') as HTMLButtonElement | null;
+
+let visible = false;
+let refreshTimer: ReturnType<typeof setTimeout> | null = null;
 
 export function initDownloads(): void {
-  if (!chrome) return;
-  loadRecentDownloads();
+  if (typeof chrome === 'undefined' || !chrome.downloads) return;
 
-  if (chrome.downloads) {
-    chrome.downloads.onCreated.addListener(() => {
-      if (downloadsPanel.classList.contains('hidden')) return;
-      loadRecentDownloads();
-    });
-  }
+  chrome.downloads.onCreated.addListener(scheduleRefresh);
+  chrome.downloads.onChanged?.addListener(scheduleRefresh);
+
+  refreshBtn?.addEventListener('click', () => loadRecentDownloads());
+}
+
+function scheduleRefresh(): void {
+  if (!visible) return;
+  if (refreshTimer) return;
+  refreshTimer = setTimeout(() => {
+    refreshTimer = null;
+    loadRecentDownloads();
+  }, 400);
 }
 
 export function toggleDownloads(show: boolean): void {
+  visible = show;
+  downloadsPanel.dataset.on = show.toString();
+
   if (show) {
     loadRecentDownloads();
     downloadsPanel.classList.remove('hidden');
@@ -22,39 +35,70 @@ export function toggleDownloads(show: boolean): void {
   } else {
     downloadsPanel.classList.add('animate-away');
     setTimeout(() => {
-      downloadsPanel.classList.add('hidden');
+      if (!visible) downloadsPanel.classList.add('hidden');
     }, 400);
   }
 }
 
 function loadRecentDownloads(): void {
-  if (!chrome.downloads) return;
+  if (typeof chrome === 'undefined' || !chrome.downloads) return;
 
-  chrome.downloads.search(
-    {
-      limit: 30,
-      orderBy: ['-startTime'],
-    },
-    (downloads) => {
-      displayDownloads(downloads);
-    }
-  );
+  chrome.downloads.search({ limit: 30, orderBy: ['-startTime'] }, (downloads) => {
+    displayDownloads(downloads ?? []);
+  });
 }
 
 function displayDownloads(downloads: chrome.downloads.DownloadItem[]): void {
   if (!downloadsList) return;
 
-  downloadsList.innerHTML = '';
-
   if (downloads.length === 0) {
-    downloadsList.innerHTML = '<p class="text-gray-400">No recent downloads</p>';
+    const empty = document.createElement('p');
+    empty.className = 'text-gray-400 text-sm';
+    empty.textContent = 'No recent downloads';
+    downloadsList.replaceChildren(empty);
     return;
   }
 
-  downloads.forEach((download, i) => {
-    const downloadItem = createDownloadElement(download, i);
-    downloadsList.appendChild(downloadItem);
-  });
+  downloadsList.replaceChildren(...downloads.map((download, i) => createDownloadElement(download, i)));
+}
+
+function baseName(path: string): string {
+  return path.split(/[/\\]/).pop() || 'Unknown file';
+}
+
+function formatBytes(bytes: number): string {
+  if (!bytes || bytes < 0) return '';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let value = bytes;
+  let unit = 0;
+  while (value >= 1024 && unit < units.length - 1) {
+    value /= 1024;
+    unit++;
+  }
+  return `${value < 10 && unit > 0 ? value.toFixed(1) : Math.round(value)} ${units[unit]}`;
+}
+
+function badge(text: string, classes: string): HTMLSpanElement {
+  const span = document.createElement('span');
+  span.className = `text-xs px-1.5 py-0.5 rounded ${classes}`;
+  span.textContent = text;
+  return span;
+}
+
+function statusBadge(download: chrome.downloads.DownloadItem): HTMLSpanElement {
+  if (download.state === 'complete' && download.exists === false) {
+    return badge('Deleted', 'bg-red-500/20 text-red-400');
+  }
+  if (download.state === 'complete') {
+    return badge('Complete', 'bg-green-500/20 text-green-400');
+  }
+  if (download.state === 'in_progress') {
+    if (download.paused) return badge('Paused', 'bg-yellow-500/20 text-yellow-400');
+    const total = download.totalBytes;
+    const progress = total > 0 ? Math.round((download.bytesReceived / total) * 100) : 0;
+    return badge(total > 0 ? `${progress}%` : formatBytes(download.bytesReceived), 'bg-blue-500/20 text-blue-400');
+  }
+  return badge('Interrupted', 'bg-red-500/20 text-red-400');
 }
 
 function createDownloadElement(download: chrome.downloads.DownloadItem, index: number): HTMLDivElement {
@@ -62,52 +106,70 @@ function createDownloadElement(download: chrome.downloads.DownloadItem, index: n
   item.className = 'flex items-center gap-3 p-2 download-item rounded-md hover:bg-slate-700/30';
   item.style.setProperty('--item-delay', `${index * 50}ms`);
 
-  const fileName = download.filename.split('/').pop() || 'Unknown file';
-  const fileExt = fileName.split('.').pop() || 'file';
+  const fileName = baseName(download.filename);
+  const fileExt = fileName.includes('.') ? (fileName.split('.').pop() as string) : '';
 
-  const date = new Date(download.startTime);
-  const formattedDate = date.toLocaleDateString('en-us', {
-    month: 'short',
-    day: 'numeric',
-  });
+  const icon = document.createElement('div');
+  icon.className = 'min-w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded';
+  icon.setAttribute('aria-hidden', 'true');
+  const iconLabel = document.createElement('span');
+  iconLabel.className = 'uppercase text-xs font-semibold';
+  iconLabel.textContent = fileExt ? fileExt.slice(0, 3) : '📁';
+  icon.appendChild(iconLabel);
+  item.appendChild(icon);
 
-  let statusHtml = '';
-  if (!download.exists) {
-    statusHtml = `<span class="text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded">Deleted</span>`;
-  } else if (download.state === 'complete') {
-    statusHtml = `<span class="text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">Complete</span>`;
-  } else if (download.state === 'in_progress') {
-    const progress = Math.round((download.bytesReceived / download.totalBytes) * 100) || 0;
-    statusHtml = `<span class="text-xs bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded">${progress}%</span>`;
-  } else {
-    statusHtml = `<span class="text-xs bg-yellow-500/20 text-yellow-400 px-1.5 py-0.5 rounded">${download.state}</span>`;
+  const body = document.createElement('div');
+  body.className = 'flex flex-col overflow-hidden flex-1';
+
+  const name = document.createElement('p');
+  name.className = 'text-sm text-violet-100 truncate';
+  name.textContent = fileName;
+  body.appendChild(name);
+
+  const meta = document.createElement('div');
+  meta.className = 'flex items-center justify-between gap-2 text-xs text-gray-400';
+
+  const when = document.createElement('span');
+  const started = new Date(download.startTime);
+  const size = formatBytes(download.totalBytes || download.fileSize);
+  when.textContent = Number.isNaN(started.getTime())
+    ? size
+    : [started.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }), size].filter(Boolean).join(' · ');
+  meta.appendChild(when);
+  meta.appendChild(statusBadge(download));
+  body.appendChild(meta);
+
+  if (download.state === 'in_progress' && download.totalBytes > 0) {
+    const track = document.createElement('div');
+    track.className = 'mt-1 h-0.5 w-full rounded-full bg-slate-600/50 overflow-hidden';
+    const bar = document.createElement('div');
+    bar.className = 'h-full bg-blue-400 transition-[width] duration-300';
+    bar.style.width = `${Math.round((download.bytesReceived / download.totalBytes) * 100)}%`;
+    track.appendChild(bar);
+    body.appendChild(track);
   }
 
-  item.innerHTML = `
-    <div class="min-w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded">
-      <span class="uppercase text-xs font-semibold">${fileExt.slice(0, 3) || '📁'}</span>
-    </div>
-    <div class="flex flex-col overflow-hidden flex-1">
-      <p class="text-sm text-violet-100 truncate" title="${fileName}">${fileName}</p>
-      <div class="flex items-center justify-between text-xs text-gray-400">
-        <span>${formattedDate}</span>
-        ${statusHtml}
-      </div>
-    </div>
-  `;
+  item.appendChild(body);
 
-  if (download.state === 'complete') {
-    item.addEventListener('click', () => {
-      if (chrome.downloads && download.id) {
-        chrome.downloads.open(download.id);
+  const openable = download.state === 'complete' && download.exists !== false;
+  if (openable) {
+    const open = () => chrome.downloads.open(download.id);
+    item.addEventListener('click', open);
+    item.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
       }
     });
-    item.ariaDisabled = 'false';
+    item.tabIndex = 0;
+    item.setAttribute('role', 'button');
     item.style.cursor = 'pointer';
-    item.title = 'Click to open file';
+    item.title = `Open ${fileName}`;
+    item.ariaDisabled = 'false';
   } else {
     item.ariaDisabled = 'true';
-    item.style.cursor = 'not-allowed';
+    item.style.cursor = 'default';
+    item.title = fileName;
   }
 
   return item;

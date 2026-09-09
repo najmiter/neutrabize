@@ -5,7 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import getStarfield from './getStarfield.js';
 import { getFresnelMat } from './getFresnelMat.js';
 
-import './styles.css';
 import { setDateTime, updateDateTime } from './setDateTime';
 import { setWelcomeText } from './setWelcomeText';
 import { getShortcuts } from './getShortcuts';
@@ -21,6 +20,7 @@ camera.position.y = -50;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 document.body.appendChild(renderer.domElement);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -34,6 +34,20 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
+controls.enabled = false;
+
+const threeDSlot = document.querySelector<HTMLElement>('div[data-slot="3d"]');
+if (threeDSlot) threeDSlot.dataset.intro = 'true';
+renderer.domElement.style.pointerEvents = 'none';
+
+let introDone = false;
+function endIntro() {
+  if (introDone) return;
+  introDone = true;
+  controls.enabled = true;
+  renderer.domElement.style.pointerEvents = '';
+  if (threeDSlot) delete threeDSlot.dataset.intro;
+}
 
 const detail = 15;
 const loader = new THREE.TextureLoader();
@@ -123,6 +137,7 @@ function animate() {
 function handleWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 window.addEventListener('resize', handleWindowResize, false);
@@ -174,6 +189,8 @@ animate();
 try {
   setTimeout(() => {
     setWelcomeText();
-    getShortcuts();
+    getShortcuts({ onComplete: endIntro });
   }, 100);
 } catch {}
+
+gsap.delayedCall(4, endIntro);

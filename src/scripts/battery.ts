@@ -8,8 +8,13 @@ if ('getBattery' in navigator) {
       const svg = parser.parseFromString(data, 'image/svg+xml');
       const batteryIcon = svg.documentElement;
 
-      const fill = batteryIcon.querySelector('#inner') as SVGElement;
-      const fullWidth = +fill.getAttribute('width')!;
+      const inner = batteryIcon.querySelector('#inner') as SVGElement | null;
+      const fullWidth = Number(inner?.getAttribute('width'));
+      if (!inner || !fullWidth) {
+        batteryContainer.dataset.batteryHaiENi = 'true';
+        return;
+      }
+      const fill = inner;
 
       const batteryIconContainer = document.getElementById('battery-icon') as HTMLElement;
       const batteryProgress = document.getElementById('battery-progress') as HTMLElement;
@@ -25,6 +30,8 @@ if ('getBattery' in navigator) {
         batteryIconContainer.innerHTML = '';
         batteryIconContainer.appendChild(batteryIcon);
       }
+
+      batteryContainer.setAttribute('role', 'status');
 
       navigator.getBattery().then((battery) => {
         update_svg(battery);

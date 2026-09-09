@@ -1,74 +1,48 @@
-import {
-  date,
-  quote,
-  shortcuts,
-  // batteryContainer,
-  update_theme,
-  CONTEXT,
-} from '@/scripts/globals';
+import { date, quote, shortcuts, update_theme, CONTEXT } from '@/scripts/globals';
+import { themesData } from '@/data/themes';
 import { update_weather } from '@/scripts/weather';
 import { initDownloads, toggleDownloads } from '@/scripts/downloads';
+import { setSwitch } from '@/scripts/settings';
+import '@/scripts/theme';
 import '@/scripts/quote';
 import '@/scripts/settings';
-import '@/scripts/theme';
 import '@/scripts/battery';
 import '@/scripts/top-sites';
 import '@/style.css';
-import { render_themes } from '@/scripts/dom';
+import { render_themes, updateThemeThumbnail } from '@/scripts/dom';
 import { generate_clock, update_time } from '@/scripts/clock';
 
-render_themes();
-
-const shouldShowQuote = localStorage.getItem('neutrabize_SHOULDSHOWQUOTE');
-const shouldShowShortcuts = localStorage.getItem('neutrabize_SHOULDSHOWSHORTCUTS');
-const shouldShowDownloads = localStorage.getItem('neutrabize_SHOULDSHOWDOWNLOADS');
-const activeTheme = localStorage.getItem('neutrabize_THEMEDATA');
-// const shouldShowBattery = localStorage.getItem('neutrabize_SHOULDSHOWBATTERY');
-
-if (activeTheme) {
+const readTheme = () => {
   try {
-    const theme = JSON.parse(activeTheme);
-    CONTEXT.set('theme', theme);
-    update_theme();
+    const stored = JSON.parse(localStorage.getItem('neutrabize_THEMEDATA') ?? 'null');
+    if (stored?.name && stored?.classes?.time && stored?.classes?.date) return stored;
   } catch {}
-}
+  return themesData.exoplanets;
+};
 
-if (shouldShowQuote === 'true') {
-  const toggle = document.getElementById('show-quote-toggle') as HTMLElement;
+CONTEXT.set('theme', readTheme());
 
-  toggle.dataset.on = 'true';
+const shouldShowQuote = localStorage.getItem('neutrabize_SHOULDSHOWQUOTE') === 'true';
+const shouldShowShortcuts = localStorage.getItem('neutrabize_SHOULDSHOWSHORTCUTS') !== 'false';
+const shouldShowDownloads = localStorage.getItem('neutrabize_SHOULDSHOWDOWNLOADS') === 'true';
+
+const quoteToggle = document.getElementById('show-quote-toggle') as HTMLElement;
+setSwitch(quoteToggle, shouldShowQuote);
+if (shouldShowQuote) {
   quote.style.display = 'block';
   quote.classList.remove('animate-away');
 }
 
-if (shouldShowShortcuts === 'false') {
-  const toggle = document.getElementById('show-shortcuts-toggle') as HTMLElement;
-  const shortcutsBar = document.getElementById('shortcuts-bar') as HTMLElement;
+const shortcutsToggle = document.getElementById('show-shortcuts-toggle') as HTMLElement;
+const shortcutsBar = document.getElementById('shortcuts-bar') as HTMLElement;
+setSwitch(shortcutsToggle, shouldShowShortcuts);
+shortcutsBar.dataset.show = shouldShowShortcuts.toString();
+if (shouldShowShortcuts) shortcuts.classList.remove('animate-away');
 
-  toggle.dataset.on = 'false';
-  shortcutsBar.dataset.show = 'false';
-} else shortcuts.classList.remove('animate-away');
-
-// if (shouldShowBattery === 'true') {
-//   const toggle = document.getElementById('show-battery-toggle') as HTMLElement;
-
-//   toggle.dataset.on = 'true';
-//   batteryContainer.dataset.show = 'true';
-// } else {
-//   batteryContainer.classList.add('hidden');
-// }
-
-// Initialize downloads functionality
 initDownloads();
-
 const downloadToggle = document.getElementById('show-downloads-toggle') as HTMLElement;
-if (shouldShowDownloads === 'true') {
-  downloadToggle.dataset.on = 'true';
-  toggleDownloads(true);
-} else {
-  downloadToggle.dataset.on = 'false';
-  toggleDownloads(false);
-}
+setSwitch(downloadToggle, shouldShowDownloads);
+toggleDownloads(shouldShowDownloads);
 
 date.textContent = new Date().toLocaleDateString('en-us', {
   month: 'short',
@@ -79,6 +53,27 @@ date.textContent = new Date().toLocaleDateString('en-us', {
 
 generate_clock();
 update_time();
+update_theme();
 update_weather();
 
-setInterval(update_time, 1000);
+let clockTimer: ReturnType<typeof setTimeout>;
+const tick = () => {
+  update_time();
+  clockTimer = setTimeout(tick, 1000 - (Date.now() % 1000));
+};
+clockTimer = setTimeout(tick, 1000 - (Date.now() % 1000));
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+  update_time();
+  date.textContent = new Date().toLocaleDateString('en-us', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    weekday: 'short',
+  });
+  clearTimeout(clockTimer);
+  clockTimer = setTimeout(tick, 1000 - (Date.now() % 1000));
+});
+
+render_themes().then(() => updateThemeThumbnail(CONTEXT.get('theme')?.name ?? ''));

@@ -3,7 +3,6 @@ export const time = document.querySelector('div[data-slot="not-3d"] #time') as H
 export const wallpaper = document.getElementById('wallpaper') as HTMLImageElement;
 export const quote = document.getElementById('quote') as HTMLElement;
 export const shortcuts = document.querySelector('div[data-slot="not-3d"] #shortcuts') as HTMLElement;
-export const themes = document.querySelectorAll('.theme');
 export const batteryContainer = document.getElementById('battery-container') as HTMLElement;
 export const video = document.getElementById('live-wallpaper-vid') as HTMLVideoElement;
 export const source = document.getElementById('live-wallpaper-src') as HTMLSourceElement;
@@ -18,135 +17,145 @@ import { updateThemeThumbnail } from '@/scripts/dom';
 
 export const CONTEXT = new Map<string, any>();
 
-let wallpaperFadeTimeout: NodeJS.Timeout | null = null;
+let wallpaperFadeTimeout: ReturnType<typeof setTimeout> | null = null;
+let activeBlobUrl: string | null = null;
 
 const wallpaperLoading = document.createElement('div');
 wallpaperLoading.className =
-  'fixed pointer-events-none inset-0 flex items-center justify-center bg-black/70 z-10 opacity-0 transition-opacity pointer-events-none';
-// wallpaperLoading.innerHTML =
-//   '<div class="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>';
+  'fixed pointer-events-none inset-0 flex items-center justify-center bg-black/70 z-10 opacity-0 transition-opacity';
+wallpaperLoading.setAttribute('aria-hidden', 'true');
+wallpaperLoading.innerHTML =
+  '<div class="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>';
 wallpaperContainer.appendChild(wallpaperLoading);
 wallpaperContainer.style.position = 'relative';
 
-export function update_theme({ theme, onSuccess }: { theme?: any; onSuccess?: () => void } = {}): void {
+function setLoading(on: boolean): void {
+  wallpaperLoading.style.opacity = on ? '1' : '0';
+  document.body.dataset.wallpaperLoading = on ? 'true' : 'false';
+}
+
+function trackBlobUrl(url: string): string {
+  if (activeBlobUrl && activeBlobUrl !== url) URL.revokeObjectURL(activeBlobUrl);
+  activeBlobUrl = url.startsWith('blob:') ? url : null;
+  return url;
+}
+
+export function update_theme({
+  theme,
+  onSuccess,
+  onError,
+}: { theme?: any; onSuccess?: () => void; onError?: (message: string) => void } = {}): void {
   const currentTheme = theme || CONTEXT.get('theme');
 
-  if (!currentTheme) {
-    console.assert(false, 'Theme not in the context for whatever reason!');
-    return;
-  }
+  if (!currentTheme) return;
+
 
   const themeToUse = currentTheme;
-  // legacy
   if (themeToUse?.bg?.startsWith('./') && !themeToUse.bg.includes('exoplanets')) {
     const onSuccessLegacy = () => {
       CONTEXT.set('theme', themesData.exoplanets);
       localStorage.setItem('neutrabize_THEMEDATA', JSON.stringify(themesData.exoplanets));
       onSuccess?.();
     };
-    return update_theme({ theme: themesData.exoplanets, onSuccess: onSuccessLegacy });
+    return update_theme({ theme: themesData.exoplanets, onSuccess: onSuccessLegacy, onError });
   }
 
   const afterEffect = () => {
-    const time = document.querySelector('div[data-slot="not-3d"] #time') as HTMLElement;
-    date.setAttribute('class', themeToUse.classes.date.join(' '));
+    const timeEl = document.querySelector('div[data-slot="not-3d"] #time') as HTMLElement | null;
+    const classes = themeToUse?.classes;
+    if (!classes?.date || !classes?.time) return;
+
+    date.setAttribute('class', classes.date.join(' '));
     date.classList.toggle('animate-bottom-item-1', true);
-    time.setAttribute('class', themeToUse.classes.time.join(' '));
-    const digits = document.querySelectorAll('.digits-container div, .time-colon');
-    digits.forEach((deez) => {
-      const keep = deez.classList.contains('time-colon') ? ['time-colon'] : [];
-      deez.setAttribute('class', [...keep, ...themeToUse.classes.time].join(' '));
+    timeEl?.setAttribute('class', classes.time.join(' '));
+
+    document.querySelectorAll('.digits-container div, .time-colon').forEach((node) => {
+      const keep = node.classList.contains('time-colon') ? ['time-colon'] : [];
+      node.setAttribute('class', [...keep, ...classes.time].join(' '));
     });
   };
+
   wallpaperFade.classList.add('animate-wallpaper-fade');
 
-  if (wallpaperFadeTimeout) {
-    clearTimeout(wallpaperFadeTimeout);
-    wallpaperFadeTimeout = null;
-  }
+  if (wallpaperFadeTimeout) clearTimeout(wallpaperFadeTimeout);
   wallpaperFadeTimeout = setTimeout(() => {
     wallpaperFade.classList.remove('animate-wallpaper-fade');
   }, 300);
 
+  const src = themeToUse.bg || themeToUse.fullUrl;
+  if (!src) {
+    onError?.('This theme has no wallpaper');
+    return;
+  }
+
+  const isLocal = src.startsWith('./') || src.startsWith('/');
+  const localSrc = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
+
+  const showVideo = () => {
+    wallpaper.style.display = 'none';
+    video.style.display = 'block';
+  };
+  const showImage = () => {
+    wallpaper.style.display = 'block';
+    video.style.display = 'none';
+  };
+
   if (themeToUse.kind === 'vid') {
-    try {
-      const src = themeToUse.bg || themeToUse.fullUrl;
-      if (src) {
-        if (src.startsWith('./') || src.startsWith('/')) {
-          source.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
-          video.load();
-          video.play();
-          updateThemeThumbnail(themeToUse.name);
-          onSuccess?.();
-          afterEffect();
-        } else {
-          wallpaperLoading.style.opacity = '1';
-          wallpaperLoading.style.pointerEvents = 'auto';
-          wallpaperManager
-            .getWallpaperSrc(themeToUse.name, src)
-            .then((blobUrl: string | null) => {
-              if (blobUrl) {
-                source.src = blobUrl;
-                video.load();
-                video.play();
-                wallpaperLoading.style.opacity = '0';
-                wallpaperLoading.style.pointerEvents = 'none';
-                wallpaper.style.display = 'none';
-                video.style.display = 'block';
-                updateThemeThumbnail(themeToUse.name);
-                onSuccess?.();
-                afterEffect();
-              } else {
-                wallpaperLoading.style.opacity = '0';
-                wallpaperLoading.style.pointerEvents = 'none';
-              }
-            })
-            .catch(() => {
-              source.src = src;
-              video.load();
-              video.play();
-              wallpaper.style.display = 'none';
-              video.style.display = 'block';
-              wallpaperLoading.style.opacity = '0';
-              wallpaperLoading.style.pointerEvents = 'none';
-            });
+    if (isLocal) {
+      source.src = localSrc;
+      video.load();
+      void video.play().catch(() => {});
+      showVideo();
+      updateThemeThumbnail(themeToUse.name);
+      onSuccess?.();
+      afterEffect();
+      return;
+    }
+
+    setLoading(true);
+    wallpaperManager
+      .getWallpaperSrc(themeToUse.name, src)
+      .then((blobUrl) => {
+        if (!blobUrl) {
+          onError?.(navigator.onLine ? 'Download failed' : 'You are offline');
+          return;
         }
-      }
-    } catch {}
-  } else {
-    const src = themeToUse.bg || themeToUse.fullUrl;
-    if (src) {
-      if (src.startsWith('./') || src.startsWith('/')) {
-        wallpaper.src = src.includes('exoplanets') ? src : './imgs/bg/exoplanets.jpeg';
+        source.src = trackBlobUrl(blobUrl);
+        video.load();
+        void video.play().catch(() => {});
+        showVideo();
         updateThemeThumbnail(themeToUse.name);
         onSuccess?.();
         afterEffect();
-      } else {
-        wallpaperLoading.style.opacity = '1';
-        wallpaperLoading.style.pointerEvents = 'auto';
-        wallpaperManager
-          .getWallpaperSrc(themeToUse.name, src)
-          .then((blobUrl: string | null) => {
-            if (blobUrl) {
-              wallpaper.src = blobUrl;
-              wallpaperLoading.style.opacity = '0';
-              wallpaperLoading.style.pointerEvents = 'none';
-              updateThemeThumbnail(themeToUse.name);
-              onSuccess?.();
-              afterEffect();
-            } else {
-              wallpaperLoading.style.opacity = '0';
-              wallpaperLoading.style.pointerEvents = 'none';
-            }
-          })
-          .catch(() => {
-            wallpaper.src = src;
-            wallpaperLoading.style.opacity = '0';
-            wallpaperLoading.style.pointerEvents = 'none';
-          });
-      }
-    }
-    wallpaper.style.display = 'block';
-    video.style.display = 'none';
+      })
+      .catch(() => onError?.('Download failed'))
+      .finally(() => setLoading(false));
+    return;
   }
+
+  showImage();
+
+  if (isLocal) {
+    wallpaper.src = localSrc;
+    updateThemeThumbnail(themeToUse.name);
+    onSuccess?.();
+    afterEffect();
+    return;
+  }
+
+  setLoading(true);
+  wallpaperManager
+    .getWallpaperSrc(themeToUse.name, src)
+    .then((blobUrl) => {
+      if (!blobUrl) {
+        onError?.(navigator.onLine ? 'Download failed' : 'You are offline');
+        return;
+      }
+      wallpaper.src = trackBlobUrl(blobUrl);
+      updateThemeThumbnail(themeToUse.name);
+      onSuccess?.();
+      afterEffect();
+    })
+    .catch(() => onError?.('Download failed'))
+    .finally(() => setLoading(false));
 }

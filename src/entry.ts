@@ -1,34 +1,43 @@
 import { LocalStorage } from '@/utils/local-storage';
 import { LocalStorageKeys, ThemeVersion } from '@/enums/local-storage';
 
-const theme = LocalStorage.getItem(LocalStorageKeys.Version, ThemeVersion.THREE_D);
+const DEFAULT_VERSION = ThemeVersion.THREE_D;
+
+const theme = LocalStorage.getItem(LocalStorageKeys.Version, DEFAULT_VERSION) as ThemeVersion;
 
 import '@/style.css';
 const threeDWrapper = document.querySelector<HTMLDivElement>('div[data-slot="3d"]');
 const notThreeDWrapper = document.querySelector<HTMLDivElement>('div[data-slot="not-3d"]');
 
-document.documentElement.dataset['theme'] = theme ?? undefined;
+document.documentElement.dataset['theme'] = theme;
 
-if (theme === ThemeVersion.THREE_D) {
+const is3d = theme === ThemeVersion.THREE_D;
+
+if (threeDWrapper) {
+  threeDWrapper.hidden = !is3d;
+  threeDWrapper.style.display = is3d ? 'block' : 'none';
+}
+if (notThreeDWrapper) {
+  notThreeDWrapper.hidden = is3d;
+  notThreeDWrapper.style.display = is3d ? 'none' : 'block';
+}
+
+if (is3d) {
   import('./scripts/3d/main');
-  threeDWrapper!.style.display = 'block';
-  notThreeDWrapper!.style.display = 'none';
 } else {
   import('./main');
-  threeDWrapper!.style.display = 'none';
-  notThreeDWrapper!.style.display = 'block';
 }
 
 const switchers = document.querySelectorAll<HTMLButtonElement>('div[data-slot="theme-selector"] button');
 
 switchers.forEach((btn) => {
-  btn.dataset['active'] =
-    (LocalStorage.getItem(LocalStorageKeys.Version) ?? ThemeVersion.NOT_THREE_D) === btn.dataset['name']
-      ? 'true'
-      : 'false';
+  const isActive = theme === btn.dataset['name'];
+  btn.dataset['active'] = isActive.toString();
+  btn.setAttribute('aria-pressed', isActive.toString());
+
   btn.addEventListener('click', () => {
     const selectedTheme = btn.dataset['name'];
-    if (!selectedTheme) return;
+    if (!selectedTheme || selectedTheme === theme) return;
 
     LocalStorage.setItem(LocalStorageKeys.Version, selectedTheme);
 

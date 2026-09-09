@@ -1,106 +1,125 @@
 import { WMO_CODES } from '@/data/weather';
 import type { IStoredWeather, IWeatherData } from '@/types';
 
+const WEATHER_KEY = 'neutrabize_WEATHER';
+const GEO_DENIED_KEY = 'neutrabize_GEODENIED';
+const MAX_AGE = 1000 * 60 * 60;
+const GEO_DENIED_BACKOFF = 1000 * 60 * 60 * 6;
+const FALLBACK_ICON = './imgs/icons/weather/clear_day.svg';
+
 const temperature = document.getElementById('temperature') as HTMLElement;
-const weather_previously_fetched = localStorage.getItem('neutrabize_WEATHER');
 const weatherIcon = document.getElementById('weather-icon') as HTMLImageElement;
 
-export function update_weather(): void {
-  if (weather_previously_fetched) {
-    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as IStoredWeather;
+const stored = readStored();
 
-    if (Date.now() > at + 1000 * 60 * 60) {
-      do_da_weather_thing();
-    } else {
-      temperature.textContent = `${old.temp}`;
-      weatherIcon.src = old.icon;
-      weatherIcon.alt = old.description || 'Weather Icon';
-      weatherIcon.title = old.description || '';
-      set_title(old.description, at);
-      weatherIcon.dataset.good = 'true';
-    }
-  } else {
-    localStorage.removeItem('neutrabize_WEATHER');
-    do_da_weather_thing();
+function readStored(): IStoredWeather | null {
+  const raw = localStorage.getItem(WEATHER_KEY);
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw) as IStoredWeather;
+    if (!parsed?.temperature?.temp) throw new Error('malformed');
+    return parsed;
+  } catch {
+    localStorage.removeItem(WEATHER_KEY);
+    return null;
   }
+}
+
+function render(weather: IStoredWeather): void {
+  temperature.textContent = weather.temperature.temp;
+  weatherIcon.src = weather.temperature.icon;
+  weatherIcon.alt = '';
+  weatherIcon.dataset.good = 'true';
+  set_title(weather.temperature.description, weather.at);
+}
+
+export function update_weather(): void {
+  if (stored) render(stored);
+
+  const isFresh = stored && Date.now() < stored.at + MAX_AGE;
+  if (isFresh) return;
+
+  const deniedAt = Number(localStorage.getItem(GEO_DENIED_KEY) ?? 0);
+  if (deniedAt && Date.now() < deniedAt + GEO_DENIED_BACKOFF) {
+    if (!stored) show_unavailable('Location access is off');
+    return;
+  }
+
+  do_da_weather_thing();
+}
+
+function show_unavailable(reason: string): void {
+  if (stored) return;
+  temperature.textContent = '—';
+  weatherIcon.dataset.good = 'false';
+  set_title(reason);
 }
 
 function do_da_weather_thing(): void {
-  if (!('geolocation' in navigator)) return (temperature.textContent = ''), void 0;
+  if (!('geolocation' in navigator)) {
+    show_unavailable('Weather unavailable');
+    return;
+  }
 
-  navigator.geolocation.getCurrentPosition(async (position) => {
-    const lati = position.coords.latitude;
-    const long = position.coords.longitude;
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      localStorage.removeItem(GEO_DENIED_KEY);
 
-    const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day,weather_code`;
+      const lati = position.coords.latitude;
+      const long = position.coords.longitude;
+      const WEATHER_API = `https://api.open-meteo.com/v1/forecast?latitude=${lati}&longitude=${long}&current=temperature_2m,rain,is_day,weather_code`;
 
-    try {
-      const choosni = await fetch(WEATHER_API);
+      try {
+        const response = await fetch(WEATHER_API, { signal: AbortSignal.timeout(8000) });
+        if (!response.ok) throw new Error(`Couldn't get the temperature`);
 
-      if (choosni.ok) {
-        const khbr = (await choosni.json()) as IWeatherData;
+        const khbr = (await response.json()) as IWeatherData;
         const weatherCode = khbr.current.weather_code.toString() as `${number}`;
         const isDay = khbr.current.is_day === 1;
         const iconData = WMO_CODES[weatherCode];
+        const condition = iconData ? (isDay ? iconData.day : iconData.night) : null;
 
-        let iconPath = './imgs/icons/clear_day.svg';
-        if (iconData) {
-          iconPath = isDay ? iconData.day.image : iconData.night.image;
-        }
-
-        weatherIcon.src = iconPath;
-        weatherIcon.alt = iconData ? (isDay ? iconData.day.description : iconData.night.description) : 'Weather Icon';
-        const description = iconData ? (isDay ? iconData.day.description : iconData.night.description) : '';
+        const iconPath = condition?.image ?? FALLBACK_ICON;
+        const description = condition?.description ?? '';
         const at = Date.now();
-        set_title(description, at);
-        weatherIcon.title = description;
-        weatherIcon.dataset.good = 'true';
-        temperature.textContent = `${khbr.current.temperature_2m} ${khbr.current_units.temperature_2m}`;
+        const temp = `${Math.round(khbr.current.temperature_2m)} ${khbr.current_units.temperature_2m}`;
 
-        localStorage.setItem(
-          'neutrabize_WEATHER',
-          JSON.stringify({
-            at,
-            temperature: {
-              temp: temperature.textContent,
-              icon: iconPath,
-              description,
-            },
-          })
-        );
-      } else {
-        throw new Error(`Couldn't get the temperature`);
+        const fresh: IStoredWeather = { at, temperature: { temp, icon: iconPath, description } };
+        render(fresh);
+        localStorage.setItem(WEATHER_KEY, JSON.stringify(fresh));
+      } catch {
+        show_unavailable('Weather unavailable');
       }
-    } catch (probably_the_network_thing) {
-      reset_weather_to_previous_or_empty();
-    }
-  }, reset_weather_to_previous_or_empty);
+    },
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        localStorage.setItem(GEO_DENIED_KEY, Date.now().toString());
+        show_unavailable('Location access is off');
+      } else {
+        show_unavailable('Weather unavailable');
+      }
+    },
+    { timeout: 10000, maximumAge: MAX_AGE }
+  );
 }
 
-function reset_weather_to_previous_or_empty(): void {
-  if (weather_previously_fetched) {
-    const { temperature: old, at } = JSON.parse(weather_previously_fetched) as IStoredWeather;
-    temperature.textContent = old.temp;
-    weatherIcon.src = old.icon;
-    set_title(old?.description, at);
-    weatherIcon.dataset.good = 'true';
-  } else {
-    temperature.textContent = '';
-  }
+function relative_time(at: number): string {
+  const dist = Date.now() - at;
+  const minutes = Math.floor(dist / 60000);
+  const hours = Math.floor(dist / 3600000);
+  const days = Math.floor(dist / 86400000);
+
+  if (dist < 60000) return 'Just now';
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+  if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  return `${days} day${days === 1 ? '' : 's'} ago`;
 }
 
 function set_title(description?: string, at?: number): void {
-  if (!description) return;
-  const container = document.querySelector('.clock-weather') as HTMLDivElement;
-  if (container) {
-    function get_msg() {
-      const dist = Date.now() - (at || 0);
-      if (dist < 60000) return 'Just now';
-      if (dist < 3600000) return `${Math.floor(dist / 60000)} minute${Math.floor(dist / 60000) === 1 ? '' : 's'} ago`;
-      if (dist < 86400000)
-        return `${Math.floor(dist / 3600000)} hour${Math.floor(dist / 3600000) === 1 ? '' : 's'} ago`;
-      return `${Math.floor(dist / 86400000)} day${Math.floor(dist / 86400000) === 1 ? '' : 's'} ago`;
-    }
-    container.title = `${description || ''}${at ? ` – Updated ${get_msg()}` : ''}`;
-  }
+  const container = document.querySelector('.clock-weather') as HTMLDivElement | null;
+  if (!container) return;
+
+  const parts = [description, at ? `Updated ${relative_time(at)}` : ''].filter(Boolean);
+  container.title = parts.join(' – ');
+  weatherIcon.title = description ?? '';
 }

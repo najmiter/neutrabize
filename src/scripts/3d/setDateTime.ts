@@ -1,14 +1,15 @@
 import gsap from 'gsap';
 
 const dateTime = document.getElementById('date-time') as HTMLDivElement;
-const date = document.getElementById('date') as HTMLDivElement;
-const time = document.getElementById('time') as HTMLDivElement;
+const date = document.getElementById('threed-date') as HTMLDivElement;
+const time = document.getElementById('threed-time') as HTMLDivElement;
 
 export const updateDateTime = () => {
-  date.textContent = `${new Date().toLocaleString('en-us', { weekday: 'long', month: 'short', day: 'numeric' })}`;
-  time.textContent = `${
-    new Date().toLocaleString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true }).split(' ')[0]
-  }`;
+  const now = new Date();
+  const full = now.toLocaleString('en-us', { hour: 'numeric', minute: '2-digit', hour12: true });
+  date.textContent = now.toLocaleString('en-us', { weekday: 'long', month: 'short', day: 'numeric' });
+  time.textContent = full.split(' ')[0] ?? full;
+  time.title = full;
 };
 
 export const setDateTime = () => {

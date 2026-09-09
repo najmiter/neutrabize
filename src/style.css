@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@source './scripts/3d/styles.css';
+@import './scripts/3d/styles.css';
 
 @font-face {
   font-family: Geist;
@@ -13,6 +13,87 @@
 @layer utilities {
   *::-webkit-scrollbar {
     display: none;
+  }
+
+  .themes-strip {
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+  }
+
+  .themes-strip > * {
+    scroll-snap-align: center;
+  }
+
+  .setting-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    background: transparent;
+    transition: background-color 150ms ease;
+  }
+
+  .setting-switch:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .setting-switch:focus-visible {
+    outline: 2px solid var(--color-indigo-400);
+    outline-offset: 2px;
+  }
+
+  .setting-switch-track {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    width: 3.5rem;
+    height: 1.75rem;
+    padding-inline: 0.25rem;
+    border-radius: 999px;
+    background-color: var(--color-slate-400);
+    transition: background-color 200ms ease;
+  }
+
+  .setting-switch[data-on='true'] .setting-switch-track {
+    background-color: var(--color-indigo-400);
+  }
+
+  .setting-switch-thumb {
+    position: absolute;
+    left: 0.25rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background-color: var(--color-stone-800);
+    transition: left 200ms ease;
+  }
+
+  .setting-switch[data-on='true'] .setting-switch-thumb {
+    left: calc(100% - 1.75rem);
+  }
+
+  body[data-wallpaper-loading='true'] {
+    cursor: progress;
+  }
+
+  body[data-settings-open='true'] #downloads-panel {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+  }
+
+  #downloads-panel {
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
   }
 
   .download-item {
@@ -355,6 +436,7 @@
   }
 
   .digits-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-height: 8rem;
@@ -522,26 +604,6 @@
     }
   }
 
-  @keyframes disappear {
-    0% {
-      opacity: 0.5;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes pulse {
-    50% {
-      opacity: 0.5;
-    }
-  }
-
   @keyframes slide-in-left {
     from {
       opacity: 0;
@@ -590,6 +652,17 @@
     100% {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
