@@ -241,6 +241,13 @@
     animation: time-update 1.5s ease-in-out forwards;
   }
 
+  h1#time.theme__time {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: inherit;
+  }
+
   .clock-container {
     background: rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.1);

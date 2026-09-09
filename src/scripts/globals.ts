@@ -52,8 +52,11 @@ export function update_theme({ theme, onSuccess }: { theme?: any; onSuccess?: ()
     date.setAttribute('class', themeToUse.classes.date.join(' '));
     date.classList.toggle('animate-bottom-item-1', true);
     time.setAttribute('class', themeToUse.classes.time.join(' '));
-    const digits = document.querySelectorAll('.digits-container div');
-    digits.forEach((deez) => deez.setAttribute('class', themeToUse.classes.time.join(' ')));
+    const digits = document.querySelectorAll('.digits-container div, .time-colon');
+    digits.forEach((deez) => {
+      const keep = deez.classList.contains('time-colon') ? ['time-colon'] : [];
+      deez.setAttribute('class', [...keep, ...themeToUse.classes.time].join(' '));
+    });
   };
   wallpaperFade.classList.add('animate-wallpaper-fade');
 

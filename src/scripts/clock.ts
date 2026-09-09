@@ -10,6 +10,7 @@ export const generate_clock = (): void => {
 
   const waj_k = document.createElement('div');
   waj_k.textContent = ':';
+  waj_k.classList.add('time-colon', ...(CONTEXT.get('theme')?.classes?.time ?? []));
   waj_k.style.marginInline = '0.02em';
 
   const realTime = document.createElement('div');
